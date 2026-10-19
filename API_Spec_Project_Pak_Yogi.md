@@ -1,18 +1,18 @@
-# API Specification (OpenAPI 3.0)
+# Spesifikasi API (OpenAPI 3.0)
 ## Platform Otomotif AI (Project Pak Yogi)
 
-### Base Information
+### Informasi Dasar
 - **Base URL:** `https://api.otomotif-ai.com/api/v1`
-- **Authentication:** Bearer Token (JWT)
+- **Autentikasi:** Bearer Token (JWT)
 - **Content-Type:** `application/json`
-- **Rate Limit:** 100 requests/hour/IP
+- **Rate Limit:** 100 request/jam/IP
 
 ---
 
-### Authentication Endpoints
+### Endpoint Autentikasi
 
 #### POST /auth/register
-Register a new user account.
+Mendaftarkan akun pengguna baru.
 
 **Request Body:**
 ```json
@@ -34,15 +34,15 @@ Register a new user account.
     "vehicle_id": "uuid-optional",
     "created_at": "2026-10-19T10:00:00Z"
   },
-  "access_token": "eyJhbGciOiJIUzI1NiIs...",
-  "refresh_token": "eyJhbGciOiJIUzI1NiIs...",
+  "access_token": "eyJhbG...NiIs...",
+  "refresh_token": "eyJhbG...NiIs...",
   "token_type": "bearer",
   "expires_in": 86400
 }
 ```
 
 #### POST /auth/login
-Authenticate user and return tokens.
+Autentikasi pengguna dan kembalikan token.
 
 **Request Body:**
 ```json
@@ -52,22 +52,22 @@ Authenticate user and return tokens.
 }
 ```
 
-**Response (200):** Same structure as register.
+**Response (200):** Struktur sama seperti register.
 
 #### POST /auth/refresh
-Refresh access token using refresh token.
+Refresh access token menggunakan refresh token.
 
 **Request Body:**
 ```json
 {
-  "refresh_token": "eyJhbGciOiJIUzI1NiIs..."
+  "refresh_token": "eyJhbG...NiIs..."
 }
 ```
 
 **Response (200):**
 ```json
 {
-  "access_token": "eyJhbGciOiJIUzI1NiIs...",
+  "access_token": "eyJhbG...NiIs...",
   "token_type": "bearer",
   "expires_in": 86400
 }
@@ -75,15 +75,15 @@ Refresh access token using refresh token.
 
 ---
 
-### Vehicle Endpoints
+### Endpoint Kendaraan
 
 #### GET /vehicles
-List all available vehicle models.
+Daftar semua model kendaraan yang tersedia.
 
 **Query Parameters:**
-- `brand` (optional): Filter by brand (e.g., "Honda", "Yamaha")
-- `category` (optional): Filter by category (matic, sport, cub, car)
-- `year` (optional): Filter by year
+- `brand` (opsional): Filter by brand (misal: "Honda", "Yamaha")
+- `category` (opsional): Filter by category (matic, sport, cub, mobil)
+- `year` (opsional): Filter by tahun
 - `page` (default: 1), `limit` (default: 20)
 
 **Response (200):**
@@ -109,7 +109,7 @@ List all available vehicle models.
 ```
 
 #### GET /vehicles/{id}
-Get vehicle details by ID.
+Dapatkan detail kendaraan by ID.
 
 **Response (200):**
 ```json
@@ -125,12 +125,12 @@ Get vehicle details by ID.
 
 ---
 
-### Diagnosis Endpoints
+### Endpoint Diagnosis
 
 #### POST /diagnosis/analyze
-Analyze user's vehicle issue description and return diagnosis.
+Analisis keluhan kendaraan pengguna dan kembalikan diagnosis.
 
-**Headers:** `Authorization: Bearer <access_token>`
+**Headers:** `Authorization: Bearer ***
 
 **Request Body:**
 ```json
@@ -208,9 +208,9 @@ Analyze user's vehicle issue description and return diagnosis.
 ```
 
 #### GET /diagnosis/history
-Get user's diagnosis history.
+Dapatkan riwayat diagnosis pengguna.
 
-**Headers:** `Authorization: Bearer <access_token>`
+**Headers:** `Authorization: Bearer ***
 
 **Query Parameters:** `page`, `limit`, `severity`
 
@@ -232,33 +232,33 @@ Get user's diagnosis history.
 
 ---
 
-### 3D Configurator Endpoints
+### Endpoint 3D Configurator
 
 #### POST /3d/generate
-Upload vehicle photos to generate base 3D mesh.
+Upload foto kendaraan untuk generate base 3D mesh.
 
-**Headers:** `Authorization: Bearer <access_token>`
+**Headers:** `Authorization: Bearer ***
 **Content-Type:** `multipart/form-data`
 
 **Form Data:**
-- `images[]` (4 files, required): Front, back, left, right photos
-- `vehicle_brand` (string, required): e.g., "Honda"
-- `vehicle_model` (string, required): e.g., "Vario 150"
+- `images[]` (4 files, required): Foto depan, belakang, kiri, kanan
+- `vehicle_brand` (string, required): misal, "Honda"
+- `vehicle_model` (string, required): misal, "Vario 150"
 
 **Response (202):**
 ```json
 {
   "task_id": "celery-task-999",
   "status": "processing",
-  "message": "3D construction is running in background",
+  "message": "Konstruksi 3D berjalan di background",
   "estimated_time_seconds": 120
 }
 ```
 
 #### GET /3d/status/{task_id}
-Check 3D generation status.
+Cek status generate 3D.
 
-**Headers:** `Authorization: Bearer <access_token>`
+**Headers:** `Authorization: Bearer ***
 
 **Response (200):**
 ```json
@@ -276,9 +276,9 @@ Check 3D generation status.
 ```
 
 #### POST /3d/modify
-Apply component modification to existing mesh.
+Terapkan modifikasi komponen ke mesh yang ada.
 
-**Headers:** `Authorization: Bearer <access_token>`
+**Headers:** `Authorization: Bearer ***
 **Content-Type:** `application/json`
 
 **Request Body:**
@@ -314,19 +314,19 @@ Apply component modification to existing mesh.
 
 ---
 
-### Workshop Endpoints
+### Endpoint Bengkel
 
 #### GET /workshops
-Find nearby workshops.
+Cari bengkel terdekat.
 
-**Headers:** `Authorization: Bearer <access_token>` (optional for public access)
+**Headers:** `Authorization: Bearer *** (opsional untuk akses publik)
 
 **Query Parameters:**
-- `lat` (required): User latitude
-- `lng` (required): User longitude
-- `radius_km` (default: 25): Search radius
-- `specialty` (optional): Filter by vehicle category
-- `min_rating` (default: 4.0): Minimum rating
+- `lat` (required): Latitude pengguna
+- `lng` (required): Longitude pengguna
+- `radius_km` (default: 25): Radius pencarian
+- `specialty` (opsional): Filter by kategori kendaraan
+- `min_rating` (default: 4.0): Rating minimum
 
 **Response (200):**
 ```json
@@ -351,9 +351,9 @@ Find nearby workshops.
 
 ---
 
-### Error Responses
+### Respons Error
 
-All endpoints may return these error formats:
+Semua endpoint mungkin mengembalikan format error ini:
 
 **400 Bad Request:**
 ```json
@@ -361,7 +361,7 @@ All endpoints may return these error formats:
   "error": "VALIDATION_ERROR",
   "message": "Invalid request payload",
   "details": [
-    { "field": "email", "message": "Invalid email format" }
+    { "field": "email", "message": "Format email tidak valid" }
   ]
 }
 ```
@@ -370,7 +370,7 @@ All endpoints may return these error formats:
 ```json
 {
   "error": "UNAUTHORIZED",
-  "message": "Invalid or expired token"
+  "message": "Token tidak valid atau expired"
 }
 ```
 
@@ -378,7 +378,7 @@ All endpoints may return these error formats:
 ```json
 {
   "error": "NOT_FOUND",
-  "message": "Resource not found"
+  "message": "Resource tidak ditemukan"
 }
 ```
 
@@ -386,7 +386,7 @@ All endpoints may return these error formats:
 ```json
 {
   "error": "RATE_LIMITED",
-  "message": "Rate limit exceeded. Try again in 60 seconds.",
+  "message": "Rate limit exceeded. Coba lagi dalam 60 detik.",
   "retry_after": 60
 }
 ```
@@ -395,10 +395,10 @@ All endpoints may return these error formats:
 ```json
 {
   "error": "INTERNAL_ERROR",
-  "message": "An unexpected error occurred",
-  "request_id": "req-uuid-for-debugging"
+  "message": "Terjadi error tak terduga",
+  "request_id": "req-uuid-untuk-debugging"
 }
 ```
 
 ---
-*Document Version 1.0 | Created: 2026-10-19*
+*Versi Dokumen 1.0 | Dibuat: 19 Oktober 2026*

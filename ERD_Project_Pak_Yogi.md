@@ -1,8 +1,8 @@
-# Entity Relationship Diagram (ERD)
+# Diagram Relasi Entitas (ERD)
 ## Platform Otomotif AI (Project Pak Yogi)
 
-### Overview
-The ERD visualizes the database schema for the Otomotif AI platform, connecting vehicles, symptoms, diagnoses, spare parts, and workshops through mapping tables.
+### Ikhtisar
+ERD memvisualisasikan skema database untuk platform Otomotif AI, menghubungkan kendaraan, gejala, diagnosis, suku cadang, dan bengkel melalui tabel mapping.
 
 ### Diagram (Mermaid)
 
@@ -83,25 +83,25 @@ erDiagram
     VEHICLES }o--o{ WORKSHOPS : served_by (via vehicle category)
 ```
 
-### Relationship Details
+### Detail Relasi
 
-| Relationship | Description |
+| Relasi | Deskripsi |
 |--------------|-------------|
-| **Vehicle → Symptom Diagnosis Map** | Links vehicles to symptom→diagnosis mappings via vehicle category filter |
-| **Symptoms → Symptom Diagnosis Map** | Many-to-many linking of symptom codes to diagnoses with confidence weights |
-| **Diagnoses → Symptom Diagnosis Map** | Each diagnosis linked to one or more symptom codes |
-| **Diagnoses → Diagnosis Part Map** | Links diagnoses to recommended spare parts (primary vs secondary) |
-| **Spare Parts → Diagnosis Part Map** | Many spare parts can be associated with multiple diagnoses |
-| **Workshops** | Independent entity storing workshop locations and specialties |
-| **Vehicle ↔ Workshops** | Conceptual relationship: workshops servicing specific vehicle categories |
+| **Vehicle → Symptom Diagnosis Map** | Menghubungkan kendaraan ke mapping gejala→diagnosis via filter kategori kendaraan |
+| **Symptoms → Symptom Diagnosis Map** | Many-to-many linking kode gejala ke diagnosis dengan bobot kepercayaan |
+| **Diagnoses → Symptom Diagnosis Map** | Setiap diagnosis terhubung ke satu atau lebih kode gejala |
+| **Diagnoses → Diagnosis Part Map** | Menghubungkan diagnosis ke suku cadang yang direkomendasikan (primary vs secondary) |
+| **Spare Parts → Diagnosis Part Map** | Banyak suku cadang dapat dikaitkan dengan banyak diagnosis |
+| **Workshops** | Entitas independen menyimpan lokasi bengkel dan spesialisasi |
+| **Vehicle ↔ Workshops** | Relasi konseptual: bengkel yang melayani kategori kendaraan tertentu |
 
-### Key Observations
-- The schema uses UUIDs as primary keys for all entities
-- Vector embeddings stored in `symptoms.embedding` (1536 dimensions) for RAG similarity search
-- `severity_level` constrained to enum values: DIY_EASY, DIY_HARD, WORKSHOP_REQUIRED
-- `repair_steps` stored as JSONB for flexible step descriptions
-- `specialties` in workshops is a PostgreSQL text array for vehicle type filtering
-- All foreign keys enforce referential integrity with CASCADE delete options (implied)
+### Observasi Kunci
+- Skema menggunakan UUID sebagai primary key untuk semua entitas
+- Vector embeddings disimpan di `symptoms.embedding` (1536 dimensi) untuk similarity search RAG
+- `severity_level` dibatasi ke nilai enum: DIY_EASY, DIY_HARD, WORKSHOP_REQUIRED
+- `repair_steps` disimpan sebagai JSONB untuk deskripsi langkah yang fleksibel
+- `specialties` di workshops adalah array text PostgreSQL untuk filtering tipe kendaraan
+- Semua foreign key meng-enforce referential integrity dengan opsi CASCADE delete (implisit)
 
 ---
-*Document Version 1.0 | Created: 2026-10-19*
+*Versi Dokumen 1.0 | Dibuat: 19 Oktober 2026*

@@ -1,74 +1,74 @@
-# Figma Design File Creation Instructions
+# Instruksi Pembuatan File Desain Figma
 ## Platform Otomotif AI (Project Pak Yogi)
 
-### Overview
-This document provides comprehensive instructions for creating the Figma design for the Otomotif AI platform, based on the UI/UX Design Specification.
+### Ikhtisar
+Dokumen ini menyediakan instruksi komprehensif untuk membuat desain Figma untuk platform Otomotif AI, berdasarkan Spesifikasi Desain UI/UX.
 
-### Required Access
-To create this Figma file, you'll need:
-- A Figma account with proper permissions
-- Access to the project organization/team: **pak-yogi** (or similar)
-- Ability to create new Figma files in the project
+### Akses yang Diperlukan
+Untuk membuat file Figma ini, Anda memerlukan:
+- Akun Figma dengan izin yang tepat
+- Akses ke organisasi/tim proyek: **pak-yogi** (atau serupa)
+- Kemampuan membuat file Figma baru di proyek
 
-### Current Limitations
-In the current sandbox environment, direct Figma file creation is limited due to authentication and API access restrictions. The following approach provides the complete design specifications that can be imported into Figma.
+### Keterbatasan Saat Ini
+Di lingkungan sandbox saat ini, pembuatan file Figma langsung terbatas karena batasan autentikasi dan akses API. Pendekatan berikut menyediakan spesifikasi desain lengkap yang dapat diimpor ke Figma.
 
 ---
 
-### Figma Design File Creation Steps
+### Langkah Pembuatan File Desain Figma
 
-#### Step 1: Create New Figma File
-1. Log into Figma with the appropriate account
-2. Navigate to the **pak-yogi** project/organization
-3. Click "New file" → "Design" (or "FigJam" for prototyping)
-4. File Name: **Project_Pak_Yogi_Design**
+#### Langkah 1: Buat File Figma Baru
+1. Login ke Figma dengan akun yang sesuai
+2. Navigasi ke proyek/organisasi **pak-yogi**
+3. Klik "New file" → "Design" (atau "FigJam" untuk prototyping)
+4. Nama File: **Project_Pak_Yogi_Design**
 
-#### Step 2: Setup Design System
-1. **Create Main Frame:** "Dashboard - Main View" (1920x1080px)
-2. **Set up Color Styles:**
+#### Langkah 2: Setup Sistem Desain
+1. **Buat Main Frame:** "Dashboard - Main View" (1920x1080px)
+2. **Setup Color Styles:**
    - Primary Dark (#0A2463)
    - Primary Main (#1E4E79)
    - Primary Light (#2563AB)
    - Secondary Dark (#92400E)
-   - etc.
+   - dst.
 
-3. **Typography Styles:** Create text styles for h1-h4, body, caption
-4. **Component Styles:** Create button styles, card variants, severity badges
+3. **Typography Styles:** Buat text styles untuk h1-h4, body, caption
+4. **Component Styles:** Buat button styles, card variants, severity badges
 
-#### Step 3: Create Main Screens
+#### Langkah 3: Buat Layar Utama
 
-##### 3.1 Dashboard Screen
+##### 3.1 Layar Dashboard
 ```
-Components:
-- Top Navigation (fixed, 64px height)
+Komponen:
+- Top Navigation (fixed, tinggi 64px)
 - Sidebar navigation (collapsed/expanded)
-- Dashboard cards:
+- Kartu Dashboard:
   • Recent Diagnosis (status card)
   • Quick 3D Configurator (CTA card)
 - Quick Action Buttons
 - User Profile/Logout
 ```
 
-##### 3.2 3D Configurator Screen
+##### 3.2 Layar 3D Configurator
 ```
-Components:
-- 3D Canvas Area (70% width)
-- Right Panel (30% width)
-  • Component Tree (collapsible categories)
+Komponen:
+- 3D Canvas Area (lebar 70%)
+- Right Panel (lebar 30%)
+  • Component Tree (kategori collapsible)
   • Preview cards (hover effects)
   • Apply buttons
-- Legend panel (bottom, status indicators)
+- Legend panel (bawah, indikator status)
 - Toolbar (zoom, reset, save)
 ```
 
-##### 3.3 AI Diagnosis Screen
+##### 3.3 Layar AI Diagnosis
 ```
-Components:
-- Input Section (top)
-  • Textarea with mic button
-  • Sample question buttons
+Komponen:
+- Input Section (atas)
+  • Textarea dengan tombol mic
+  • Tombol sample question
   • Vehicle context selector
-- Result Panel (main area)
+- Result Panel (area utama)
   • Severity indicator (badge)
   • AI explanation section
   • Repair steps (collapsible list)
@@ -76,11 +76,11 @@ Components:
   • Workshop suggestions (list/map toggle)
 ```
 
-##### 3.4 Workshop Finder Screen
+##### 3.4 Layar Pencari Bengkel
 ```
-Components:
-- Map View (main area)
-- Filter Panel (right sidebar)
+Komponen:
+- Map View (area utama)
+- Filter Panel (sidebar kanan)
   • Location search
   • Radius selector
   • Rating filter
@@ -89,18 +89,18 @@ Components:
 - Workshop detail panel
 ```
 
-##### 3.5 Authentication Screens
+##### 3.5 Layar Autentikasi
 ```
-Components:
+Komponen:
 - Login form (email/password + OAuth)
 - Register form
 - Forgot password
 - Email verification
 ```
 
-#### Step 4: Create Components
+#### Langkah 4: Buat Komponen
 
-##### 4.1 Button Variants
+##### 4.1 Variasi Tombol
 ```
 .btn-primary { /* gradient style */ }
 .btn-secondary { /* outline style */ }
@@ -108,7 +108,7 @@ Components:
 .btn-disabled { /* disabled state */ }
 ```
 
-##### 4.2 Status Cards
+##### 4.2 Kartu Status
 ```
 .card { /* base style */ }
 .card.severity-easy { /* green border */ }
@@ -117,7 +117,7 @@ Components:
 .card.hover { /* lift effect */ }
 ```
 
-##### 4.3 Severity Indicators
+##### 4.3 Indikator Tingkat Keparahan
 ```
 .badge {
   .severity-easy { background: #ECFDF5, color: #065F46 }
@@ -126,7 +126,7 @@ Components:
 }
 ```
 
-##### 4.4 Form Elements
+##### 4.4 Elemen Form
 ```
 .input-group {
   .label { /* label style */ }
@@ -135,10 +135,10 @@ Components:
 }
 ```
 
-#### Step 5: Create Design Tokens
+#### Langkah 5: Buat Design Tokens
 
 ##### 5.1 Color Tokens
-```
+```json
 {
   "colors": {
     "primary": {
@@ -156,7 +156,7 @@ Components:
 ```
 
 ##### 5.2 Typography Tokens
-```
+```json
 {
   "typography": {
     "h1": { "fontFamily": "Inter", "fontWeight": "Bold", "fontSize": "2.5rem", "lineHeight": "3.2rem" },
@@ -166,126 +166,126 @@ Components:
 }
 ```
 
-#### Step 6: Set Up Prototypes
+#### Langkah 6: Setup Prototypes
 ```
-- Create clickable hotspots on 3D configurator components
-- Link screens for main user flows:
-  • Dashboard → 3D Configurator → Diagnosis → Workshop
+- Buat clickable hotspots pada komponen 3D configurator
+- Link layar untuk main user flows:
+  • Dashboard → 3D Configurator → Diagnosis → Bengkel
   • Login → Dashboard
-  • Diagnosis → Results → Parts/Workshop
-- Create transitions with appropriate easing
+  • Diagnosis → Results → Parts/Bengkel
+- Buat transisi dengan easing yang tepat
 ```
 
-#### Step 7: Documentation and System Setup
+#### Langkah 7: Dokumentasi dan Setup Sistem
 
-##### 7.1 Component Documentation
-For each component, document:
+##### 7.1 Dokumentasi Komponen
+Untuk setiap komponen, dokumentasikan:
 - Props/States
-- Interaction patterns
-- Accessibility notes
-- Variants
-- Usage guidelines
+- Pola interaksi
+- Catatan aksesibilitas
+- Variasi
+- Pedoman penggunaan
 
-##### 7.2 Design System Documentation
+##### 7.2 Dokumentasi Sistem Desain
 ```
-Documentation should include:
-- Color palette usage
-- Typography scale
-- Spacing system (8px grid)
-- Shadow layers
-- Border radius system
-- Z-index scales
+Dokumentasi harus mencakup:
+- Penggunaan palette warna
+- Skala tipografi
+- Sistem spacing (grid 8px)
+- Layer shadow
+- Sistem border radius
+- Skala Z-index
 ```
 
 ---
 
-### Alternative: Manual Figma Creation
+### Alternatif: Pembuatan Figma Manual
 
-If direct tool creation isn't possible, you can:
+Jika pembuatan tool langsung tidak mungkin, Anda bisa:
 
-1. **Import from Code:** Export the CSS from this specification as:
-   - Component code in Figma
-   - Documentation in Figma Comments
-   - Design tokens as Figma variables
+1. **Import dari Kode:** Ekspor CSS dari spesifikasi ini sebagai:
+   - Kode komponen di Figma
+   - Dokumentasi di Figma Comments
+   - Design tokens sebagai Figma variables
 
-2. **Manual Setup:**
-   - Create frames matching the specified dimensions
-   - Apply colors, typography, spacing as specified
-   - Build components using the provided CSS structure as reference
+2. **Setup Manual:**
+   - Buat frame sesuai dimensi yang dispesifikasikan
+   - Terapkan warna, tipografi, spacing seperti yang dispesifikasikan
+   - Bangun komponen menggunakan struktur CSS yang disediakan sebagai referensi
 
-3. **Collaboration with Design Team:**
-   - Share this specification with the design team
-   - Provide clear component specs and design tokens
-   - Use as base for final design iteration
+3. **Kolaborasi dengan Tim Desain:**
+   - Bagikan spesifikasi ini ke tim desain
+   - Berikan spec komponen dan design tokens yang jelas
+   - Gunakan sebagai base untuk iterasi desain final
 
 ---
 
-### Export/Import Recommendations
+### Rekomendasi Export/Import
 
-#### Step 8: Export Design Assets
+#### Langkah 8: Export Design Assets
 ```
-- Export SVG icons (all 24px variations)
+- Export SVG icons (semua variasi 24px)
 - Export component states (hover, active, disabled)
-- Export dark theme variants (for developer implementation)
-- Export design tokens as JSON/CSS custom properties
+- Export dark theme variants (untuk implementasi developer)
+- Export design tokens sebagai JSON/CSS custom properties
 ```
 
-#### Step 9: Developer Handoff
+#### Langkah 9: Developer Handoff
 ```
-- Create figma-plugin.json with component props
-- Export component specifications to developer portal
-- Create interactive prototype for feedback
-- Set up design review comments
+- Buat figma-plugin.json dengan component props
+- Ekspor spesifikasi komponen ke developer portal
+- Buat prototype interaktif untuk feedback
+- Setup design review comments
 ```
 
 ---
 
-### Project Progress Summary
+### Ringkasan Kemajuan Proyek
 
-#### Created Documents (✅)
-1. **PRD (Project Requirements Document)**
-2. **SRS (Software Requirements Specification)** 
-3. **ERD (Entity Relationship Diagram)**
-4. **API Specification**
-5. **UI/UX Design Specification**
+#### Dokumen yang Dibuat (✅)
+1. **PRD (Dokumen Kebutuhan Proyek)**
+2. **SRS (Spesifikasi Kebutuhan Perangkat Lunak)** 
+3. **ERD (Diagram Relasi Entitas)**
+4. **Spesifikasi API**
+5. **Spesifikasi Desain UI/UX**
 
-#### In Progress
-- [x] Documentation deliverables
-- [x] Design specifications
-- [ ] Figma design file creation (requires manual setup)
+#### Sedang Berlangsung
+- [x] Deliverable dokumentasi
+- [x] Spesifikasi desain
+- [ ] Pembuatan file desain Figma (memerlukan setup manual)
 
-#### Next Steps
-1. **Manual Figma File Creation:** Due to sandbox limitations, the Figma design file needs to be created manually using the provided specifications
-2. **Component Implementation:** Build all UI components following the design system
-3. **Design Handoff:** Export specifications to development team
-4. **Review and Iteration:** Gather feedback and refine design
-
----
-
-### Implementation Notes
-
-#### Critical Design Decisions
-- **Color Psychology:** Blue tones for trust/technical reliability, orange for action/energy, green for success
-- **Typography:** Inter font for modern, clean look
-- **Grid System:** 8px spacing for consistency
-- **3D Integration:** Priority for 3D canvas with minimal UI overlay
-
-#### Responsive Considerations
-- Mobile-first approach with progressive enhancement
-- Touch targets minimum 44px
-- Optimized for 320px+ width
-
-#### Accessibility Priority
-- WCAG AA compliance required
-- Sufficient color contrast ratios
-- Screen reader friendly
-- Keyboard navigation support
+#### Langkah Selanjutnya
+1. **Pembuatan File Figma Manual:** Karena keterbatasan sandbox, file desain Figma perlu dibuat manual menggunakan spesifikasi yang disediakan
+2. **Implementasi Komponen:** Bangun semua komponen UI mengikuti sistem desain
+3. **Design Handoff:** Ekspor spesifikasi ke tim development
+4. **Review dan Iterasi:** Kumpulkan feedback dan perbaiki desain
 
 ---
-*Document Version 1.0 | Created: 2026-10-19*
 
-### Contact Information
-For Figma file creation assistance:
-- Project: Otomotif AI Platform (Project Pak Yogi)
-- Team: fajar1180 (Project Manager), ilhamalmunawar05-cpu (Design Coordination)
-- Repository: /c/laragon/www/Project-Otomotif-Visual3D/
+### Catatan Implementasi
+
+#### Keputusan Desain Kritis
+- **Psikologi Warna:** Tone biru untuk kepercayaan/keandalan teknis, orange untuk aksi/energi, hijau untuk sukses
+- **Tipografi:** Font Inter untuk tampilan modern, bersih
+- **Sistem Grid:** Spacing 8px untuk konsistensi
+- **Integrasi 3D:** Prioritas untuk kanvas 3D dengan UI overlay minimal
+
+#### Pertimbangan Responsif
+- Pendekatan mobile-first dengan progressive enhancement
+- Touch target minimum 44px
+- Dioptimalkan untuk lebar 320px+
+
+#### Prioritas Aksesibilitas
+- Kompliance WCAG AA diperlukan
+- Rasio kontras warna yang memadai
+- Ramah screen reader
+- Dukungan navigasi keyboard
+
+---
+*Versi Dokumen 1.0 | Dibuat: 19 Oktober 2026*
+
+### Informasi Kontak
+Untuk bantuan pembuatan file Figma:
+- Proyek: Platform Otomotif AI (Project Pak Yogi)
+- Tim: fajar1180 (Project Manager), ilhamalmunawar05-cpu (Koordinasi Desain)
+- Repositori: /c/laragon/www/Project-Otomotif-Visual3D/

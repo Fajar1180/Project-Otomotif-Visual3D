@@ -1,8 +1,8 @@
 # ✅ DESIGN MOCKUPS CREATION - COMPLETE
 
 **Status:** Phase 2 Complete - Design Mockups Created  
-**Date:** 19 Oktober 2026, 09:07 UTC+7  
-**Created by:** ilhamalmunawar05-cpu (Sistem Analyst/Designer)
+**Tanggal:** 19 Oktober 2026, 09:07 UTC+7  
+**Dibuat oleh:** ilhamalmunawar05-cpu (Sistem Analyst/Designer)
 
 ---
 
@@ -10,42 +10,42 @@
 
 ### HTML Mockups Created (4 Files)
 1. ✅ **dashboard.html** (17.2KB)
-   - Dashboard screen design
-   - Recent diagnosis cards dengan status badges
-   - Quick 3D configurator dengan 4-step process
-   - Statistics cards (diagnosis, config, parts, bengkel)
+   - Desain layar Dashboard
+   - Kartu diagnosis terbaru dengan status badges
+   - Quick 3D configurator dengan proses 4-langkah
+   - Kartu statistik (diagnosis, config, parts, bengkel)
    - Quick actions shortcuts
 
 2. ✅ **3d-configurator.html** (14.1KB)
-   - 3D Configurator interface
-   - Canvas area (70% width) dengan toolbar
-   - Right panel (30% width) dengan component selector
-   - Categories: Wheels, Exhaust, Body Kit, Suspension
-   - Preview & Apply buttons per component
-   - Legend panel dengan status indicators
+   - Interface 3D Configurator
+   - Canvas area (lebar 70%) dengan toolbar
+   - Panel kanan (lebar 30%) dengan component selector
+   - Kategori: Wheels, Exhaust, Body Kit, Suspension
+   - Tombol Preview & Apply per komponen
+   - Panel legend dengan indikator status
 
 3. ✅ **ai-diagnosis.html** (17.1KB)
-   - AI Diagnosis screen interface
-   - Input panel (left) dengan textarea + mic button
+   - Interface layar AI Diagnosis
+   - Input panel (kiri) dengan textarea + tombol mic
    - Vehicle selector dan sample questions
-   - Result panel (right) dengan severity badges
+   - Result panel (kanan) dengan severity badges
    - Confidence score dengan visual bar
-   - Step-by-step repair instructions
-   - Recommended spare parts dengan Shopee affiliate links
+   - Instruksi perbaikan langkah-demi-langkah
+   - Suku cadang yang direkomendasikan dengan link affiliate Shopee
 
 4. ✅ **README.md** (4.4KB)
-   - Complete mockups documentation
-   - Design system reference
-   - How to use mockups
+   - Dokumentasi mockups lengkap
+   - Referensi sistem desain
+   - Cara menggunakan mockups
    - Next steps untuk designers & developers
 
-**Total:** 52.8KB design mockups, ~1,678 lines of HTML/CSS
+**Total:** 52.8KB design mockups, ~1,678 baris HTML/CSS
 
 ---
 
-## 🎨 DESIGN SYSTEM IMPLEMENTED
+## 🎨 SISTEM DESAIN YANG DIIMPLEMENTASIKAN
 
-### Color Palette ✅
+### Palette Warna ✅
 ```
 Primary:
 - #0A2463 (Navy Dark)
@@ -63,32 +63,32 @@ Status:
 - #DC2626 (Red - Workshop Required)
 ```
 
-### Typography ✅
+### Tipografi ✅
 - Font: Inter (system fallback)
 - Headings: Bold, 2rem-1.25rem
 - Body: Regular, 1rem
 - Small: Regular, 0.875rem
 
-### Components ✅
-- Buttons: Gradient backgrounds, hover effects
+### Komponen ✅
+- Buttons: Background gradient, hover effects
 - Cards: 12px radius, box-shadow depth
 - Status badges: Color-coded, pill-shaped
-- Form inputs: Consistent styling, focus states
+- Form inputs: Styling konsisten, focus states
 - Responsive layouts: Desktop/Tablet/Mobile
 
 ---
 
-## 📐 RESPONSIVE DESIGN
+## 📐 DESAIN RESPONSIF
 
 ### Breakpoints
-- **Desktop** (>1200px): Full grid layout dengan 2-3 columns
-- **Tablet** (768px-1200px): Adjusted grid, reduced columns
+- **Desktop** (>1200px): Full grid layout dengan 2-3 kolom
+- **Tablet** (768px-1200px): Grid disesuaikan, kolom dikurangi
 - **Mobile** (<768px): Single column, stacked layout
 
-### Tested Layouts
-- ✅ Dashboard: Cards grid yang responsive
-- ✅ 3D Configurator: Flexbox untuk canvas + right panel
-- ✅ AI Diagnosis: Grid system untuk input + result panels
+### Layout yang Diuji
+- ✅ Dashboard: Cards grid yang responsif
+- ✅ 3D Configurator: Flexbox untuk canvas + panel kanan
+- ✅ AI Diagnosis: Grid system untuk panel input + result
 
 ---
 
@@ -102,79 +102,79 @@ Status:
 ```
 design: Add HTML mockups for all main screens
 
-- dashboard.html: Dashboard screen
-- 3d-configurator.html: 3D configurator interface
-- ai-diagnosis.html: AI diagnosis screen
-- README.md: Design mockups documentation
+- dashboard.html: Layar Dashboard
+- 3d-configurator.html: Interface 3D configurator
+- ai-diagnosis.html: Layar AI diagnosis
+- README.md: Dokumentasi design mockups
 
 Berdasarkan UI_UX_Design_Specification.md dengan:
 - Complete design system
 - Responsive layouts
 - CSS-in-HTML
-- Ready untuk Figma import
+- Siap untuk Figma import
 ```
 
 ---
 
-## 🎯 FEATURES IMPLEMENTED
+## 🎯 FITUR YANG DIIMPLEMENTASIKAN
 
-### Dashboard Screen ✅
+### Layar Dashboard ✅
 - [x] Top navigation dengan logo & search
-- [x] Navigation menu (6 sections)
+- [x] Navigation menu (6 section)
 - [x] Dashboard header dengan welcome text
-- [x] Recent diagnosis card dengan status badges
-- [x] Quick 3D configurator card dengan 4 steps
-- [x] Statistics cards (4 metrics)
-- [x] Quick actions buttons (4 actions)
-- [x] Responsive layout
+- [x] Kartu diagnosis terbaru dengan status badges
+- [x] Kartu Quick 3D configurator dengan 4 langkah
+- [x] Kartu statistik (4 metrik)
+- [x] Tombol quick actions (4 aksi)
+- [x] Layout responsif
 
-### 3D Configurator Screen ✅
-- [x] Canvas area (70% width) dengan toolbar
-- [x] Right panel (30% width) collapsible
-- [x] Component categories (Wheels, Exhaust, Body Kit, Suspension)
-- [x] Component items dengan preview/apply buttons
+### Layar 3D Configurator ✅
+- [x] Canvas area (lebar 70%) dengan toolbar
+- [x] Panel kanan (lebar 30%) collapsible
+- [x] Kategori komponen (Wheels, Exhaust, Body Kit, Suspension)
+- [x] Item komponen dengan tombol preview/apply
 - [x] Toolbar: Reset, Zoom In/Out, Rotate, Save
-- [x] Legend panel dengan status indicators
-- [x] Hover effects dan interactions
-- [x] Responsive layout (mobile: stacked)
+- [x] Panel legend dengan indikator status
+- [x] Hover effects dan interaksi
+- [x] Layout responsif (mobile: stacked)
 
-### AI Diagnosis Screen ✅
-- [x] Input panel (left) dengan textarea + mic button
+### Layar AI Diagnosis ✅
+- [x] Input panel (kiri) dengan textarea + tombol mic
 - [x] Vehicle selector dropdown
 - [x] Sample questions untuk quick start
-- [x] Result panel (right) dengan severity badge
+- [x] Result panel (kanan) dengan severity badge
 - [x] Confidence score dengan visual bar
-- [x] Technical explanation section
-- [x] Step-by-step repair instructions (7 steps)
-- [x] Recommended spare parts cards (2 parts)
-- [x] Shopee affiliate links
-- [x] Workshop suggestions (template)
+- [x] Section penjelasan teknis
+- [x] Instruksi perbaikan langkah-demi-langkah (7 langkah)
+- [x] Kartu suku cadang yang direkomendasikan (2 parts)
+- [x] Link affiliate Shopee
+- [x] Saran bengkel (template)
 
 ---
 
-## 📊 DESIGN METRICS
+## 📊 METRIK DESAIN
 
-### Accessibility ✅
-- [x] Sufficient color contrast ratios
-- [x] Focus states for interactive elements
-- [x] Semantic HTML structure
+### Aksesibilitas ✅
+- [x] Rasio kontras warna yang memadai
+- [x] Focus states untuk elemen interaktif
+- [x] Struktur HTML semantik
 - [x] WCAG compliance ready
 
-### Performance ✅
-- [x] Lightweight CSS (no external dependencies)
+### Performa ✅
+- [x] CSS ringan (no external dependencies)
 - [x] Pure HTML/CSS (no JS dependencies)
-- [x] Fast load time (~50KB total)
-- [x] Optimized for all screen sizes
+- [x] Waktu load cepat (~50KB total)
+- [x] Dioptimalkan untuk semua ukuran layar
 
-### Consistency ✅
-- [x] Unified design system across all mockups
-- [x] Consistent spacing (8px grid)
-- [x] Consistent typography scale
-- [x] Consistent color usage
+### Konsistensi ✅
+- [x] Sistem desain terpadu di semua mockups
+- [x] Spacing konsisten (grid 8px)
+- [x] Skala tipografi konsisten
+- [x] Penggunaan warna konsisten
 
 ---
 
-## 🚀 HOW TO USE MOCKUPS
+## 🚀 CARA MENGGUNAKAN MOCKUPS
 
 ### View Mockups
 ```bash
@@ -189,29 +189,29 @@ open dashboard.html
 xdg-open dashboard.html
 ```
 
-### Import to Figma
-1. Screenshot mockups sebagai design reference
+### Import ke Figma
+1. Screenshot mockups sebagai referensi desain
 2. Buka Figma → New Design file
 3. Copy CSS design tokens dari mockups
 4. Rebuild components dengan Figma components
 5. Export untuk development
 
-### Use in Development
-1. Review mockup layouts untuk understand structure
-2. Extract CSS variables untuk production
+### Gunakan dalam Development
+1. Review mockup layouts untuk memahami struktur
+2. Ekstrak CSS variables untuk production
 3. Implement components dengan framework pilihan
 4. Integrate dengan backend API
 
 ---
 
-## 📚 DOCUMENTATION
+## 📚 DOKUMENTASI
 
-### Files in Repository
+### Files di Repository
 ```
 Project-Otomotif-Visual3D/
 ├── design-mockups/
-│   ├── README.md (Mockups documentation)
-│   ├── dashboard.html (Dashboard screen)
+│   ├── README.md (Dokumentasi Mockups)
+│   ├── dashboard.html (Layar Dashboard)
 │   ├── 3d-configurator.html (3D Configurator)
 │   └── ai-diagnosis.html (AI Diagnosis)
 ├── PRD_Project_Pak_Yogi.md
@@ -230,38 +230,38 @@ Project-Otomotif-Visual3D/
 
 ## ✨ NEXT STEPS
 
-### For Designers
-1. ✅ **Review mockups** - Open HTML files di browser
-2. ⏳ **Create Figma file** (Issue #14) - Based on mockups
-3. ⏳ **Build components** - Wheels, Buttons, Cards, etc.
+### Untuk Designers
+1. ✅ **Review mockups** - Buka file HTML di browser
+2. ⏳ **Buat Figma file** (Issue #14) - Berdasarkan mockups
+3. ⏳ **Bangun komponen** - Wheels, Buttons, Cards, dll.
 4. ⏳ **Setup design tokens** - Export untuk development
 
-### For Developers
-1. ✅ **Review mockup layout** - Understand structure
-2. ⏳ **Extract CSS** - Copy design tokens
-3. ⏳ **Implement with Next.js** - Build production components
+### Untuk Developers
+1. ✅ **Review layout mockup** - Pahami struktur
+2. ⏳ **Ekstrak CSS** - Copy design tokens
+3. ⏳ **Implement dengan Next.js** - Bangun komponen production
 4. ⏳ **Integrate API** - Connect dengan backend
 
-### For Frontend M2
+### Untuk Frontend M2
 1. ⏳ **Issue #4: M2-Frontend: Setup Next.js App**
    - Setup Next.js 13+ dengan App Router
    - Install Tailwind CSS + config
    - Setup Zustand untuk state management
-   - Create layout components based on mockups
+   - Buat komponen layout berdasarkan mockups
 
 ---
 
-## 🎉 ACHIEVEMENT SUMMARY
+## 🎉 RINGKASAN PENCAPAIAN
 
-### Completed Today (19 Oktober 2026)
-1. ✅ **3 Main Screen Mockups** created dengan full design system
-2. ✅ **HTML/CSS Implementation** dengan responsive layouts
-3. ✅ **Design System** fully implemented (colors, typography, components)
-4. ✅ **Documentation** lengkap untuk mockups
-5. ✅ **Git Commit & Push** ke main branch
+### Selesai Hari Ini (19 Oktober 2026)
+1. ✅ **3 Main Screen Mockups** dibuat dengan sistem desain lengkap
+2. ✅ **Implementasi HTML/CSS** dengan layout responsif
+3. ✅ **Sistem Desain** fully implemented (warna, tipografi, komponen)
+4. ✅ **Dokumentasi** lengkap untuk mockups
+5. ✅ **Git Commit & Push** ke branch main
 
 ### Total Deliverables (Phase 1-2)
-- **10 Documentation files** (~75 pages)
+- **10 File Dokumentasi** (~75 halaman)
 - **4 Design mockups** (~52KB HTML/CSS)
 - **14 GitHub Issues** dengan assignments
 - **3 Git commits** dengan proper messages
@@ -269,27 +269,27 @@ Project-Otomotif-Visual3D/
 
 ---
 
-## 📈 PROJECT STATUS
+## 📈 STATUS PROYEK
 
-### Phase 1: Documentation ✅ COMPLETE
+### Phase 1: Dokumentasi ✅ COMPLETE
 - [x] PRD, SRS, ERD, API Spec, UI/UX Design
 - [x] GitHub repository setup
-- [x] 14 Issues created dengan assignments
+- [x] 14 Issues dibuat dengan assignments
 
 ### Phase 2: Design Mockups ✅ COMPLETE
 - [x] 3 Main screen mockups (Dashboard, 3D Config, Diagnosis)
-- [x] Design system fully implemented
-- [x] Documentation untuk mockups
+- [x] Sistem desain fully implemented
+- [x] Dokumentasi untuk mockups
 - [x] Git commit & push
 
-### Phase 3: Figma Design File ⏳ PENDING
-- [ ] Create Figma file (Issue #14)
+### Phase 3: File Desain Figma ⏳ PENDING
+- [ ] Buat file Figma (Issue #14)
 - [ ] Setup design tokens sebagai Figma variables
-- [ ] Build components library
-- [ ] Create prototypes dengan interactions
+- [ ] Bangun library komponen
+- [ ] Buat prototypes dengan interaksi
 
 ### Phase 4: Development ⏳ PENDING
-- [ ] M1: Database Implementation (Issue #2)
+- [ ] M1: Implementasi Database (Issue #2)
 - [ ] M2: Backend API & Frontend (Issues #3, #4)
 - [ ] M3: Integrations (Issues #5-9)
 - [ ] M4: Auth & QA (Issues #10-12)
@@ -297,16 +297,16 @@ Project-Otomotif-Visual3D/
 
 ---
 
-## 📞 NOTES
+## 📞 CATATAN
 
-### For Design Team
+### Untuk Tim Desain
 Mockups sudah siap untuk di-import ke Figma. Semua CSS variables dan design tokens sudah terdefinisi untuk quick reference.
 
-### For Development Team
-HTML mockups bisa langsung di-preview untuk memahami layout structure sebelum implementation.
+### Untuk Tim Development
+HTML mockups bisa langsung di-preview untuk memahami layout structure sebelum implementasi.
 
-### For Project Manager
-Design mockups phase sudah 100% complete. Ready untuk transition ke development phase (M1).
+### Untuk Project Manager
+Design mockups phase sudah 100% complete. Ready untuk transisi ke development phase (M1).
 
 ---
 
@@ -321,6 +321,6 @@ Design mockups phase sudah 100% complete. Ready untuk transition ke development 
 **STATUS: DESIGN MOCKUPS PHASE COMPLETE ✅**  
 **READY FOR: Figma Implementation → Development Phase**
 
-*Prepared by: ilhamalmunawar05-cpu*  
-*Date: 19 Oktober 2026*  
-*Time: 09:07 UTC+7*
+*Disusun oleh: ilhamalmunawar05-cpu*  
+*Tanggal: 19 Oktober 2026*  
+*Waktu: 09:07 UTC+7*

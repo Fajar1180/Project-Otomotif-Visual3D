@@ -1,67 +1,67 @@
-# Project Otomotif AI (Project Pak Yogi) - Documentation Package
+# Project Otomotif AI (Project Pak Yogi) - Paket Dokumentasi
 
-## Overview
-This repository contains all deliverables for Project Otomotif AI (Project Pak Yogi), including:
-- Project Requirements Document (PRD)
-- Software Requirements Specification (SRS)
-- Entity Relationship Diagram (ERD)
-- API Specification
-- UI/UX Design Specification
-- Figma Design Creation Instructions
+## Ikhtisar
+Repositori ini berisi semua hasil kerja untuk Project Otomotif AI (Project Pak Yogi), mencakup:
+- Dokumen Kebutuhan Proyek (PRD)
+- Spesifikasi Kebutuhan Perangkat Lunak (SRS)
+- Diagram Relasi Entitas (ERD)
+- Spesifikasi API
+- Spesifikasi Desain UI/UX
+- Instruksi Pembuatan Desain Figma
 
-## Document List
+## Daftar Dokumen
 
 ### 1. [PRD_Project_Pak_Yogi.md](PRD_Project_Pak_Yogi.md)
-**Project Requirements Document**
-- Project overview and business context
-- Core features: AI 3D Configurator & Shopee Recommender, AI Storytelling Diagnosis
-- Technical requirements and architecture
-- Milestones and assignments
-- Success criteria and risks
+**Dokumen Kebutuhan Proyek**
+- Ikhtisar proyek dan konteks bisnis
+- Fitur inti: AI 3D Configurator & Shopee Recommender, AI Storytelling Diagnosis
+- Kebutuhan teknis dan arsitektur
+- Milestone dan penugasan
+- Kriteria keberhasilan dan risiko
 
 ### 2. [SRS_Project_Pak_Yogi.md](SRS_Project_Pak_Yogi.md)
-**Software Requirements Specification**
-- Detailed functional requirements (FR-001 to FR-026)
-- Non-functional requirements (performance, safety, security, etc.)
-- External interface requirements
-- System features and user stories
-- Glossary and analysis models
+**Spesifikasi Kebutuhan Perangkat Lunak**
+- Kebutuhan fungsional detail (FR-001 s.d FR-026)
+- Kebutuhan non-fungsional (kinerja, keamanan, keamanan, dll)
+- Kebutuhan antarmuka eksternal
+- Fitur sistem dan user stories
+- Glosarium dan model analisis
 
 ### 3. [ERD_Project_Pak_Yogi.md](ERD_Project_Pak_Yogi.md)
-**Entity Relationship Diagram**
-- Complete database schema with relationships
-- Mermaid diagram visualization
-- Entity definitions and relationship details
-- Tables: vehicles, symptoms, diagnoses, spare_parts, workshops, mapping tables
+**Diagram Relasi Entitas**
+- Skema database lengkap dengan relasi
+- Visualisasi diagram Mermaid
+- Definisi entitas dan detail relasi
+- Tabel: vehicles, symptoms, diagnoses, spare_parts, workshops, tabel mapping
 
 ### 4. [API_Spec_Project_Pak_Yogi.md](API_Spec_Project_Pak_Yogi.md)
-**API Specification (OpenAPI 3.0)**
-- Authentication endpoints (/auth/*)
-- Vehicle endpoints (/vehicles/*)
-- Diagnosis endpoints (/diagnosis/*)
-- 3D Configurator endpoints (/3d/*)
-- Workshop endpoints (/workshops/*)
-- Error responses and rate limiting
+**Spesifikasi API (OpenAPI 3.0)**
+- Endpoint autentikasi (/auth/*)
+- Endpoint kendaraan (/vehicles/*)
+- Endpoint diagnosis (/diagnosis/*)
+- Endpoint 3D Configurator (/3d/*)
+- Endpoint bengkel (/workshops/*)
+- Respons error dan rate limiting
 
 ### 5. [UI_UX_Design_Specification.md](UI_UX_Design_Specification.md)
-**UI/UX Design Specification**
-- Design system (color palette, typography, iconography)
-- Layout structures (dashboard, 3D configurator, diagnosis, etc.)
-- Component library (buttons, cards, forms)
-- Interactive elements (loading states, notifications)
-- Responsive design guidelines
-- Accessibility and internationalization support
+**Spesifikasi Desain UI/UX**
+- Sistem desain (palette warna, tipografi, ikonografi)
+- Struktur layout (dashboard, 3D configurator, diagnosis, dll)
+- Perpustakaan komponen (tombol, kartu, formulir)
+- Elemen interaktif (loading states, notifikasi)
+- Panduan desain responsif
+- Dukungan aksesibilitas dan internasionalisasi
 
 ### 6. [Figma_Design_Creation_Instructions.md](Figma_Design_Creation_Instructions.md)
-**Figma Design Creation Instructions**
-- Step-by-step guide to creating Figma design file
-- Design system setup instructions
-- Screen-by-screen component specifications
-- Component variants and states
-- Design tokens and prototyping guidance
-- Alternative approaches and handoff process
+**Instruksi Pembuatan Desain Figma**
+- Panduan langkah-demi-langkah pembuatan file desain Figma
+- Instruksi setup sistem desain
+- Spesifikasi komponen per layar
+- Variasi dan state komponen
+- Design tokens dan panduan prototyping
+- Pendekatan alternatif dan proses handoff
 
-## Project Structure
+## Struktur Proyek
 ```
 Project-Otomotif-Visual3D/
 ├── PRD_Project_Pak_Yogi.md
@@ -73,60 +73,60 @@ Project-Otomotif-Visual3D/
 └── .git/
 ```
 
-## Next Steps
+## Langkah Selanjutnya
 
-### For Project Manager (fajar1180):
-1. Review all documentation with stakeholders
-2. Assign tasks to team members based on specifications
-3. Set up development environment and repository structure
-4. Begin sprint planning for Milestone 1
+### Untuk Project Manager (fajar1180):
+1. Tinjau semua dokumentasi dengan stakeholder
+2. Tugas ke anggota tim berdasarkan spesifikasi
+3. Siapkan lingkungan development dan struktur repositori
+4. Mulai sprint planning untuk Milestone 1
 
-### For System Analyst (ilhamalmunawar05-cpu):
-1. Finalize database schema based on ERD
-2. Set up development database with sample data
-3. Review API specifications for implementation
-4. Prepare technical design documents
+### Untuk System Analyst (ilhamalmunawar05-cpu):
+1. Finalisasi skema database berdasarkan ERD
+2. Setup database development dengan sample data
+3. Tinjau spesifikasi API untuk implementasi
+4. Siapkan dokumen desain teknis
 
-### For Development Team (ilhamalmunawar05-cpu):
-1. **Milestone 1 (Week 2):**
-   - Set up project repository
-   - Implement database schema and models
-   - Write unit tests (TDD approach)
-   - Create initial FastAPI application structure
+### Untuk Tim Development (ilhamalmunawar05-cpu):
+1. **Milestone 1 (Minggu 2):**
+   - Setup repositori proyek
+   - Implementasi skema database dan models
+   - Tulis unit tests (pendekatan TDD)
+   - Buat struktur awal aplikasi FastAPI
 
-2. **Milestone 2 (Week 3):**
-   - Implement diagnosis API endpoint
-   - Integrate pgvector for RAG functionality
-   - Set up Celery for background tasks
-   - Create initial frontend skeleton with Next.js
+2. **Milestone 2 (Minggu 3):**
+   - Implementasi endpoint API diagnosis
+   - Integrasi pgvector untuk fungsionalitas RAG
+   - Setup Celery untuk background tasks
+   - Buat skeleton frontend awal dengan Next.js
 
-3. **Milestone 3 (Week 4):**
-   - Implement 3D configurator API and frontend
-   - Integrate Shopee Affiliate API
-   - Set up workshop finder functionality
-   - Implement user authentication
+3. **Milestone 3 (Minggu 4):**
+   - Implementasi API 3D configurator dan frontend
+   - Integrasi Shopee Affiliate API
+   - Setup fungsionalitas workshop finder
+   - Implementasi autentikasi pengguna
 
-4. **Milestone 4-5 (Week 5-6):**
-   - Feature integration and QA
-   - Performance optimization
+4. **Milestone 4-5 (Minggu 5-6):**
+   - Integrasi fitur dan QA
+   - Optimasi performa
    - User acceptance testing
-   - Production deployment preparation
+   - Persiapan deployment production
 
-## Technology Stack Confirmation
+## Konfirmasi Technology Stack
 - **Frontend:** Next.js (App Router), React Three Fiber, Tailwind CSS, Zustand
 - **Backend:** Python FastAPI, Celery + Redis, PostgreSQL + pgvector
-- **AI:** OpenAI/Claude LLM for RAG pipeline
-- **Integrations:** Shopee Affiliate API, Google Maps API
-- **Development:** Test-Driven Development (TDD) methodology
+- **AI:** OpenAI/Claude LLM untuk RAG pipeline
+- **Integrasi:** Shopee Affiliate API, Google Maps API
+- **Development:** Metodologi Test-Driven Development (TDD)
 
-## Success Criteria
-- Diagnostic accuracy > 85% on test cases
-- 3D configurator loads in <3 seconds on mobile
-- Average API response time < 200ms
-- All core features functional and tested
-- 99.5% monthly uptime target
-- SUS score > 75 in user testing
+## Kriteria Keberhasilan
+- Akurasi diagnosis > 85% pada test case
+- 3D configurator load < 3 detik di mobile
+- Rata-rata response time API < 200ms
+- Semua fitur inti fungsional dan teruji
+- Target uptime bulanan 99.5%
+- Skor SUS > 75 pada user testing
 
 ---
-*Documentation Package Created: 2026-10-19*
-*Prepared by: fajar1180 (Project Manager), ilhamalmunawar05-cpu (System Analyst/Developer)*
+*Paket Dokumentasi Dibuat: 19 Oktober 2026*
+*Disusun oleh: fajar1180 (Project Manager), ilhamalmunawar05-cpu (System Analyst/Developer)*

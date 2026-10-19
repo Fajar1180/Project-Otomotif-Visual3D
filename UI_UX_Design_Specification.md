@@ -1,36 +1,36 @@
-# UI/UX Design Specification
+# Spesifikasi Desain UI/UX
 ## Platform Otomotif AI (Project Pak Yogi)
 
-### 1. Design Overview
-**Target Users:**
-- DIY motorcycle enthusiasts
-- Vehicle owners seeking self-repair solutions
-- Mechanics looking for diagnostic reference
-- Workshop owners seeking customer acquisition
+### 1. Ikhtisar Desain
+**Target Pengguna:**
+- Penggemar DIY motor
+- Pemilik kendaraan mencari solusi perbaikan mandiri
+- Mekanik mencari referensi diagnosis
+- Pemilik bengkel mencari akuisisi pelanggan
 
-**Primary Goals:**
-1. Provide intuitive, interactive vehicle diagnosis
-2. Enable easy 3D component visualization and modification
-3. Deliver actionable repair instructions with spare parts integration
-4. Connect users with local workshop services when needed
+**Tujuan Utama:**
+1. Menyediakan diagnosis kendaraan intuitif dan interaktif
+2. Memungkinkan visualisasi dan modifikasi komponen 3D dengan mudah
+3. Menyediakan instruksi perbaikan actionable dengan integrasi suku cadang
+4. Menghubungkan pengguna dengan layanan bengkel lokal saat dibutuhkan
 
 ---
 
-### 2. Design System
+### 2. Sistem Desain
 
-#### 2.1 Color Palette
+#### 2.1 Palette Warna
 ```css
-/* Primary Colors */
+/* Warna Primary */
 - primary-dark: #0A2463 (navy blue)
 - primary-main: #1E4E79 (deep blue)
 - primary-light: #2563AB (bright blue)
 
-/* Secondary Colors */
+/* Warna Secondary */
 - secondary-dark: #92400E (brown)
 - secondary-main: #D97706 (orange)
 - secondary-light: #F59E0B (amber)
 
-/* Status Colors */
+/* Warna Status */
 - success: #059669 (green)
 - warning: #D97706 (orange)
 - error: #DC2626 (red)
@@ -44,9 +44,9 @@
 - white: #FFFFFF
 ```
 
-#### 2.2 Typography
+#### 2.2 Tipografi
 ```css
-/* Headings */
+/* Heading */
 - h1: Inter Bold, 2.5rem (desktop), 2rem (mobile), 32px-40px line-height
 - h2: Inter Bold, 2rem (desktop), 1.75rem (mobile), 28px-36px
 - h3: Inter SemiBold, 1.5rem, 24-32px
@@ -61,51 +61,51 @@
 - code: Fira Code, monospace
 ```
 
-#### 2.3 Iconography
-- 24px outline icons for interactions
-- 20px filled icons for status indicators
-- Custom 3D-styled icons for vehicle components
-- Material Design Icons set for consistency
+#### 2.3 Ikonografi
+- Ikon outline 24px untuk interaksi
+- Ikon filled 20px untuk indikator status
+- Ikon custom 3D-styled untuk komponen kendaraan
+- Set Material Design Icons untuk konsistensi
 
 ---
 
-### 3. Layout Structure
+### 3. Struktur Layout
 
-#### 3.1 Main Navigation
+#### 3.1 Navigasi Utama
 ```
 ┌─────────────────────────────────────────────────────┐
-│ Logo [OTOMOTIF AI] │ Search [Vehicle/File] │     │
+│ Logo [OTOMOTIF AI] │ Search [Kendaraan/File] │     │
 │                                                   │
 │ [Dashboard] │ [3D Configurator] │ [AI Diagnosis] │
-│ [Spare Parts] │ [Workshops] │ [History] │
+│ [Suku Cadang] │ [Bengkel] │ [Riwayat] │
 └─────────────────────────────────────────────────────┘
 ```
 
-- Fixed top navigation with brand and search
-- Secondary navigation with 6 main sections
-- Dark theme with gradient effect
-- Shadow for depth
+- Navigasi atas fixed dengan brand dan search
+- Navigasi sekunder dengan 6 section utama
+- Tema gelap dengan efek gradient
+- Shadow untuk kedalaman
 
-#### 3.2 Dashboard Layout
+#### 3.2 Layout Dashboard
 ```
 ┌─────────────────────────────────────────────────────┐
 │              Dashboard                               │
 │                                                   │
 │ [Recent Diagnosis] │ [Quick 3D Config] │         │
 │  ┌─────┐  ┌──────────┐                           │
-│  │ •  │  │  Generate │  (4-step process)        │
+│  │ •  │  │  Generate │  (proses 4-langkah)       │
 │  │ 1  │  │  3D Mesh  │                           │
 │  │2&3 │  └──────────┘                           │
 │  │DIY  │                                          │
 │  └─────┘                                          │
 │                                                   │
 │ Quick Actions:                                     │
-│ • Diagnosis Story               • Spare Parts      │
-│ • Workshop Locator             • Profile Settings │
+│ • Diagnosis Story               • Suku Cadang      │
+│ • Pencari Bengkel             • Pengaturan Profil │
 └─────────────────────────────────────────────────────┘
 ```
 
-#### 3.3 3D Configurator Layout
+#### 3.3 Layout 3D Configurator
 ```
 ┌─────────────────────────────────────────────────────┐
 │              3D Vehicle Configurator                │
@@ -128,20 +128,20 @@
 │   │ │   │   └── Apply    │ │ │                 │
 │   │ │   └── ...          │ │ │                 │
 │   │ │ • Category 2       │ │ │                 │
-│   │ │                    │ │                 │
+│   │ │                    │ │ │                 │
 │   │ │                      │ │                 │
 │   │ └─────────────────────┘ │                 │
 │                                                   │
 │   ┌─────────────────────┐ │                 │
 │   │ Legend              │ │                 │
 │   │ • Connected       │ │                 │
-│   │ • Requires Skill │ │                 │
-│   │ • Affiliate      │ │                 │
+│   │ • Butuh Skill     │ │                 │
+│   │ • Affiliate       │ │                 │
 │   └─────────────────────┘ │                 │
 └─────────────────────────────────────────────────────┘
 ```
 
-#### 3.4 AI Diagnosis Layout
+#### 3.4 Layout AI Diagnosis
 ```
 ┌─────────────────────────────────────────────────────┐
 │                AI Diagnosis Interface               │
@@ -149,7 +149,7 @@
 │ ┌─────────────────────┐ ┌───────────────────────┐ │
 │ │ Input Area          │ │ Result Panel          │ │
 │ │                     │ │                       │ │
-│ │ Textbox with mic    │ │ ┌─────────────────────┐ │ │
+│ │ Textbox dengan mic  │ │ ┌─────────────────────┐ │ │
 │ │ icon                │ │ │ Severity:           │ │ │
 │ │ • Story Input       │ │ │                      │ │ │
 │ │ • Sample Questions  │ │ │ 💚 DIY EASY          │ │ │
@@ -181,9 +181,9 @@
 
 ---
 
-### 4. Component Library
+### 4. Perpustakaan Komponen
 
-#### 4.1 Buttons
+#### 4.1 Tombol
 ```css
 /* Primary Action */
 .btn-primary {
@@ -224,7 +224,7 @@
 }
 ```
 
-#### 4.2 Cards
+#### 4.2 Kartu
 ```css
 .card {
   background: white;
@@ -252,7 +252,7 @@ card.severity-workshop {
 }
 ```
 
-#### 4.3 Forms & Inputs
+#### 4.3 Form & Input
 ```css
 .input-group {
   margin-bottom: 20px;
@@ -288,12 +288,12 @@ card.severity-workshop {
 
 ---
 
-### 5. Interactive Elements
+### 5. Elemen Interaktif
 
-#### 5.1 3D Canvas Interactions
-- **Hover States:** Highlight interactable parts
-- **Drag & Drop:** Component rearrangement in configurator
-- **Mouse Wheel:** Zoom in/out on 3D model
+#### 5.1 Interaksi Kanvas 3D
+- **Hover States:** Highlight bagian yang bisa diinteraksi
+- **Drag & Drop:** Penyusunan komponen di konfigurator
+- **Mouse Wheel:** Zoom in/out pada model 3D
 - **Touch Gestures:** Pinch to zoom, swipe to rotate (mobile)
 
 #### 5.2 Loading States
@@ -313,7 +313,7 @@ card.severity-workshop {
 }
 ```
 
-#### 5.3 Notifications
+#### 5.3 Notifikasi
 ```css
 .notification {
   position: fixed;
@@ -340,9 +340,9 @@ card.severity-workshop {
 
 ---
 
-### 6. Color System for Diagnosis Severity
+### 6. Sistem Warna untuk Tingkat Keparahan Diagnosis
 
-| Severity | Color | Light Shade | Text on Background |
+| Tingkat Keparahan | Warna | Light Shade | Teks pada Background |
 |----------|-------|-------------|-------------------|
 | DIY Easy | #10B981 | #ECFDF5 | #065F46 |
 | DIY Hard | #F59E0B | #FFFBEB | #92400E |
@@ -350,19 +350,19 @@ card.severity-workshop {
 
 ---
 
-### 7. Responsive Design
+### 7. Desain Responsif
 
 #### Mobile (< 768px)
 ```
-- Navigation: Collapsible hamburger menu
-- 3D Canvas: Full-width, reduced quality settings
+- Navigasi: Collapsible hamburger menu
+- 3D Canvas: Full-width, pengaturan kualitas reduced
 - Panel Width: 280px max (drawer)
 - Font Size: Body 0.875rem, Headings scale down
 ```
 
 #### Tablet (768px - 1024px)
 ```
-- Navigation: Full width with icons
+- Navigasi: Full width dengan ikon
 - 3D Canvas: Fixed height, side panel
 - Panel Width: 320px
 - Font Size: Body 1rem
@@ -370,53 +370,53 @@ card.severity-workshop {
 
 #### Desktop (> 1024px)
 ```
-- Navigation: Fixed top with secondary sidebar
-- 3D Canvas: Left/main area with right panel
+- Navigasi: Fixed top dengan sidebar sekunder
+- 3D Canvas: Area kiri/utama dengan panel kanan
 - Panel Width: 360px
 - Font Size: Body 1.125rem
 ```
 
 ---
 
-### 8. Typography & Accessibility
+### 8. Tipografi & Aksesibilitas
 
-#### 8.1 Text Hierarchy
+#### 8.1 Hierarki Teks
 ```
-Level 1 (H1)  : 2.5rem / 32px - Page titles
-Level 2 (H2)  : 2rem / 28px - Section titles
-Level 3 (H3)  : 1.5rem / 24px - Subsection titles
-Level 4 (H4)  : 1.25rem / 20px - Component titles
-Level 5 (H5)  : 1.125rem / 18px - Card titles
-Body Large   : 1.125rem / 18px - Primary text
-Body          : 1rem / 16px - Secondary text
-Body Small    : 0.875rem / 14px - Captions, labels
+Level 1 (H1)  : 2.5rem / 32px - Judul halaman
+Level 2 (H2)  : 2rem / 28px - Judul section
+Level 3 (H3)  : 1.5rem / 24px - Judul subsection
+Level 4 (H4)  : 1.25rem / 20px - Judul komponen
+Level 5 (H5)  : 1.125rem / 18px - Judul kartu
+Body Large   : 1.125rem / 18px - Teks primer
+Body          : 1rem / 16px - Teks sekunder
+Body Small    : 0.875rem / 14px - Caption, label
 ```
 
-#### 8.2 Contrast Ratios
-- All text must meet WCAG AA standard (4.5:1 for normal text, 3:1 for large text)
-- Use color combinations that pass accessibility tests
-- Include focus indicators for keyboard navigation
-- Provide alternative text for all images
+#### 8.2 Rasio Kontras
+- Semua teks harus memenuhi standar WCAG AA (4.5:1 untuk teks normal, 3:1 untuk teks besar)
+- Gunakan kombinasi warna yang lolos tes aksesibilitas
+- Sertakan indikator fokus untuk navigasi keyboard
+- Sediakan teks alternatif untuk semua gambar
 
 ---
 
-### 9. Animation & Motion
+### 9. Animasi & Motion
 
-#### 9.1 Easing Functions
-- **Ease Out:** For element expansion, dialog opening
-- **Ease In:** For element collapsing
-- **Linear:** For loading spinners
+#### 9.1 Fungsi Easing
+- **Ease Out:** Untuk ekspansi elemen, pembukaan dialog
+- **Ease In:** Untuk kollaps elemen
+- **Linear:** Untuk loading spinner
 
-#### 9.2 Duration
-- **Fast:** 150ms - Quick interactions
-- **Normal:** 300ms - Standard animations
-- **Slow:** 500ms - Complex transitions
+#### 9.2 Durasi
+- **Cepat:** 150ms - Interaksi cepat
+- **Normal:** 300ms - Animasi standar
+- **Lambat:** 500ms - Transisi kompleks
 
 ---
 
-### 10. Component States
+### 10. State Komponen
 
-#### 10.1 Interactive Components
+#### 10.1 Komponen Interaktif
 ```
 Default State:
   Background: white
@@ -440,20 +440,20 @@ Disabled:
   Cursor: not-allowed
 ```
 
-#### 10.2 Diagnosis Card States
+#### 10.2 State Kartu Diagnosis
 ```
-Default: Clean white card with severity color left border
-Hover: Lift effect, shadow enhancement
-Selected: Highlighted background, border accent
-Loading: Skeleton placeholders with shimmer effect
+Default: Kartu putih bersih dengan border warna severity di kiri
+Hover: Efek lift, peningkatan shadow
+Selected: Background highlighted, border accent
+Loading: Skeleton placeholders dengan efek shimmer
 ```
 
 ---
 
-### 11. i18n Support
+### 11. Dukungan i18n
 
-#### 11.1 Language Structure
-```
+#### 11.1 Struktur Bahasa
+```json
 {
   "en": {
     "diagnosis": "Diagnosis",
@@ -482,7 +482,7 @@ Loading: Skeleton placeholders with shimmer effect
 
 ---
 
-### 12. Local Storage Structure
+### 12. Struktur Local Storage
 ```javascript
 {
   "user": {
@@ -501,4 +501,4 @@ Loading: Skeleton placeholders with shimmer effect
 ```
 
 ---
-*Document Version 1.0 | Created: 2026-10-19*
+*Versi Dokumen 1.0 | Dibuat: 19 Oktober 2026*

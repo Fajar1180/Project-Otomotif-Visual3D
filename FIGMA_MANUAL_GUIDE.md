@@ -1,417 +1,417 @@
-# Manual Figma File Creation Guide
+# Panduan Manual Pembuatan File Figma
 ## Platform Otomotif AI - Project Pak Yogi
 
-**Target:** Create complete Figma design file with design system, components, and screens  
-**Account:** pak-yogi organization (atau personal account)  
-**File Name:** Project_Pak_Yogi_Design  
-**Date:** 19 Oktober 2026
+**Target:** Membuat file desain Figma lengkap dengan sistem desain, komponen, dan layar  
+**Akun:** organisasi pak-yogi (atau akun personal)  
+**Nama File:** Project_Pak_Yogi_Design  
+**Tanggal:** 19 Oktober 2026
 
 ---
 
-## Prerequisites
+## Prasyarat
 
-### 1. Setup Figma Account
-- [ ] Buat/login Figma account di https://figma.com
-- [ ] Install Figma desktop app (recommended) atau gunakan web version
-- [ ] Join team/organization "pak-yogi" (jika ada)
+### 1. Setup Akun Figma
+- [ ] Buat/login akun Figma di https://figma.com
+- [ ] Install Figma desktop app (direkomendasikan) atau gunakan versi web
+- [ ] Join tim/organisasi "pak-yogi" (jika ada)
 
-### 2. Preparation Materials
-- [ ] `figma-design-specification.json` - Design tokens dan component specs
-- [ ] `design-mockups/` folder - HTML mockups sebagai visual reference
-- [ ] `UI_UX_Design_Specification.md` - Complete design documentation
+### 2. Materi Persiapan
+- [ ] `figma-design-specification.json` - Design tokens dan spec komponen
+- [ ] Folder `design-mockups/` - HTML mockups sebagai referensi visual
+- [ ] `UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
 
 ---
 
-## Phase 1: Create New Figma File (5 menit)
+## Phase 1: Buat File Figma Baru (5 menit)
 
-### Step 1.1: Create File
-1. Open Figma
-2. Click **"New design file"** 
+### Langkah 1.1: Buat File
+1. Buka Figma
+2. Klik **"New design file"** 
 3. Rename file: **Project_Pak_Yogi_Design**
-4. Save to team "pak-yogi" (atau Drafts)
+4. Simpan ke tim "pak-yogi" (atau Drafts)
 
-### Step 1.2: Setup Pages
-Create 4 pages (left sidebar):
-1. **🎨 Design System** - Colors, typography, components
-2. **📱 Screens** - All main screens
-3. **🔄 Prototypes** - Linked user flows
-4. **📦 Assets** - Icons, images, exports
+### Langkah 1.2: Setup Halaman
+Buat 4 halaman (sidebar kiri):
+1. **🎨 Design System** - Warna, tipografi, komponen
+2. **📱 Screens** - Semua layar utama
+3. **🔄 Prototypes** - User flows yang terlink
+4. **📦 Assets** - Ikon, gambar, exports
 
 ---
 
-## Phase 2: Design System Setup (30 menit)
+## Phase 2: Setup Design System (30 menit)
 
-### Page: 🎨 Design System
+### Halaman: 🎨 Design System
 
-### Step 2.1: Color Styles
+### Langkah 2.1: Color Styles
 
-1. **Create frame:** "Color Palette" (1200x800px)
+1. **Buat frame:** "Color Palette" (1200x800px)
 
-2. **Primary Colors** - Create 3 rectangles (200x100px each):
-   - Primary Dark: `#0A2463` → Right-click → Create color style → Name: "Primary/Dark"
+2. **Warna Primary** - Buat 3 rectangle (200x100px masing-masing):
+   - Primary Dark: `#0A2463` → Right-click → Create color style → Nama: "Primary/Dark"
    - Primary Main: `#1E4E79` → Create style: "Primary/Main"
    - Primary Light: `#2563AB` → Create style: "Primary/Light"
 
-3. **Secondary Colors** - Same process:
+3. **Warna Secondary** - Proses sama:
    - Secondary Dark: `#92400E` → "Secondary/Dark"
    - Secondary Main: `#D97706` → "Secondary/Main"
    - Secondary Light: `#F59E0B` → "Secondary/Light"
 
-4. **Status Colors**:
+4. **Warna Status**:
    - Success: `#059669` → "Status/Success" (DIY Easy)
    - Warning: `#D97706` → "Status/Warning" (DIY Hard)
-   - Error: `#DC2626` → "Status/Error" (Workshop)
+   - Error: `#DC2626` → "Status/Error" (Bengkel)
    - Info: `#2563AB` → "Status/Info"
 
-5. **Neutral Colors**:
+5. **Warna Neutral**:
    - Dark: `#111827` → "Neutral/Dark"
    - Gray: `#6B7280` → "Neutral/Gray"
    - Light: `#F3F4F6` → "Neutral/Light"
    - White: `#FFFFFF` → "Neutral/White"
 
-**Pro tip:** Group colors dengan slash notation (Primary/Dark) untuk organize styles
+**Pro tip:** Group warna dengan slash notation (Primary/Dark) untuk organize styles
 
-### Step 2.2: Typography Styles
+### Langkah 2.2: Typography Styles
 
-1. **Create frame:** "Typography Scale" (1200x1000px)
+1. **Buat frame:** "Typography Scale" (1200x1000px)
 
 2. **Install Font:** Inter (Google Fonts)
-   - Menu → File → Font settings → Add "Inter"
+   - Menu → File → Font settings → Tambah "Inter"
 
-3. **Create Text Styles:**
+3. **Buat Text Styles:**
 
 **Heading 1:**
-- Create text: "Heading 1 - Main Page Headings"
+- Buat teks: "Heading 1 - Main Page Headings"
 - Font: Inter Bold
-- Size: 32px (2rem)
+- Ukuran: 32px (2rem)
 - Line height: 44.8px (140%)
 - Letter spacing: -0.64px (-2%)
 - Right-click → Create text style → "Heading/H1"
 
 **Heading 2:**
-- Text: "Heading 2 - Section Headings"
+- Teks: "Heading 2 - Section Headings"
 - Inter Bold, 24px, line height 32px, -0.24px
 - Style: "Heading/H2"
 
 **Heading 3:**
-- Text: "Heading 3 - Card Titles"
+- Teks: "Heading 3 - Card Titles"
 - Inter Semibold, 20px, line height 25.6px, 0px
 - Style: "Heading/H3"
 
 **Heading 4:**
-- Text: "Heading 4 - Component Headings"
+- Teks: "Heading 4 - Component Headings"
 - Inter Semibold, 18px, line height 24px, 0px
 - Style: "Heading/H4"
 
 **Body:**
-- Text: "Body - Regular text for content and descriptions"
+- Teks: "Body - Regular text untuk konten dan deskripsi"
 - Inter Regular, 16px, line height 25.6px (160%), 0px
 - Style: "Body/Regular"
 
 **Small:**
-- Text: "Small - Labels and secondary text"
+- Teks: "Small - Label dan teks sekunder"
 - Inter Regular, 14px, line height 19.6px, 0px
 - Style: "Body/Small"
 
 **Caption:**
-- Text: "Caption - Metadata and captions"
+- Teks: "Caption - Metadata dan caption"
 - Inter Medium, 12px, line height 16px, 0.12px
 - Style: "Body/Caption"
 
-### Step 2.3: Spacing System
+### Langkah 2.3: Sistem Spacing
 
-1. **Create frame:** "Spacing Grid" (800x600px)
-2. Create rectangles showing 8px grid:
+1. **Buat frame:** "Spacing Grid" (800x600px)
+2. Buat rectangle menunjukkan grid 8px:
    - 4px (xs)
-   - 8px (sm) - base unit
+   - 8px (sm) - unit dasar
    - 16px (md)
    - 24px (lg)
    - 32px (xl)
    - 48px (2xl)
 
-**Pro tip:** Use Auto Layout dengan 8px spacing untuk consistency
+**Pro tip:** Gunakan Auto Layout dengan spacing 8px untuk konsistensi
 
-### Step 2.4: Component Library
+### Langkah 2.4: Library Komponen
 
-#### Button Components
+#### Komponen Tombol
 
-1. **Create frame:** "Buttons" (1000x600px)
+1. **Buat frame:** "Buttons" (1000x600px)
 
 2. **Button - Primary:**
    - Rectangle: 120x48px
    - Background: Gradient linear 135° (#1E4E79 → #2563AB)
    - Border radius: 8px
-   - Text: "Button Text" (Inter Semibold, 16px, white)
-   - Padding: 12px vertical, 24px horizontal (Auto Layout)
-   - Create Component: Cmd/Ctrl+Alt+K → Name: "Button/Primary"
+   - Teks: "Button Text" (Inter Semibold, 16px, white)
+   - Padding: 12px vertikal, 24px horizontal (Auto Layout)
+   - Create Component: Cmd/Ctrl+Alt+K → Nama: "Button/Primary"
 
-3. **Add Variants:**
-   - Default state (created)
-   - Hover: Slightly darker gradient + shadow
-   - Active: Even darker
-   - Disabled: Gray + 50% opacity
+3. **Tambah Variants:**
+   - Default state (dibuat)
+   - Hover: Gradient sedikit lebih gelap + shadow
+   - Active: Lebih gelap lagi
+   - Disabled: Abu-abu + 50% opacity
 
 4. **Button - Secondary:**
-   - Same size (120x48px)
-   - Background: transparent
+   - Ukuran sama (120x48px)
+   - Background: transparan
    - Border: 2px solid Primary/Main
-   - Text color: Primary/Main
+   - Warna teks: Primary/Main
    - Create Component: "Button/Secondary"
-   - Add same 4 variants
+   - Tambah 4 variants yang sama
 
 5. **Button - Ghost:**
-   - No background, no border
-   - Just text (Primary/Main color)
+   - Tanpa background, tanpa border
+   - Hanya teks (warna Primary/Main)
    - Padding: 8px 16px
    - Component: "Button/Ghost"
 
-#### Card Components
+#### Komponen Kartu
 
-1. **Create frame:** "Cards" (1200x800px)
+1. **Buat frame:** "Cards" (1200x800px)
 
 2. **Base Card:**
    - Rectangle: 380x300px
    - Background: White
    - Border radius: 12px
    - Shadow: 0px 2px 8px rgba(0,0,0,0.1)
-   - Auto Layout: vertical, 24px padding
+   - Auto Layout: vertikal, padding 24px
    - Create Component: "Card/Base"
 
 3. **Card Variants:**
-   - **Easy Severity:** Add left border 4px solid Success
-   - **Hard Severity:** Left border Warning
-   - **Workshop Severity:** Left border Error
+   - **Easy Severity:** Tambah border kiri 4px solid Success
+   - **Hard Severity:** Border kiri Warning
+   - **Workshop Severity:** Border kiri Error
 
 4. **Status Card (Recent Diagnosis):**
-   - Use Card/Base
-   - Add: Header (icon + title), Content area, Status badges
+   - Gunakan Card/Base
+   - Tambah: Header (icon + judul), Area konten, Status badges
    - Component: "Card/Status"
 
-#### Badge Components
+#### Komponen Badge
 
-1. **Create frame:** "Badges" (800x400px)
+1. **Buat frame:** "Badges" (800x400px)
 
 2. **Severity Easy:**
    - Rectangle: auto width x 32px
    - Background: `#ECFDF5`
-   - Border radius: 16px (pill shape)
-   - Text: "DIY EASY" (Inter Semibold, 14px, `#065F46`)
+   - Border radius: 16px (bentuk pil)
+   - Teks: "DIY EASY" (Inter Semibold, 14px, `#065F46`)
    - Padding: 4px 12px (Auto Layout)
    - Component: "Badge/Severity-Easy"
 
 3. **Severity Hard:**
    - Background: `#FFFBEB`
-   - Text: "DIY HARD" (color `#92400E`)
+   - Teks: "DIY HARD" (warna `#92400E`)
    - Component: "Badge/Severity-Hard"
 
 4. **Severity Workshop:**
    - Background: `#FEF2F2`
-   - Text: "WORKSHOP REQUIRED" (color `#991B1B`)
+   - Teks: "WORKSHOP REQUIRED" (warna `#991B1B`)
    - Component: "Badge/Severity-Workshop"
 
-#### Input Components
+#### Komponen Input
 
 1. **Text Input:**
    - Rectangle: 360x48px
    - Background: White
    - Border: 2px solid `#E5E7EB`
    - Border radius: 8px
-   - Placeholder text: Inter Regular 16px Gray
+   - Placeholder teks: Inter Regular 16px Gray
    - Component: "Input/Text"
    - Variants: Default, Focused (border Primary/Light + shadow), Error
 
 2. **Textarea:**
-   - Same style, height 150px
+   - Style sama, tinggi 150px
    - Component: "Input/Textarea"
 
 ---
 
-## Phase 3: Screen Designs (60 menit)
+## Phase 3: Desain Layar (60 menit)
 
-### Page: 📱 Screens
+### Halaman: 📱 Screens
 
-### Step 3.1: Dashboard Screen
+### Langkah 3.1: Layar Dashboard
 
-1. **Create frame:** "Dashboard" (1920x1080px)
+1. **Buat frame:** "Dashboard" (1920x1080px)
 
-2. **Navigation Bar** (top, 64px height):
+2. **Navigation Bar** (atas, tinggi 64px):
    - Rectangle: full width x 64px
    - Gradient background: Primary/Dark → Primary/Main (135°)
-   - Logo text: "🚗 OTOMOTIF AI" (white, H3)
-   - Search input (300px width)
+   - Teks logo: "🚗 OTOMOTIF AI" (putih, H3)
+   - Search input (lebar 300px)
    - Auto Layout: horizontal, space-between
 
 3. **Sub Navigation Menu:**
-   - Below navbar, same background
-   - Items: Dashboard, 3D Configurator, AI Diagnosis, Spare Parts, Workshops, History
-   - Horizontal Auto Layout, 24px gap
-   - Active state: white background 20% opacity
+   - Di bawah navbar, background sama
+   - Item: Dashboard, 3D Configurator, AI Diagnosis, Suku Cadang, Bengkel, Riwayat
+   - Horizontal Auto Layout, gap 24px
+   - Active state: background putih 20% opacity
 
 4. **Dashboard Header:**
-   - Padding top: 32px
+   - Padding atas: 32px
    - H1: "Dashboard"
    - Body/Small: "Selamat datang di Platform Otomotif AI"
    - Margin bottom: 32px
 
 5. **Cards Grid:**
-   - Auto Layout: horizontal wrap, 3 columns
+   - Auto Layout: horizontal wrap, 3 kolom
    - Gap: 24px
-   - Cards:
-     - Recent Diagnosis (use Card/Status component)
-     - Quick 3D Configurator (Card/Base + 4 steps)
-     - Statistics (Card/Base + 4 metrics grid)
+   - Kartu:
+     - Recent Diagnosis (gunakan component Card/Status)
+     - Quick 3D Configurator (Card/Base + 4 langkah)
+     - Statistik (Card/Base + 4 metrik grid)
 
 6. **Quick Actions:**
-   - Section title: "Quick Actions" (H2)
-   - 4 action cards: Diagnosis, Spare Parts, Workshop, Settings
-   - Auto Layout: horizontal, 16px gap
+   - Judul section: "Quick Actions" (H2)
+   - 4 action cards: Diagnosis, Suku Cadang, Bengkel, Pengaturan
+   - Auto Layout: horizontal, gap 16px
 
-**Reference:** Lihat `design-mockups/dashboard.html` untuk visual
+**Referensi:** Lihat `design-mockups/dashboard.html` untuk visual
 
-### Step 3.2: 3D Configurator Screen
+### Langkah 3.2: Layar 3D Configurator
 
-1. **Create frame:** "3D Configurator" (1920x1080px)
+1. **Buat frame:** "3D Configurator" (1920x1080px)
 
-2. **Layout:** Horizontal Auto Layout, 2 sections
+2. **Layout:** Horizontal Auto Layout, 2 section
 
-3. **Left: Canvas Area (70% width):**
+3. **Kiri: Canvas Area (lebar 70%):**
    - Background: Gradient `#f5f5f5` → `#e8e8e8` (135°)
-   - Placeholder: Large icon 🎨 (center)
-   - Toolbar (bottom center):
-     - Frame: Auto Layout horizontal, white background
+   - Placeholder: Icon besar 🎨 (tengah)
+   - Toolbar (bawah tengah):
+     - Frame: Auto Layout horizontal, background putih
      - Border radius: 12px
      - Shadow: 0 4px 12px rgba(0,0,0,0.15)
-     - Buttons: Reset, Zoom In, Zoom Out, Rotate, Save
+     - Tombol: Reset, Zoom In, Zoom Out, Rotate, Save
      - Gap: 16px, padding: 12px 24px
 
-4. **Right: Component Panel (30% width):**
+4. **Kanan: Component Panel (lebar 30%):**
    - **Panel Header:**
      - Background: Light
      - Padding: 24px
-     - Title: "Component Selector" (H3)
+     - Judul: "Component Selector" (H3)
      - Border bottom: 1px Light
 
    - **Component Sections** (scrollable):
      - Section: Wheels 🛞
        - Collapsible header (Auto Layout)
-       - Items: 2 wheel components
-       - Each item: name, price range, Preview + Apply buttons
+       - Item: 2 komponen roda
+       - Tiap item: nama, rentang harga, tombol Preview + Apply
      - Section: Exhaust 🔥
      - Section: Body Kit 🎨
      - Section: Suspension ⚙️
 
-   - **Legend (bottom):**
+   - **Legend (bawah):**
      - Background: Light
-     - 3 legend items dengan colored dots
+     - 3 item legend dengan dot berwarna
      - Padding: 24px
 
-**Reference:** `design-mockups/3d-configurator.html`
+**Referensi:** `design-mockups/3d-configurator.html`
 
-### Step 3.3: AI Diagnosis Screen
+### Langkah 3.3: Layar AI Diagnosis
 
-1. **Create frame:** "AI Diagnosis" (1920x1080px)
+1. **Buat frame:** "AI Diagnosis" (1920x1080px)
 
-2. **Layout:** Horizontal Auto Layout, 2 columns (1fr 2fr)
+2. **Layout:** Horizontal Auto Layout, 2 kolom (1fr 2fr)
 
-3. **Left: Input Panel (narrower):**
-   - White background card
+3. **Kiri: Input Panel (lebih sempit):**
+   - Background card putih
    - Padding: 24px
-   - Sections (vertical Auto Layout, 20px gap):
-     - **Title:** "Ceritakan Masalah Kendaraan Anda" (H3)
-     - **Textarea:** Input/Textarea component
+   - Section (vertikal Auto Layout, gap 20px):
+     - **Judul:** "Ceritakan Masalah Kendaraan Anda" (H3)
+     - **Textarea:** Component Input/Textarea
        - Placeholder: "Contoh: Motor Vario saya..."
-       - Mic button (bottom right, floating)
+       - Tombol mic (bawah kanan, floating)
      - **Vehicle Selector:** Dropdown input
-     - **Sample Questions:** 4 clickable question cards
+     - **Sample Questions:** 4 kartu pertanyaan yang bisa diklik
      - **Analyze Button:** Button/Primary full width
 
-4. **Right: Result Panel (wider):**
-   - White background card
+4. **Kanan: Result Panel (lebih lebar):**
+   - Background card putih
    - Padding: 24px
-   - Sections (vertical Auto Layout):
-     - **Severity Badge:** Badge/Severity-Easy component
-     - **Conclusion:** H2 text "Kerusakan terindikasi pada..."
+   - Section (vertikal Auto Layout):
+     - **Severity Badge:** Component Badge/Severity-Easy
+     - **Conclusion:** H2 teks "Kerusakan terindikasi pada..."
      - **Confidence Score:** 
        - Label + progress bar (92%)
-       - Bar: 100px x 8px, filled 92%
+       - Bar: 100px x 8px, terisi 92%
      - **Section: Penjelasan Teknis** (H4 + body text)
      - **Section: Langkah Perbaikan:**
-       - 7 step items (numbered circles + text)
-       - Auto Layout vertical, 12px gap
+       - 7 item langkah (lingkaran bernomor + teks)
+       - Auto Layout vertikal, gap 12px
      - **Section: Suku Cadang:**
-       - 2 part cards (icon + name + price + Shopee link)
-       - Auto Layout, 16px gap
+       - 2 kartu part (icon + nama + harga + link Shopee)
+       - Auto Layout, gap 16px
 
-**Reference:** `design-mockups/ai-diagnosis.html`
+**Referensi:** `design-mockups/ai-diagnosis.html`
 
-### Step 3.4: Workshop Finder Screen (Optional)
+### Langkah 3.4: Layar Pencari Bengkel (Opsional)
 
-1. **Create frame:** "Workshop Finder" (1920x1080px)
+1. **Buat frame:** "Workshop Finder" (1920x1080px)
 2. **Layout:** 70% map view + 30% filter panel
-3. Use placeholder for map area
-4. Right panel: Location search, filters (radius, rating, specialty)
+3. Gunakan placeholder untuk area map
+4. Panel kanan: Location search, filter (radius, rating, specialty)
 
-### Step 3.5: Authentication Screens (Optional)
+### Langkah 3.5: Layar Autentikasi (Opsional)
 
 1. **Login Frame:** 1920x1080px
-   - Centered card: 480x600px
-   - Logo, email input, password input, login button, OAuth buttons
-2. **Register Frame:** Similar layout, more fields
-3. **Forgot Password Frame:** Simplified, just email input
+   - Card terpusat: 480x600px
+   - Logo, email input, password input, tombol login, tombol OAuth
+2. **Register Frame:** Layout serupa, field lebih banyak
+3. **Forgot Password Frame:** Disederhanakan, hanya email input
 
 ---
 
 ## Phase 4: Prototyping (20 menit)
 
-### Page: 🔄 Prototypes
+### Halaman: 🔄 Prototypes
 
-### Step 4.1: Create Interactions
+### Langkah 4.1: Buat Interaksi
 
-1. **Switch to Prototype mode** (top right)
+1. **Switch ke Prototype mode** (kanan atas)
 
 2. **Main User Flow:**
-   - Login → Dashboard: Click "Login" button
-   - Dashboard → 3D Configurator: Click "Quick 3D Configurator" card
-   - Dashboard → AI Diagnosis: Click "Diagnosis Story" action
-   - AI Diagnosis Input → Result: Click "Analyze" button
+   - Login → Dashboard: Klik tombol "Login"
+   - Dashboard → 3D Configurator: Klik kartu "Quick 3D Configurator"
+   - Dashboard → AI Diagnosis: Klik aksi "Diagnosis Story"
+   - AI Diagnosis Input → Result: Klik tombol "Analisis"
 
-3. **Component Interactions:**
-   - Button hover states: On hover → Change to hover variant
-   - Card hover: On hover → Lift animation (4px up)
-   - Section collapse: Click header → Toggle visibility
+3. **Interaksi Komponen:**
+   - Button hover states: On hover → Ganti ke variant hover
+   - Card hover: On hover → Animasi lift (4px ke atas)
+   - Section collapse: Klik header → Toggle visibility
 
-4. **Transitions:**
-   - Screen transitions: Smart Animate, 300ms, Ease Out
-   - Hover effects: Instant or 100ms
+4. **Transisi:**
+   - Transisi layar: Smart Animate, 300ms, Ease Out
+   - Hover effects: Instant atau 100ms
 
-### Step 4.2: Create Presentation
+### Langkah 4.2: Buat Presentasi
 
 1. **Set starting frame:** Dashboard
-2. **Test prototype:** Click Play (▶) button top right
-3. **Share:** Click Share → Copy link → Send to team
+2. **Test prototype:** Klik Play (▶) button kanan atas
+3. **Share:** Klik Share → Copy link → Kirim ke tim
 
 ---
 
-## Phase 5: Component Documentation (15 menit)
+## Phase 5: Dokumentasi Komponen (15 menit)
 
-### In Design System Page
+### Di Halaman Design System
 
-1. **For each component:**
-   - Add description text beside component
-   - Document props/variants
-   - Note usage guidelines
+1. **Untuk setiap komponen:**
+   - Tambah teks deskripsi di samping komponen
+   - Dokumentasikan props/variants
+   - Catat pedoman penggunaan
 
-2. **Example - Button/Primary:**
+2. **Contoh - Button/Primary:**
    ```
    Button - Primary
    
-   Usage: Main CTAs, form submits, primary actions
+   Penggunaan: Main CTAs, form submits, aksi primer
    States: Default, Hover, Active, Disabled
-   Sizes: Default (48px height), Large (56px)
+   Sizes: Default (tinggi 48px), Large (56px)
    
    Props:
    - Text (string)
-   - Icon (optional)
+   - Icon (opsional)
    - Full width (boolean)
    ```
 
@@ -419,39 +419,39 @@ Create 4 pages (left sidebar):
 
 ## Phase 6: Developer Handoff (10 menit)
 
-### Step 6.1: Inspect Panel Setup
+### Langkah 6.1: Setup Inspect Panel
 
-1. **Enable Dev Mode:** Switch mode (top right)
-2. **Check measurements:** All spacing in 8px increments
-3. **Verify color codes:** Match figma-design-specification.json
+1. **Enable Dev Mode:** Switch mode (kanan atas)
+2. **Cek pengukuran:** Semua spacing dalam kelipatan 8px
+3. **Verifikasi kode warna:** Match figma-design-specification.json
 
-### Step 6.2: Export Assets
+### Langkah 6.2: Export Assets
 
-1. **Icons:**
-   - Select all icons
-   - Right panel → Export → SVG, 24px
-   - Export to: `exports/icons/`
+1. **Ikon:**
+   - Select semua ikon
+   - Panel kanan → Export → SVG, 24px
+   - Export ke: `exports/icons/`
 
-2. **Components:**
-   - Export component states as PNG
-   - 2x scale for retina
+2. **Komponen:**
+   - Export state komponen sebagai PNG
+   - Skala 2x untuk retina
 
 3. **Design Tokens:**
-   - Use plugin: "Design Tokens" atau "Style Dictionary"
-   - Export JSON dengan all colors, typography, spacing
+   - Gunakan plugin: "Design Tokens" atau "Style Dictionary"
+   - Export JSON dengan semua warna, tipografi, spacing
 
-### Step 6.3: Documentation
+### Langkah 6.3: Dokumentasi
 
-1. **Add README in Figma:**
-   - Create frame: "README - Developer Guide"
-   - Document:
-     - File structure
-     - Component naming conventions
-     - How to use design tokens
-     - Links to GitHub repo
+1. **Tambah README di Figma:**
+   - Buat frame: "README - Developer Guide"
+   - Dokumentasikan:
+     - Struktur file
+     - Konvensi penamaan komponen
+     - Cara menggunakan design tokens
+     - Link ke GitHub repo
 
 2. **Comments:**
-   - Add comments for complex interactions
+   - Tambah komentar untuk interaksi kompleks
    - Tag developers dengan @mentions
 
 ---
@@ -461,125 +461,125 @@ Create 4 pages (left sidebar):
 ### Checklist
 
 **Design System:**
-- [ ] 11 color styles created (Primary x3, Secondary x3, Status x4, Neutral x1)
-- [ ] 7 text styles created (H1-H4, Body, Small, Caption)
-- [ ] Spacing grid documented (8px base)
-- [ ] All components created dengan variants
+- [ ] 11 color styles dibuat (Primary x3, Secondary x3, Status x4, Neutral x1)
+- [ ] 7 text styles dibuat (H1-H4, Body, Small, Caption)
+- [ ] Grid spacing terdokumentasi (base 8px)
+- [ ] Semua komponen dibuat dengan variants
 
-**Screens:**
-- [ ] Dashboard (1920x1080) complete
-- [ ] 3D Configurator complete
-- [ ] AI Diagnosis complete
-- [ ] Workshop Finder (optional) complete
-- [ ] Auth screens (optional) complete
+**Layar:**
+- [ ] Dashboard (1920x1080) lengkap
+- [ ] 3D Configurator lengkap
+- [ ] AI Diagnosis lengkap
+- [ ] Workshop Finder (opsional) lengkap
+- [ ] Layar Auth (opsional) lengkap
 
 **Prototyping:**
-- [ ] Main user flows linked
-- [ ] Component interactions working
-- [ ] Transitions smooth (300ms)
-- [ ] Starting frame set
+- [ ] Main user flows terlink
+- [ ] Interaksi komponen berfungsi
+- [ ] Transisi smooth (300ms)
+- [ ] Starting frame di-set
 
 **Developer Handoff:**
 - [ ] Dev Mode enabled
-- [ ] Measurements verified (8px grid)
-- [ ] Export assets prepared
-- [ ] Documentation added
+- [ ] Pengukuran terverifikasi (grid 8px)
+- [ ] Asset export dipersiapkan
+- [ ] Dokumentasi ditambahkan
 
 ---
 
 ## Export & Share
 
-### Final Steps
+### Langkah Final
 
 1. **Organize Layers:**
-   - Rename all frames clearly
-   - Group related components
-   - Lock background elements
+   - Rename semua frame dengan jelas
+   - Group komponen terkait
+   - Lock elemen background
 
 2. **Clean Up:**
-   - Delete unused components
+   - Hapus komponen yang tidak dipakai
    - Merge duplicate styles
-   - Update component descriptions
+   - Update deskripsi komponen
 
 3. **Share Link:**
-   - Click "Share" (top right)
+   - Klik "Share" (kanan atas)
    - Set permissions: "Anyone with link can view"
    - Copy link
-   - Share to team: fajar1180, ilhamalmunawar05-cpu
+   - Bagikan ke tim: fajar1180, ilhamalmunawar05-cpu
 
 4. **GitHub Integration:**
-   - Add Figma link to GitHub README.md
-   - Update issue #14 dengan Figma file link
-   - Mark issue as "Done"
+   - Tambah link Figma ke GitHub README.md
+   - Update issue #14 dengan link file Figma
+   - Tandai issue sebagai "Done"
 
 ---
 
 ## Troubleshooting
 
-### Common Issues
+### Masalah Umum
 
 **Font tidak tersedia:**
-- Install Inter font dari Google Fonts
-- Upload custom font files di Figma settings
+- Install font Inter dari Google Fonts
+- Upload file font custom di Figma settings
 
-**Color tidak match:**
-- Double check HEX codes di `figma-design-specification.json`
-- Use color picker untuk precision
+**Warna tidak match:**
+- Double check kode HEX di `figma-design-specification.json`
+- Gunakan color picker untuk presisi
 
 **Auto Layout tidak bekerja:**
-- Ensure parent frame has Auto Layout enabled
-- Check direction (horizontal/vertical)
-- Verify padding/gap values
+- Pastikan parent frame memiliki Auto Layout enabled
+- Cek direction (horizontal/vertical)
+- Verifikasi nilai padding/gap
 
 **Component variants hilang:**
 - Re-create component sebagai main component
-- Add variants via right panel: Component → Variants
+- Tambah variants via panel kanan: Component → Variants
 
 **Export gagal:**
-- Check file size limits
-- Export in smaller batches
-- Use SVG untuk icons, PNG untuk raster
+- Cek batas ukuran file
+- Export dalam batch kecil
+- Gunakan SVG untuk ikon, PNG untuk raster
 
 ---
 
-## Resources
+## Referensi
 
-### Files Reference
-- `figma-design-specification.json` - Complete design tokens
-- `design-mockups/dashboard.html` - Dashboard visual reference
-- `design-mockups/3d-configurator.html` - Configurator reference
-- `design-mockups/ai-diagnosis.html` - Diagnosis reference
-- `UI_UX_Design_Specification.md` - Full design documentation
+### File Referensi
+- `figma-design-specification.json` - Design tokens lengkap
+- `design-mockups/dashboard.html` - Referensi visual Dashboard
+- `design-mockups/3d-configurator.html` - Referensi Configurator
+- `design-mockups/ai-diagnosis.html` - Referensi Diagnosis
+- `UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
 
-### Links
+### Link
 - Figma Help: https://help.figma.com
 - Inter Font: https://fonts.google.com/specimen/Inter
 - Design Tokens Plugin: Figma Community
 - Auto Layout Guide: https://help.figma.com/hc/en-us/articles/360040451373
 
-### Team Contacts
+### Kontak Tim
 - Project Manager: fajar1180 (GitHub)
 - Designer: ilhamalmunawar05-cpu (GitHub)
 - Repository: https://github.com/Fajar1180/Project-Otomotif-Visual3D
 
 ---
 
-## Estimated Time
+## Estimasi Waktu
 
-- **Phase 1:** Setup (5 min)
-- **Phase 2:** Design System (30 min)
-- **Phase 3:** Screens (60 min)
-- **Phase 4:** Prototyping (20 min)
-- **Phase 5:** Documentation (15 min)
-- **Phase 6:** Handoff (10 min)
-- **Phase 7:** Review (10 min)
+- **Phase 1:** Setup (5 menit)
+- **Phase 2:** Design System (30 menit)
+- **Phase 3:** Layar (60 menit)
+- **Phase 4:** Prototyping (20 menit)
+- **Phase 5:** Dokumentasi (15 menit)
+- **Phase 6:** Handoff (10 menit)
+- **Phase 7:** Review (10 menit)
 
-**Total:** ~2.5 hours untuk complete Figma file
+**Total:** ~2.5 jam untuk file Figma lengkap
 
 ---
 
-**STATUS: READY FOR IMPLEMENTATION** ✅  
+**STATUS: SIAP UNTUK IMPLEMENTASI** ✅  
 **Last Updated:** 19 Oktober 2026  
 **Version:** 1.0
 
-*Follow this guide step-by-step untuk create production-ready Figma design file*
+*Ikuti panduan ini langkah-demi-langkah untuk membuat file desain Figma production-ready*

@@ -1,0 +1,18 @@
+/* Figma 风格 - 智能生成 */
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F5F5F5;
+  --text-primary: #1E1E1E;
+  --text-secondary: #737373;
+  --link-color: #0C8CE9;
+  --border-color: #E5E5E5;
+  --primary: #0C8CE9;
+  --radius: 8px;
+  --shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+body { background-color: var(--bg-primary) !important; color: var(--text-primary) !important; font-family: var(--font-body) !important; }
+h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading) !important; color: var(--text-primary) !important; }
+a { color: var(--link-color) !important; }
+button, .btn { border-radius: var(--radius) !important; background: var(--primary) !important; color: #fff !important; }
+.card { background: var(--bg-secondary) !important; border: 1px solid var(--border-color) !important; border-radius: var(--radius) !important; }
