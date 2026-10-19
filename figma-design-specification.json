@@ -1,0 +1,491 @@
+{
+  "figmaDesignFile": {
+    "name": "Project_Pak_Yogi_Design",
+    "organization": "pak-yogi",
+    "version": "1.0",
+    "createdDate": "2026-10-19",
+    "designTokens": {
+      "colors": {
+        "primary": {
+          "dark": {
+            "value": "#0A2463",
+            "name": "Primary Dark",
+            "description": "Navy blue for dark backgrounds"
+          },
+          "main": {
+            "value": "#1E4E79",
+            "name": "Primary Main",
+            "description": "Deep blue for primary elements"
+          },
+          "light": {
+            "value": "#2563AB",
+            "name": "Primary Light",
+            "description": "Bright blue for hover/active states"
+          }
+        },
+        "secondary": {
+          "dark": {
+            "value": "#92400E",
+            "name": "Secondary Dark",
+            "description": "Dark brown for secondary elements"
+          },
+          "main": {
+            "value": "#D97706",
+            "name": "Secondary Main",
+            "description": "Orange for action/CTA elements"
+          },
+          "light": {
+            "value": "#F59E0B",
+            "name": "Secondary Light",
+            "description": "Amber for hover states"
+          }
+        },
+        "status": {
+          "success": {
+            "value": "#059669",
+            "name": "Success Green",
+            "description": "DIY Easy - green status"
+          },
+          "warning": {
+            "value": "#D97706",
+            "name": "Warning Orange",
+            "description": "DIY Hard - orange status"
+          },
+          "error": {
+            "value": "#DC2626",
+            "name": "Error Red",
+            "description": "Workshop Required - red status"
+          },
+          "info": {
+            "value": "#2563AB",
+            "name": "Info Blue",
+            "description": "Informational elements"
+          }
+        },
+        "neutral": {
+          "dark": {
+            "value": "#111827",
+            "name": "Dark",
+            "description": "Text color"
+          },
+          "gray": {
+            "value": "#6B7280",
+            "name": "Gray",
+            "description": "Secondary text"
+          },
+          "light": {
+            "value": "#F3F4F6",
+            "name": "Light",
+            "description": "Background color"
+          },
+          "white": {
+            "value": "#FFFFFF",
+            "name": "White",
+            "description": "Card/surface color"
+          }
+        }
+      },
+      "typography": {
+        "h1": {
+          "fontFamily": "Inter",
+          "fontSize": "2rem",
+          "fontWeight": "700",
+          "lineHeight": "2.8rem",
+          "letterSpacing": "-0.02em",
+          "description": "Main page headings"
+        },
+        "h2": {
+          "fontFamily": "Inter",
+          "fontSize": "1.5rem",
+          "fontWeight": "700",
+          "lineHeight": "2rem",
+          "letterSpacing": "-0.01em",
+          "description": "Section headings"
+        },
+        "h3": {
+          "fontFamily": "Inter",
+          "fontSize": "1.25rem",
+          "fontWeight": "600",
+          "lineHeight": "1.6rem",
+          "letterSpacing": "0em",
+          "description": "Card titles"
+        },
+        "h4": {
+          "fontFamily": "Inter",
+          "fontSize": "1.125rem",
+          "fontWeight": "600",
+          "lineHeight": "1.5rem",
+          "letterSpacing": "0em",
+          "description": "Component headings"
+        },
+        "body": {
+          "fontFamily": "Inter",
+          "fontSize": "1rem",
+          "fontWeight": "400",
+          "lineHeight": "1.6rem",
+          "letterSpacing": "0em",
+          "description": "Body text"
+        },
+        "small": {
+          "fontFamily": "Inter",
+          "fontSize": "0.875rem",
+          "fontWeight": "400",
+          "lineHeight": "1.4rem",
+          "letterSpacing": "0em",
+          "description": "Small text, labels"
+        },
+        "caption": {
+          "fontFamily": "Inter",
+          "fontSize": "0.75rem",
+          "fontWeight": "500",
+          "lineHeight": "1rem",
+          "letterSpacing": "0.01em",
+          "description": "Captions, metadata"
+        }
+      },
+      "spacing": {
+        "xs": "4px",
+        "sm": "8px",
+        "md": "16px",
+        "lg": "24px",
+        "xl": "32px",
+        "2xl": "48px",
+        "base": "8px",
+        "description": "8px grid system"
+      },
+      "borderRadius": {
+        "sm": "4px",
+        "md": "8px",
+        "lg": "12px",
+        "full": "9999px",
+        "description": "Border radius scale"
+      },
+      "shadows": {
+        "sm": "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+        "md": "0 4px 6px -1px rgba(0, 0, 0, 0.1)",
+        "lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
+        "xl": "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+        "description": "Shadow layers for depth"
+      }
+    },
+    "components": {
+      "buttons": {
+        "primary": {
+          "state": ["default", "hover", "active", "disabled"],
+          "properties": {
+            "background": "linear-gradient(135deg, #1E4E79, #2563AB)",
+            "color": "#FFFFFF",
+            "padding": "12px 24px",
+            "borderRadius": "8px",
+            "fontWeight": "600",
+            "fontSize": "1rem"
+          }
+        },
+        "secondary": {
+          "state": ["default", "hover", "active", "disabled"],
+          "properties": {
+            "background": "transparent",
+            "border": "2px solid #1E4E79",
+            "color": "#1E4E79",
+            "padding": "12px 24px",
+            "borderRadius": "8px",
+            "fontWeight": "600"
+          }
+        },
+        "ghost": {
+          "state": ["default", "hover", "active"],
+          "properties": {
+            "background": "transparent",
+            "color": "#1E4E79",
+            "padding": "8px 16px",
+            "fontWeight": "600"
+          }
+        }
+      },
+      "cards": {
+        "base": {
+          "background": "#FFFFFF",
+          "borderRadius": "12px",
+          "padding": "24px",
+          "shadow": "0 2px 8px rgba(0,0,0,0.1)",
+          "transition": "all 0.3s ease"
+        },
+        "severity-variants": {
+          "easy": {
+            "borderLeft": "4px solid #059669",
+            "background": "#FFFFFF"
+          },
+          "hard": {
+            "borderLeft": "4px solid #D97706",
+            "background": "#FFFFFF"
+          },
+          "workshop": {
+            "borderLeft": "4px solid #DC2626",
+            "background": "#FFFFFF"
+          }
+        }
+      },
+      "badges": {
+        "severity-easy": {
+          "background": "#ECFDF5",
+          "color": "#065F46",
+          "padding": "4px 12px",
+          "borderRadius": "16px",
+          "fontSize": "0.875rem",
+          "fontWeight": "600"
+        },
+        "severity-hard": {
+          "background": "#FFFBEB",
+          "color": "#92400E",
+          "padding": "4px 12px",
+          "borderRadius": "16px",
+          "fontSize": "0.875rem",
+          "fontWeight": "600"
+        },
+        "severity-workshop": {
+          "background": "#FEF2F2",
+          "color": "#991B1B",
+          "padding": "4px 12px",
+          "borderRadius": "16px",
+          "fontSize": "0.875rem",
+          "fontWeight": "600"
+        }
+      },
+      "inputs": {
+        "text": {
+          "background": "#FFFFFF",
+          "border": "2px solid #E5E7EB",
+          "borderRadius": "8px",
+          "padding": "12px 16px",
+          "fontSize": "1rem",
+          "focusBorder": "2px solid #2563AB",
+          "focusBoxShadow": "0 0 0 3px rgba(37, 99, 171, 0.1)"
+        },
+        "textarea": {
+          "background": "#FFFFFF",
+          "border": "2px solid #E5E7EB",
+          "borderRadius": "8px",
+          "padding": "16px",
+          "fontSize": "1rem",
+          "minHeight": "150px",
+          "focusBorder": "2px solid #2563AB"
+        }
+      }
+    },
+    "screens": {
+      "dashboard": {
+        "frameSize": "1920x1080px",
+        "layout": "grid",
+        "sections": [
+          {
+            "name": "Navigation",
+            "height": "64px",
+            "position": "top",
+            "components": ["logo", "search", "nav-menu"]
+          },
+          {
+            "name": "Header",
+            "height": "auto",
+            "components": ["page-title", "subtitle"]
+          },
+          {
+            "name": "Cards Grid",
+            "layout": "grid",
+            "columns": 3,
+            "gap": "24px",
+            "cards": [
+              {
+                "title": "Recent Diagnosis",
+                "type": "status-card",
+                "severity": "easy",
+                "content": "Diagnosis items list"
+              },
+              {
+                "title": "Quick 3D Configurator",
+                "type": "process-card",
+                "steps": 4
+              },
+              {
+                "title": "Statistics",
+                "type": "stats-card",
+                "metrics": 4
+              }
+            ]
+          },
+          {
+            "name": "Quick Actions",
+            "layout": "grid",
+            "columns": 4,
+            "gap": "16px"
+          }
+        ]
+      },
+      "3d-configurator": {
+        "frameSize": "1920x1080px",
+        "layout": "flex",
+        "sections": [
+          {
+            "name": "Navigation",
+            "height": "64px"
+          },
+          {
+            "name": "Main Content",
+            "layout": "flex",
+            "ratio": ["70%", "30%"],
+            "left": {
+              "name": "Canvas Area",
+              "background": "linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%)",
+              "children": ["canvas-placeholder", "toolbar"]
+            },
+            "right": {
+              "name": "Component Panel",
+              "sections": [
+                "section-header",
+                "component-sections",
+                "legend"
+              ]
+            }
+          }
+        ]
+      },
+      "ai-diagnosis": {
+        "frameSize": "1920x1080px",
+        "layout": "grid",
+        "columns": "1fr 2fr",
+        "gap": "24px",
+        "sections": [
+          {
+            "name": "Input Panel (Left)",
+            "width": "100%",
+            "components": [
+              "textarea",
+              "vehicle-selector",
+              "sample-questions",
+              "analyze-button"
+            ]
+          },
+          {
+            "name": "Result Panel (Right)",
+            "width": "100%",
+            "sections": [
+              "severity-badge",
+              "conclusion",
+              "confidence-score",
+              "explanation",
+              "repair-steps",
+              "parts-recommendations",
+              "workshop-list"
+            ]
+          }
+        ]
+      },
+      "workshop-finder": {
+        "frameSize": "1920x1080px",
+        "layout": "flex",
+        "sections": [
+          {
+            "name": "Navigation",
+            "height": "64px"
+          },
+          {
+            "name": "Main Content",
+            "layout": "flex",
+            "ratio": ["70%", "30%"],
+            "left": {
+              "name": "Map View",
+              "placeholder": "Map component (Google Maps API)"
+            },
+            "right": {
+              "name": "Filter Panel",
+              "sections": [
+                "location-search",
+                "radius-slider",
+                "rating-filter",
+                "specialty-filter"
+              ]
+            }
+          }
+        ]
+      },
+      "authentication": {
+        "frames": [
+          {
+            "name": "Login",
+            "size": "1920x1080px",
+            "sections": [
+              "logo",
+              "login-form",
+              "oauth-buttons",
+              "signup-link"
+            ]
+          },
+          {
+            "name": "Register",
+            "size": "1920x1080px",
+            "sections": [
+              "logo",
+              "register-form",
+              "terms-checkbox",
+              "login-link"
+            ]
+          },
+          {
+            "name": "Forgot Password",
+            "size": "1920x1080px",
+            "sections": [
+              "logo",
+              "email-input",
+              "submit-button",
+              "back-to-login"
+            ]
+          }
+        ]
+      }
+    },
+    "prototyping": {
+      "flows": [
+        {
+          "name": "Main User Flow",
+          "steps": [
+            "Login → Dashboard → 3D Configurator → AI Diagnosis → Workshop Finder"
+          ]
+        },
+        {
+          "name": "Diagnosis Flow",
+          "steps": [
+            "Dashboard → AI Diagnosis (Input) → AI Diagnosis (Result) → Parts/Workshop"
+          ]
+        },
+        {
+          "name": "Configuration Flow",
+          "steps": [
+            "Dashboard → 3D Configurator (Canvas) → Component Selection → Preview → Apply"
+          ]
+        }
+      ],
+      "interactions": [
+        {
+          "component": "component-item",
+          "trigger": "hover",
+          "animation": "translateX(4px)"
+        },
+        {
+          "component": "card",
+          "trigger": "hover",
+          "animation": "translateY(-4px), shadow-increase"
+        },
+        {
+          "component": "button-primary",
+          "trigger": "hover",
+          "animation": "background-gradient-shift"
+        }
+      ]
+    },
+    "exportAssets": {
+      "icons": ["all at 24px, 32px, 48px variations"],
+      "componentStates": ["default", "hover", "active", "disabled"],
+      "formats": ["SVG", "PNG", "PDF"],
+      "darkThemeVariants": true
+    }
+  }
+}
