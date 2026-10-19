@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Pak Yogi - Dashboard Design</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Primary Colors */
+            --primary-dark: #0A2463;
+            --primary-main: #1E4E79;
+            --primary-light: #2563AB;
+            
+            /* Secondary Colors */
+            --secondary-dark: #92400E;
+            --secondary-main: #D97706;
+            --secondary-light: #F59E0B;
+            
+            /* Status Colors */
+            --success: #059669;
+            --warning: #D97706;
+            --error: #DC2626;
+            --info: #2563AB;
+            
+            /* Neutral */
+            --dark: #111827;
+            --dark-2: #1F2937;
+            --gray: #6B7280;
+            --light: #F3F4F6;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* Navigation */
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-main));
+            color: var(--white);
+            padding: 16px 32px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .navbar-search {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 8px 16px;
+            color: var(--white);
+            width: 300px;
+        }
+
+        .navbar-search::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .navbar-menu {
+            display: flex;
+            gap: 24px;
+            list-style: none;
+            margin-top: 16px;
+            padding-bottom: 8px;
+        }
+
+        .navbar-menu a {
+            color: var(--white);
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: background 0.3s;
+        }
+
+        .navbar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .navbar-menu a.active {
+            background: rgba(255,255,255,0.2);
+            font-weight: 600;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        .dashboard-header {
+            margin-bottom: 32px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 8px;
+        }
+
+        .dashboard-header p {
+            color: var(--gray);
+            font-size: 1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 24px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .card-content {
+            color: var(--gray);
+            line-height: 1.6;
+        }
+
+        .card-status {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .status-easy {
+            background: #ECFDF5;
+            color: #065F46;
+        }
+
+        .status-hard {
+            background: #FFFBEB;
+            color: #92400E;
+        }
+
+        .status-workshop {
+            background: #FEF2F2;
+            color: #991B1B;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 24px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-main), var(--primary-light));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(30, 78, 121, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary-main);
+            border: 2px solid var(--primary-main);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary-main);
+            color: var(--white);
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .quick-action {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .quick-action:hover {
+            background: var(--light);
+            transform: scale(1.05);
+        }
+
+        .quick-action-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+        }
+
+        .quick-action-title {
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        /* Recent Diagnosis Card */
+        .diagnosis-card {
+            border-left: 4px solid var(--success);
+        }
+
+        .diagnosis-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .diagnosis-item {
+            padding: 12px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .diagnosis-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--primary-light);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.875rem;
+        }
+
+        .diagnosis-text {
+            flex: 1;
+        }
+
+        /* 3D Configurator Card */
+        .configurator-card {
+            border-left: 4px solid var(--info);
+            min-height: 300px;
+        }
+
+        .config-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .config-step {
+            padding: 16px;
+            background: var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .config-step-number {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--secondary-main);
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--gray);
+            font-size: 0.875rem;
+            margin-top: 48px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div>
+            <div class="navbar-brand">
+                🚗 OTOMOTIF AI
+            </div>
+            <ul class="navbar-menu">
+                <li><a href="#" class="active">Dashboard</a></li>
+                <li><a href="#">3D Configurator</a></li>
+                <li><a href="#">AI Diagnosis</a></li>
+                <li><a href="#">Spare Parts</a></li>
+                <li><a href="#">Workshops</a></li>
+                <li><a href="#">History</a></li>
+            </ul>
+        </div>
+        <div>
+            <input type="text" class="navbar-search" placeholder="Cari kendaraan atau file...">
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1>Dashboard</h1>
+            <p>Selamat datang di Platform Otomotif AI - Project Pak Yogi</p>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="cards-grid">
+            <!-- Recent Diagnosis Card -->
+            <div class="card diagnosis-card">
+                <div class="card-header">
+                    <div class="card-title">Diagnosis Terbaru</div>
+                    <div class="card-icon" style="background: #ECFDF5; color: #059669;">
+                        ✓
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div class="diagnosis-list">
+                        <div class="diagnosis-item">
+                            <div class="diagnosis-number">1</div>
+                            <div class="diagnosis-text">
+                                <strong>Aki Tekor</strong>
+                                <div style="font-size: 0.875rem; color: var(--gray);">Honda Vario 150</div>
+                            </div>
+                            <span class="status-badge status-easy">DIY Easy</span>
+                        </div>
+                        <div class="diagnosis-item">
+                            <div class="diagnosis-number">2</div>
+                            <div class="diagnosis-text">
+                                <strong>Kampas Rem Aus</strong>
+                                <div style="font-size: 0.875rem; color: var(--gray);">Yamaha NMAX</div>
+                            </div>
+                            <span class="status-badge status-hard">DIY Hard</span>
+                        </div>
+                        <div class="diagnosis-item">
+                            <div class="diagnosis-number">3</div>
+                            <div class="diagnosis-text">
+                                <strong>Kompresi Rendah</strong>
+                                <div style="font-size: 0.875rem; color: var(--gray);">Honda Beat</div>
+                            </div>
+                            <span class="status-badge status-workshop">Bengkel</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D Configurator Card -->
+            <div class="card configurator-card">
+                <div class="card-header">
+                    <div class="card-title">Quick 3D Configurator</div>
+                    <div class="card-icon" style="background: #DBEAFE; color: #2563AB;">
+                        🎨
+                    </div>
+                </div>
+                <div class="card-content">
+                    <p>Generate 3D mesh kendaraan Anda dalam 4 langkah mudah</p>
+                    <div class="config-steps">
+                        <div class="config-step">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="config-step-number">1</div>
+                                <span>Upload 4 foto kendaraan</span>
+                            </div>
+                        </div>
+                        <div class="config-step">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="config-step-number">2</div>
+                                <span>AI processing 3D mesh</span>
+                            </div>
+                        </div>
+                        <div class="config-step">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="config-step-number">3</div>
+                                <span>Pilih komponen modifikasi</span>
+                            </div>
+                        </div>
+                        <div class="config-step">
+                            <div style="display: flex; align-items: center; gap: 12px;">
+                                <div class="config-step-number">4</div>
+                                <span>Preview & beli parts</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" style="margin-top: 20px; width: 100%;">
+                        Generate 3D Mesh
+                    </button>
+                </div>
+            </div>
+
+            <!-- Statistics Card -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Statistik Anda</div>
+                    <div class="card-icon" style="background: #FEF3C7; color: #D97706;">
+                        📊
+                    </div>
+                </div>
+                <div class="card-content">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px;">
+                        <div style="text-align: center; padding: 16px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--primary-main);">12</div>
+                            <div style="font-size: 0.875rem; color: var(--gray);">Diagnosis</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--secondary-main);">5</div>
+                            <div style="font-size: 0.875rem; color: var(--gray);">Konfigurasi 3D</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--success);">8</div>
+                            <div style="font-size: 0.875rem; color: var(--gray);">Parts Dibeli</div>
+                        </div>
+                        <div style="text-align: center; padding: 16px; background: var(--light); border-radius: 8px;">
+                            <div style="font-size: 2rem; font-weight: 700; color: var(--info);">3</div>
+                            <div style="font-size: 0.875rem; color: var(--gray);">Bengkel Saved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div style="margin-top: 48px;">
+            <h2 style="margin-bottom: 24px; font-size: 1.5rem; font-weight: 600;">Quick Actions</h2>
+            <div class="quick-actions">
+                <div class="quick-action">
+                    <div class="quick-action-icon">🔍</div>
+                    <div class="quick-action-title">Diagnosis Story</div>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action-icon">🔧</div>
+                    <div class="quick-action-title">Spare Parts</div>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action-icon">🏪</div>
+                    <div class="quick-action-title">Workshop Locator</div>
+                </div>
+                <div class="quick-action">
+                    <div class="quick-action-icon">⚙️</div>
+                    <div class="quick-action-title">Profile Settings</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        Platform Otomotif AI - Project Pak Yogi © 2026
+    </div>
+</body>
+</html>
