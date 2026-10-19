@@ -117,8 +117,22 @@ Isi kolom deskripsi setiap komponen: tujuan, kapan dipakai, aturan padding, lara
 - Figma MCP punya kuota panggilan; kalau habis, otomatisasi berhenti sampai limit direset.
 - Font Inter harus terpasang di aplikasi Figma agar teks tidak berubah tampilan.
 
-## Berkas Terkait di Repo
+## Jalur Sementara: Canva
 
+Karena Figma MCP kena batas panggilan, desain layar dialihkan sementara ke Canva sebagai **deck presentasi** (bukan file komponen).
+
+- Judul: `OTOMOTIF AI` — ID `DAHYdFVr81I`
+- Edit: https://www.canva.com/d/OOdRQgtqK7AJ52p
+- Lihat: https://www.canva.com/d/H_EccmNyAe0YphZ
+- 4 slide 16:9 (1920×1080): 1 sampul, 2 Dashboard, 3 Konfigurasi 3D, 4 Diagnosis AI
+- Isi layar = hasil render `design-mockups/*.html` (gambar, bukan elemen vektor terpisah)
+
+Keterbatasan Canva untuk pekerjaan ini:
+- Tidak ada komponen/varian/auto layout → Design System tidak bisa dibangun di Canva
+- Gambar layar tidak bisa diedit per elemen; revisi harus lewat file Figma/HTML lalu render ulang
+- Jadi Canva dipakai untuk presentasi & review cepat, Figma tetap sumber desain
+
+## Berkas Terkait di Repo
 - `UI_UX_Design_Specification.md` — spesifikasi desain lengkap
 - `DESIGN.md` — token desain
 - `figma-design-specification.json` — token format JSON
