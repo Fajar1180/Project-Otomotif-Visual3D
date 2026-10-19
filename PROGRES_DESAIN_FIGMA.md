@@ -132,6 +132,20 @@ Keterbatasan Canva untuk pekerjaan ini:
 - Gambar layar tidak bisa diedit per elemen; revisi harus lewat file Figma/HTML lalu render ulang
 - Jadi Canva dipakai untuk presentasi & review cepat, Figma tetap sumber desain
 
+## Riwayat Pembaruan
+
+- 19 Okt 2026 — Figma: file dibuat, 3 halaman, Design System (14 color style, 7 text style, 5 komponen), 3 frame layar 1920×1080. Prototype gagal karena kuota MCP.
+- 19 Okt 2026 — Canva: render `design-mockups/*.html` → 3 PNG (1920×1080) → unggah sebagai aset → deck `OTOMOTIF AI` 4 slide diisi screenshot, disimpan (committed) dan diverifikasi lewat thumbnail.
+- 19 Okt 2026 — Catatan progres ini dibuat dan di-push agar tim bisa meneruskan.
+
+## Langkah Berikutnya (urut prioritas)
+
+1. Sambungkan prototype di Figma (langkah manual ada di bagian "Yang Belum Selesai").
+2. Verifikasi visual frame `Konfigurasi 3D` — satu-satunya layar yang belum dicek ulang setelah rebuild.
+3. Isi deskripsi komponen di Figma.
+4. Tambah slide spesifikasi (palet, tipografi, komponen) ke deck Canva bila dipakai untuk presentasi.
+5. Ganti placeholder judul slide Canva yang menduplikasi heading di dalam gambar.
+
 ## Berkas Terkait di Repo
 - `UI_UX_Design_Specification.md` — spesifikasi desain lengkap
 - `DESIGN.md` — token desain
