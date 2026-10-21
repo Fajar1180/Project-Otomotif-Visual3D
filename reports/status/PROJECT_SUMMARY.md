@@ -11,11 +11,11 @@
 
 | No | Dokumen | Status | Deskripsi |
 |----|---------|--------|-----------|
-| 1 | `PRD_Project_Pak_Yogi.md` | ✅ | Project Requirements Document - Konteks bisnis, fitur, milestone |
-| 2 | `SRS_Project_Pak_Yogi.md` | ✅ | Software Requirements Specification - 26 FR, NFR, interface specs |
-| 3 | `ERD_Project_Pak_Yogi.md` | ✅ | Entity Relationship Diagram - 7 tabel dengan visualisasi Mermaid |
-| 4 | `API_Spec_Project_Pak_Yogi.md` | ✅ | API Specification OpenAPI 3.0 - Auth, Diagnosis, 3D, Workshop endpoints |
-| 5 | `UI_UX_Design_Specification.md` | ✅ | Design System - Palette warna, tipografi, komponen, layout |
+| 1 | `docs/PRD_Project_Pak_Yogi.md` | ✅ | Project Requirements Document - Konteks bisnis, fitur, milestone |
+| 2 | `docs/SRS_Project_Pak_Yogi.md` | ✅ | Software Requirements Specification - 26 FR, NFR, interface specs |
+| 3 | `docs/ERD_Project_Pak_Yogi.md` | ✅ | Entity Relationship Diagram - 7 tabel dengan visualisasi Mermaid |
+| 4 | `docs/API_Spec_Project_Pak_Yogi.md` | ✅ | API Specification OpenAPI 3.0 - Auth, Diagnosis, 3D, Workshop endpoints |
+| 5 | `docs/UI_UX_Design_Specification.md` | ✅ | Design System - Palette warna, tipografi, komponen, layout |
 | 6 | `Figma_Design_Creation_Instructions.md` | ✅ | Panduan langkah-demi-langkah pembuatan desain Figma |
 | 7 | `README.md` | ✅ | Ikhtisar proyek dan panduan navigasi |
 | 8 | `TASK_COMPLETION_SUMMARY.md` | ✅ | Checklist penyelesaian tugas |

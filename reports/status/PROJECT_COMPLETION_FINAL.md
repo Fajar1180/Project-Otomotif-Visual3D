@@ -69,7 +69,7 @@ Project-Otomotif-Visual3D/
 │   ├── UI_UX_Design_Specification.md
 │   ├── Figma_Design_Creation_Instructions.md
 │   ├── FIGMA_MANUAL_GUIDE.md
-│   ├── figma-design-specification.json
+│   ├── design/figma-design-specification.json
 │   ├── DESIGN_MOCKUPS_SUMMARY.md
 │   ├── PROJECT_SUMMARY.md
 │   ├── FINAL_STATUS_REPORT.md
@@ -77,7 +77,7 @@ Project-Otomotif-Visual3D/
 │   └── README.md
 │
 ├── 🎨 Design Mockups (4 files, ~52KB)
-│   └── design-mockups/
+│   └── design/mockups/
 │       ├── dashboard.html
 │       ├── 3d-configurator.html
 │       ├── ai-diagnosis.html
@@ -153,7 +153,7 @@ Caption:  Medium 12px, line-height 133%
   - Statistics (4 metrics)
 - Quick actions (4 shortcuts)
 
-**Preview:** `design-mockups/dashboard.html`
+**Preview:** `design/mockups/dashboard.html`
 
 ### 2. 3D Configurator Screen (1920x1080) ✅
 **Components:**
@@ -166,7 +166,7 @@ Caption:  Medium 12px, line-height 133%
   - Each item: Preview & Apply buttons
   - Legend panel
 
-**Preview:** `design-mockups/3d-configurator.html`
+**Preview:** `design/mockups/3d-configurator.html`
 
 ### 3. AI Diagnosis Screen (1920x1080) ✅
 **Components:**
@@ -183,7 +183,7 @@ Caption:  Medium 12px, line-height 133%
   - 2 recommended parts with Shopee links
   - Workshop suggestions (template)
 
-**Preview:** `design-mockups/ai-diagnosis.html`
+**Preview:** `design/mockups/ai-diagnosis.html`
 
 ### 4. Workshop Finder Screen ⏳
 **Spec ready:** In `FIGMA_MANUAL_GUIDE.md` (Phase 3.4)
@@ -196,7 +196,7 @@ Caption:  Medium 12px, line-height 133%
 ## 🔧 FIGMA IMPLEMENTATION RESOURCES
 
 ### 1. Design Tokens (JSON) ✅
-**File:** `figma-design-specification.json` (13.5KB)
+**File:** `design/figma-design-specification.json` (13.5KB)
 
 Includes:
 - 14 color tokens (primary, secondary, status, neutral)
@@ -307,24 +307,24 @@ All assigned to: **ilhamalmunawar05-cpu**
 ### Phase 1 → Phase 2 Transition Checklist
 
 **For Design Team:**
-- [ ] Review mockups (`design-mockups/` folder)
+- [ ] Review mockups (`design/mockups/` folder)
 - [ ] Follow `FIGMA_MANUAL_GUIDE.md` to create Figma file
-- [ ] Use `figma-design-specification.json` for design tokens
+- [ ] Use `design/figma-design-specification.json` for design tokens
 - [ ] Build component library in Figma
 - [ ] Create interactive prototypes
 - [ ] Export assets for development
 - [ ] Update GitHub Issue #14 when Figma file ready
 
 **For Backend Team:**
-- [ ] Review `API_Spec_Project_Pak_Yogi.md`
+- [ ] Review `docs/API_Spec_Project_Pak_Yogi.md`
 - [ ] Start Issue #2 (M1-Database)
-- [ ] Create database schema from `ERD_Project_Pak_Yogi.md`
+- [ ] Create database schema from `docs/ERD_Project_Pak_Yogi.md`
 - [ ] Setup Laravel project structure
 - [ ] Begin API endpoint implementation
 
 **For Frontend Team:**
-- [ ] Review `UI_UX_Design_Specification.md`
-- [ ] Check mockups in `design-mockups/` folder
+- [ ] Review `docs/UI_UX_Design_Specification.md`
+- [ ] Check mockups in `design/mockups/` folder
 - [ ] Start Issue #4 (M2-Frontend)
 - [ ] Setup Next.js project with Tailwind
 - [ ] Implement components based on design system
@@ -351,14 +351,14 @@ All assigned to: **ilhamalmunawar05-cpu**
 
 ### Quick Links
 - **Project Overview:** `README.md`
-- **Requirements:** `PRD_Project_Pak_Yogi.md`
-- **Technical Spec:** `SRS_Project_Pak_Yogi.md`
-- **Database:** `ERD_Project_Pak_Yogi.md`
-- **API Endpoints:** `API_Spec_Project_Pak_Yogi.md`
-- **UI/UX Design:** `UI_UX_Design_Specification.md`
-- **Design Mockups:** `design-mockups/` folder
+- **Requirements:** `docs/PRD_Project_Pak_Yogi.md`
+- **Technical Spec:** `docs/SRS_Project_Pak_Yogi.md`
+- **Database:** `docs/ERD_Project_Pak_Yogi.md`
+- **API Endpoints:** `docs/API_Spec_Project_Pak_Yogi.md`
+- **UI/UX Design:** `docs/UI_UX_Design_Specification.md`
+- **Design Mockups:** `design/mockups/` folder
 - **Figma Guide:** `FIGMA_MANUAL_GUIDE.md`
-- **Design Tokens:** `figma-design-specification.json`
+- **Design Tokens:** `design/figma-design-specification.json`
 - **Status Reports:** `PROJECT_SUMMARY.md`, `FINAL_STATUS_REPORT.md`
 
 ---

@@ -16,9 +16,9 @@
 - [ ] Join tim/organisasi "pak-yogi" (jika ada)
 
 ### 2. Materi Persiapan
-- [ ] `figma-design-specification.json` - Design tokens dan spec komponen
-- [ ] Folder `design-mockups/` - HTML mockups sebagai referensi visual
-- [ ] `UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
+- [ ] `design/figma-design-specification.json` - Design tokens dan spec komponen
+- [ ] Folder `design/mockups/` - HTML mockups sebagai referensi visual
+- [ ] `docs/UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
 
 ---
 
@@ -266,7 +266,7 @@ Buat 4 halaman (sidebar kiri):
    - 4 action cards: Diagnosis, Suku Cadang, Bengkel, Pengaturan
    - Auto Layout: horizontal, gap 16px
 
-**Referensi:** Lihat `design-mockups/dashboard.html` untuk visual
+**Referensi:** Lihat `design/mockups/dashboard.html` untuk visual
 
 ### Langkah 3.2: Layar 3D Configurator
 
@@ -305,7 +305,7 @@ Buat 4 halaman (sidebar kiri):
      - 3 item legend dengan dot berwarna
      - Padding: 24px
 
-**Referensi:** `design-mockups/3d-configurator.html`
+**Referensi:** `design/mockups/3d-configurator.html`
 
 ### Langkah 3.3: Layar AI Diagnosis
 
@@ -342,7 +342,7 @@ Buat 4 halaman (sidebar kiri):
        - 2 kartu part (icon + nama + harga + link Shopee)
        - Auto Layout, gap 16px
 
-**Referensi:** `design-mockups/ai-diagnosis.html`
+**Referensi:** `design/mockups/ai-diagnosis.html`
 
 ### Langkah 3.4: Layar Pencari Bengkel (Opsional)
 
@@ -423,7 +423,7 @@ Buat 4 halaman (sidebar kiri):
 
 1. **Enable Dev Mode:** Switch mode (kanan atas)
 2. **Cek pengukuran:** Semua spacing dalam kelipatan 8px
-3. **Verifikasi kode warna:** Match figma-design-specification.json
+3. **Verifikasi kode warna:** Match design/figma-design-specification.json
 
 ### Langkah 6.2: Export Assets
 
@@ -523,7 +523,7 @@ Buat 4 halaman (sidebar kiri):
 - Upload file font custom di Figma settings
 
 **Warna tidak match:**
-- Double check kode HEX di `figma-design-specification.json`
+- Double check kode HEX di `design/figma-design-specification.json`
 - Gunakan color picker untuk presisi
 
 **Auto Layout tidak bekerja:**
@@ -545,11 +545,11 @@ Buat 4 halaman (sidebar kiri):
 ## Referensi
 
 ### File Referensi
-- `figma-design-specification.json` - Design tokens lengkap
-- `design-mockups/dashboard.html` - Referensi visual Dashboard
-- `design-mockups/3d-configurator.html` - Referensi Configurator
-- `design-mockups/ai-diagnosis.html` - Referensi Diagnosis
-- `UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
+- `design/figma-design-specification.json` - Design tokens lengkap
+- `design/mockups/dashboard.html` - Referensi visual Dashboard
+- `design/mockups/3d-configurator.html` - Referensi Configurator
+- `design/mockups/ai-diagnosis.html` - Referensi Diagnosis
+- `docs/UI_UX_Design_Specification.md` - Dokumentasi desain lengkap
 
 ### Link
 - Figma Help: https://help.figma.com
