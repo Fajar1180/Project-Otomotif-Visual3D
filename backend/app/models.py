@@ -1,142 +1,148 @@
-"""SQLAlchemy ORM models for Otomotif AI platform."""
+"""Database models for Otomotif AI platform aligned with ERD schema (7 tables)."""
 from datetime import datetime
 from uuid import uuid4
 
-from sqlalchemy import Column, String, Integer, Float, Boolean, DateTime, ForeignKey, Text, JSON
-from sqlalchemy.dialects.postgresql import UUID
-from sqlalchemy.orm import relationship
-from pgvector.sqlalchemy import Vector
 
-from app.database import Base
+from sqlalchemy import (
+    Column,
+    String,
+    Integer,
+    Float,
+    Text,
+    JSON,
+    DateTime,
+    Enum,
+    Boolean,
+    ARRAY,
+    Numeric,
+    UniqueConstraint,
+    ForeignKey,
+    func,
+)
+from sqlalchemy.orm import relationship, declarative_base
+from sqlalchemy.dialects.postgresql import UUID, JSONB, NUMERIC
 
 
-class User(Base):
-    """User account and profile."""
-    __tablename__ = "users"
-
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    email = Column(String(255), unique=True, nullable=False, index=True)
-    password_hash = Column(String(255), nullable=False)
-    full_name = Column(String(255), nullable=False)
-    phone = Column(String(20), nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
-    vehicles = relationship("Vehicle", back_populates="owner", cascade="all, delete-orphan")
-    diagnostic_results = relationship("DiagnosticResult", back_populates="user", cascade="all, delete-orphan")
+Base = declarative_base()
 
 
 class Vehicle(Base):
-    """User vehicle inventory."""
     __tablename__ = "vehicles"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True)
-    make = Column(String(100), nullable=False)  # e.g., "Honda"
-    model = Column(String(100), nullable=False)  # e.g., "Civic"
-    year = Column(Integer, nullable=False)
-    color = Column(String(100), nullable=True)
-    vin = Column(String(50), unique=True, nullable=True)
-    mileage = Column(Integer, nullable=True)  # in km
-    notes = Column(Text, nullable=True)
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-    
-    owner = relationship("User", back_populates="vehicles")
-    diagnostic_results = relationship("DiagnosticResult", back_populates="vehicle", cascade="all, delete-orphan")
+    brand = Column(String(50), nullable=False)
+    model = Column(String(100), nullable=False)
+    year_start = Column(Integer, nullable=False)
+    year_end = Column(Integer, nullable=True)
+    category = Column(String(30), nullable=True)
+
+    # Relationships
+    symptom_maps = relationship("SymptomDiagnosisMap", back_populates="vehicle")
+    workshop_maps = relationship("VehicleWorkshop", back_populates="vehicle")
 
 
-class DiagnosticResult(Base):
-    """AI diagnosis history with vector embeddings."""
-    __tablename__ = "diagnostic_results"
+class Symptom(Base):
+    __tablename__ = "symptoms"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    user_id = Column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=False, index=True)
-    vehicle_id = Column(UUID(as_uuid=True), ForeignKey("vehicles.id"), nullable=False, index=True)
-    
-    # Input
-    symptom_text = Column(Text, nullable=False)
-    
-    # Output
-    diagnosis = Column(Text, nullable=False)
-    confidence_score = Column(Float, nullable=False)  # 0.0-1.0
-    severity = Column(String(50), nullable=False)  # "low", "medium", "high", "critical"
+    symptom_code = Column(String(20), nullable=False, unique=True)
+    description = Column(Text, nullable=False)
+    category = Column(String(50), nullable=True)
+    embedding = Column(NUMERIC(1536), nullable=True)  # 1536-dim vector for similarity search
+
+    # Relationships
+    vehicle_symptoms = relationship("VehicleSymptom", back_populates="symptom")
+    diagnosis_maps = relationship("SymptomDiagnosisMap", back_populates="symptom")
+
+
+class Diagnosis(Base):
+    __tablename__ = "diagnoses"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
+    title = Column(String(150), nullable=False)
+    technical_explanation = Column(Text, nullable=False)
+    severity_level = Column(Enum("DIY_EASY", "DIY_HARD", "WORKSHOP_REQUIRED", name="severity_level"), nullable=False)
     repair_steps = Column(JSON, nullable=True)  # Array of step objects
-    
-    # Vector embedding for semantic search (pgvector)
-    embedding = Column(Vector(768), nullable=True)
-    
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    user = relationship("User", back_populates="diagnostic_results")
-    vehicle = relationship("Vehicle", back_populates="diagnostic_results")
-    recommendations = relationship("Recommendation", back_populates="diagnostic_result", cascade="all, delete-orphan")
+
+    # Relationships
+    symptom_maps = relationship("SymptomDiagnosisMap", back_populates="diagnosis")
+    part_maps = relationship("DiagnosisPartMap", back_populates="diagnosis")
+    vehicle_symptoms = relationship("VehicleSymptom", back_populates="diagnosis")
+    diagnosis_parts = relationship("DiagnosisPartMap", back_populates="diagnosis")
 
 
-class Recommendation(Base):
-    """Suku cadang recommendations with Shopee affiliate links."""
-    __tablename__ = "recommendations"
+class SparePart(Base):
+    __tablename__ = "spare_parts"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    diagnostic_result_id = Column(UUID(as_uuid=True), ForeignKey("diagnostic_results.id"), nullable=False, index=True)
-    
-    part_name = Column(String(255), nullable=False)
-    part_description = Column(Text, nullable=True)
-    part_category = Column(String(100), nullable=False)
-    estimated_cost = Column(Float, nullable=True)  # in IDR
-    
-    # Shopee Affiliate
-    shopee_product_id = Column(String(100), nullable=True)
-    shopee_link = Column(String(500), nullable=True)
-    shopee_affiliate_link = Column(String(500), nullable=True)
-    
-    priority = Column(Integer, default=0)  # 0=low, 1=medium, 2=high
-    urgency = Column(String(50), nullable=False)  # "immediate", "soon", "optional"
-    
-    created_at = Column(DateTime, default=datetime.utcnow)
-    
-    diagnostic_result = relationship("DiagnosticResult", back_populates="recommendations")
+    part_name = Column(String(150), nullable=False)
+    part_number = Column(String(50), nullable=False)
+    brand = Column(String(50), nullable=True)
+    price_min = Column(Numeric(12, 2), nullable=True)
+    price_max = Column(Numeric(12, 2), nullable=True)
+    shopee_item_id = Column(String(50), nullable=True)
+    shopee_shop_id = Column(String(50), nullable=True)
+    default_shopee_url = Column(Text, nullable=True)
+
+    # Relationships
+    diagnosis_parts = relationship("DiagnosisPartMap", back_populates="spare_part")
 
 
 class Workshop(Base):
-    """Bengkel directory for workshop finder integration."""
     __tablename__ = "workshops"
 
     id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    name = Column(String(255), nullable=False)
+    name = Column(String(100), nullable=False)
     address = Column(Text, nullable=False)
     latitude = Column(Float, nullable=False)
     longitude = Column(Float, nullable=False)
     phone = Column(String(20), nullable=True)
-    
-    specialties = Column(JSON, nullable=True)  # Array of service types
-    rating = Column(Float, nullable=True)  # 0.0-5.0
+    specialties = Column(ARRAY(String), nullable=True)  # e.g., ['engine', 'transmission']
+    rating = Column(Float, nullable=True)
     review_count = Column(Integer, default=0)
-    
-    # Google Maps / external integration
-    google_place_id = Column(String(200), nullable=True)
-    website = Column(String(500), nullable=True)
-    
-    created_at = Column(DateTime, default=datetime.utcnow)
-    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+    # Relationships
+    vehicle_workshop = relationship("VehicleWorkshop", back_populates="workshop")
 
 
-class VectorStore(Base):
-    """Cache for pgvector embeddings (diagnostic knowledge base)."""
-    __tablename__ = "vector_store"
+class SymptomDiagnosisMap(Base):
+    __tablename__ = "symptom_diagnosis_map"
 
-    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid4)
-    
-    # Reference to diagnostic result (optional, for traceability)
-    diagnostic_result_id = Column(UUID(as_uuid=True), ForeignKey("diagnostic_results.id"), nullable=True)
-    
-    # Content
-    text_chunk = Column(Text, nullable=False)
-    source = Column(String(100), nullable=False)  # "faq", "manual", "community", etc.
-    
-    # Vector embedding
-    embedding = Column(Vector(768), nullable=False)
-    
-    metadata = Column(JSON, nullable=True)  # Extra context (e.g., vehicle_make, part_category)
-    
-    created_at = Column(DateTime, default=datetime.utcnow)
+    symptom_id = Column(UUID(as_uuid=True), ForeignKey("symptoms.id", ondelete="CASCADE"), primary_key=True)
+    diagnosis_id = Column(UUID(as_uuid=True), ForeignKey("diagnoses.id", ondelete="CASCADE"), primary_key=True)
+    confidence_weight = Column(Float, nullable=False)
+
+    # Relationships
+    symptom = relationship("Symptom", back_populates="diagnosis_maps")
+    diagnosis = relationship("Diagnosis", back_populates="symptom_maps")
+    vehicle = relationship("Vehicle", back_populates="symptom_diagnosis_maps")
+
+
+class DiagnosisPartMap(Base):
+    __tablename__ = "diagnosis_part_map"
+
+    diagnosis_id = Column(UUID(as_uuid=True), ForeignKey("diagnoses.id", ondelete="CASCADE"), primary_key=True)
+    spare_part_id = Column(UUID(as_uuid=True), ForeignKey("spare_parts.id", ondelete="CASCADE"), primary_key=True)
+    is_primary = Column(Boolean, default=False)
+
+    # Relationships
+    diagnosis = relationship("Diagnosis", back_populates="part_map")
+    spare_part = relationship("SparePart", back_populates="diagnosis_parts")
+
+
+class VehicleSymptom(Base):
+    __tablename__ = "vehicle_symptom"
+
+    vehicle_id = Column(UUID(as_uuid=True), ForeignKey("vehicles.id", ondelete="CASCADE"), primary_key=True)
+    symptom_id = Column(UUID(as_uuid=True), ForeignKey("symptoms.id", ondelete="CASCADE"), primary_key=True)
+
+
+class VehicleWorkshop(Base):
+    __tablename__ = "vehicle_workshop"
+
+    vehicle_id = Column(UUID(as_uuid=True), ForeignKey("vehicles.id", ondelete="CASCADE"), primary_key=True)
+    workshop_id = Column(UUID(as_uuid=True), ForeignKey("workshops.id", ondelete="CASCADE"), primary_key=True)
+
+
+def __repr__(self):
+    return f"<{self.__class__.__name__}(id={self.id})>"
