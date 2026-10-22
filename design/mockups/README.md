@@ -86,7 +86,7 @@ Neutral:
 ### 1. Preview Mockups
 ```bash
 # Buka salah satu file di browser
-cd design-mockups
+cd design/mockups
 start dashboard.html          # Windows
 open dashboard.html           # macOS
 xdg-open dashboard.html       # Linux
