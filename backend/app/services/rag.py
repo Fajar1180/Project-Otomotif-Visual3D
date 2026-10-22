@@ -6,7 +6,7 @@ from uuid import UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select, text
 
-from app.models import VectorStore, Symptom, Diagnosis, DiagnosisPartMap, SparePart
+from models import VectorStore, Symptom, Diagnosis, DiagnosisPartMap, SparePart
 
 
 class RAGService:

@@ -1,5 +1,6 @@
 """Database and application configuration."""
 import os
+from pydantic import Field
 from pydantic_settings import BaseSettings
 
 
@@ -7,14 +8,15 @@ class Settings(BaseSettings):
     """Application settings from environment."""
 
     # Database
-    database_url: str = os.getenv(
-        "DATABASE_URL",
-        "postgresql://postgres:postgres@localhost:5432/otomotif_ai"
+    database_url: str = Field(
+        default="sqlite:///:memory:",
+        description="Database connection string (SQLite or PostgreSQL)"
     )
     
     # App
-    debug: bool = os.getenv("DEBUG", "False").lower() == "true"
-    environment: str = os.getenv("ENVIRONMENT", "development")
+    debug: bool = Field(default=False, description="Debug mode")
+    environment: str = Field(default="development", description="Environment name")
+    openai_api_key: str = Field(default="", description="OpenAI API key")
     
     class Config:
         env_file = ".env"

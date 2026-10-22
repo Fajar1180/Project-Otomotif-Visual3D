@@ -2,10 +2,9 @@
 import pytest
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from uuid import uuid4
 
 from app.database import Base
-from app.models import User, Vehicle, DiagnosticResult, Recommendation, Workshop
+from models import Vehicle, Symptom, Diagnosis, SparePart, DiagnosisPartMap, VectorStore, Workshop, DiagnosticResult
 
 
 @pytest.fixture
@@ -19,136 +18,52 @@ def test_db():
     db.close()
 
 
-def test_create_user(test_db):
-    """Test user creation."""
-    user = User(
-        id=uuid4(),
-        email="test@example.com",
-        password_hash="hashed_password",
-        full_name="Test User",
-        phone="081234567890",
-    )
-    test_db.add(user)
-    test_db.commit()
-    test_db.refresh(user)
-    
-    assert user.email == "test@example.com"
-    assert user.full_name == "Test User"
-    assert user.id is not None
-
-
-def test_create_vehicle(test_db):
-    """Test vehicle creation."""
-    user = User(
-        id=uuid4(),
-        email="test@example.com",
-        password_hash="hashed_password",
-        full_name="Test User",
-    )
-    test_db.add(user)
-    test_db.commit()
-    
+def test_vehicle_creation(test_db):
+    """Test vehicle model creation."""
     vehicle = Vehicle(
-        id=uuid4(),
-        user_id=user.id,
-        make="Honda",
+        brand="Honda",
         model="Civic",
-        year=2020,
-        color="Silver",
+        year_start=2020,
+        year_end=2023,
     )
     test_db.add(vehicle)
     test_db.commit()
     test_db.refresh(vehicle)
-    
-    assert vehicle.make == "Honda"
+
+    assert vehicle.brand == "Honda"
     assert vehicle.model == "Civic"
-    assert vehicle.year == 2020
+    assert vehicle.year_start == 2020
+    assert vehicle.id is not None
 
 
-def test_create_diagnostic_result(test_db):
-    """Test diagnostic result creation with relationships."""
-    user = User(
-        id=uuid4(),
-        email="test@example.com",
-        password_hash="hashed_password",
-        full_name="Test User",
+def test_symptom_creation(test_db):
+    """Test symptom model creation."""
+    symptom = Symptom(
+        symptom_code="ENG_KNOCK",
+        description="Engine knocking sound",
+        category="Engine",
     )
-    test_db.add(user)
+    test_db.add(symptom)
     test_db.commit()
-    
-    vehicle = Vehicle(
-        id=uuid4(),
-        user_id=user.id,
-        make="Honda",
-        model="Civic",
-        year=2020,
-    )
-    test_db.add(vehicle)
-    test_db.commit()
-    
-    diagnostic = DiagnosticResult(
-        id=uuid4(),
-        user_id=user.id,
-        vehicle_id=vehicle.id,
-        symptom_text="Engine is making noise",
-        diagnosis="Carbon buildup likely",
-        confidence_score=0.87,
-        severity="medium",
-    )
-    test_db.add(diagnostic)
-    test_db.commit()
-    test_db.refresh(diagnostic)
-    
-    assert diagnostic.confidence_score == 0.87
-    assert diagnostic.severity == "medium"
-    assert diagnostic.vehicle.make == "Honda"
+    test_db.refresh(symptom)
+
+    assert symptom.symptom_code == "ENG_KNOCK"
+    assert symptom.category == "Engine"
 
 
-def test_diagnostic_has_recommendations(test_db):
-    """Test recommendations relationship."""
-    user = User(
-        id=uuid4(),
-        email="test@example.com",
-        password_hash="hashed_password",
-        full_name="Test User",
-    )
-    test_db.add(user)
-    test_db.commit()
+def test_diagnosis_creation(test_db):
+    """Test diagnosis model creation."""
+    from models import SeverityLevel
     
-    vehicle = Vehicle(
-        id=uuid4(),
-        user_id=user.id,
-        make="Honda",
-        model="Civic",
-        year=2020,
+    diagnosis = Diagnosis(
+        title="Carbon Buildup",
+        technical_explanation="Accumulation of carbon deposits",
+        severity_level=SeverityLevel.DIY_HARD,
+        repair_steps=[{"step": 1, "description": "Clean fuel injectors"}],
     )
-    test_db.add(vehicle)
+    test_db.add(diagnosis)
     test_db.commit()
-    
-    diagnostic = DiagnosticResult(
-        id=uuid4(),
-        user_id=user.id,
-        vehicle_id=vehicle.id,
-        symptom_text="Engine is making noise",
-        diagnosis="Carbon buildup likely",
-        confidence_score=0.87,
-        severity="medium",
-    )
-    test_db.add(diagnostic)
-    test_db.commit()
-    
-    recommendation = Recommendation(
-        id=uuid4(),
-        diagnostic_result_id=diagnostic.id,
-        part_name="Fuel System Cleaner",
-        part_category="Additives",
-        estimated_cost=75000,
-        urgency="soon",
-        priority=1,
-    )
-    test_db.add(recommendation)
-    test_db.commit()
-    test_db.refresh(diagnostic)
-    
-    assert len(diagnostic.recommendations) == 1
-    assert diagnostic.recommendations[0].part_name == "Fuel System Cleaner"
+    test_db.refresh(diagnosis)
+
+    assert diagnosis.title == "Carbon Buildup"
+    assert diagnosis.severity_level == SeverityLevel.DIY_HARD

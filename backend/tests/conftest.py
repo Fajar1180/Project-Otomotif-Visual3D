@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.database import Base
-from app.models import User, Vehicle, DiagnosticResult, Recommendation, Workshop, VectorStore
+from models import Vehicle, Symptom, Diagnosis, SparePart, DiagnosisPartMap, VectorStore, Workshop, DiagnosticResult
 
 
 @pytest.fixture(scope="session")

@@ -5,7 +5,7 @@ from httpx import AsyncClient
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.main import app
-from app.models import Symptom, Diagnosis, SparePart
+from models import Vehicle, Symptom, Diagnosis, SparePart
 
 
 @pytest.mark.asyncio
@@ -89,7 +89,7 @@ async def test_analyze_diagnosis_year_validation():
 @pytest.mark.asyncio
 async def test_analyze_diagnosis_with_vehicle_id(test_db: AsyncSession):
     """Test diagnosis with saved vehicle ID."""
-    from app.models import Vehicle
+    from models import Vehicle
     
     vehicle = Vehicle(
         id=uuid4(),

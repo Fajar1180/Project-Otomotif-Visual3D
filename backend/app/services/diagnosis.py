@@ -5,7 +5,7 @@ from uuid import UUID
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 
-from app.models import DiagnosticResult, Recommendation
+from models import DiagnosticResult
 from app.schemas import DiagnosisAnalyzeRequest, DiagnosisAnalyzeResponse, RepairStepResponse, RecommendationResponse
 from app.services.rag import RAGService
 from app.services.llm import LLMService
