@@ -2,7 +2,7 @@
 from typing import Optional, List
 from uuid import UUID
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class DiagnosisAnalyzeRequest(BaseModel):
@@ -22,6 +22,8 @@ class RepairStepResponse(BaseModel):
 
 class RecommendationResponse(BaseModel):
     """Recommendation for parts/services."""
+    model_config = ConfigDict(from_attributes=True)
+    
     id: UUID
     part_name: str
     part_category: str
@@ -30,9 +32,6 @@ class RecommendationResponse(BaseModel):
     urgency: str
     priority: int
     shopee_affiliate_link: Optional[str] = None
-
-    class Config:
-        from_attributes = True
 
 
 class DiagnosisAnalyzeResponse(BaseModel):

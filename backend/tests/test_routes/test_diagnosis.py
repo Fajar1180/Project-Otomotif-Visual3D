@@ -9,20 +9,20 @@ from models import Vehicle, Symptom, Diagnosis, SparePart
 
 
 @pytest.mark.asyncio
-async def test_analyze_diagnosis_happy_path(test_db: AsyncSession):
+async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
     """Test successful diagnosis analysis."""
     # Seed test data
     symptom = Symptom(
-        id=uuid4(),
+        id=str(uuid4()),
         symptom_code="ENG_KNOCK",
         description="Engine knocking sound at high RPM",
         category="Engine",
     )
-    test_db.add(symptom)
-    await test_db.flush()
+    test_db_async.add(symptom)
+    await test_db_async.flush()
 
     diagnosis = Diagnosis(
-        id=uuid4(),
+        id=str(uuid4()),
         title="Carbon Buildup",
         technical_explanation="Accumulation of carbon deposits in combustion chamber",
         severity_level="DIY_HARD",
@@ -31,8 +31,8 @@ async def test_analyze_diagnosis_happy_path(test_db: AsyncSession):
             {"step": 2, "description": "Visit workshop for injection cleaning"},
         ],
     )
-    test_db.add(diagnosis)
-    await test_db.commit()
+    test_db_async.add(diagnosis)
+    await test_db_async.commit()
 
     # Make request
     async with AsyncClient(app=app, base_url="http://test") as client:
@@ -87,12 +87,12 @@ async def test_analyze_diagnosis_year_validation():
 
 
 @pytest.mark.asyncio
-async def test_analyze_diagnosis_with_vehicle_id(test_db: AsyncSession):
+async def test_analyze_diagnosis_with_vehicle_id(test_db_async: AsyncSession):
     """Test diagnosis with saved vehicle ID."""
     from models import Vehicle
     
     vehicle = Vehicle(
-        id=uuid4(),
+        id=str(uuid4()),
         brand="Toyota",
         model="Avanza",
         year_start=2019,
