@@ -16,6 +16,8 @@ Repositori ini berisi semua hasil kerja untuk Project Otomotif AI (Project Pak Y
 ```
 Project-Otomotif-Visual3D/
 ├── design/
+│   ├── components/               # Komponen reusable (akan diisi)
+│   ├── tokens/                   # Design tokens (akan diisi)
 │   ├── figma/                    # File desain Figma (akan diisi)
 │   ├── mockups/                  # Mockup HTML (dashboard, 3D configurator, AI diagnosis)
 │   ├── spec/                     # Spesifikasi desain (akan diisi)
@@ -37,7 +39,8 @@ Project-Otomotif-Visual3D/
 ├── guides/
 │   ├── figma/
 │   │   └── FIGMA_MANUAL_GUIDE.md
-│   │   └── Figma_Design_Creation_Instructions.md
+│   │   ├── Figma_Design_Creation_Instructions.md
+│   │   └── preview-figma.html
 │   └── development/
 │       └── (akan diisi)
 ├── reports/
@@ -49,9 +52,10 @@ Project-Otomotif-Visual3D/
 │   │   ├── PROJECT_SUMMARY.md
 │   │   └── TASK_COMPLETION_SUMMARY.md
 │   ├── progress/
+│   │   └── M0-review-dokumentasi/
+│   │       └── CHECKLIST.md
 │   └── akademik/
-│       └── LAPORAN_INISIASI_PRODUK_STARTUP.md
-├── progress/
+│   │   └── LAPORAN_INISIASI_PRODUK_STARTUP.md
 ├── plan.md                       # Rencana implementasi detail
 ├── skills.md                     # Analisis keterampuan yang diperlukan
 ├── report.md                     # Laporan analisis proyek

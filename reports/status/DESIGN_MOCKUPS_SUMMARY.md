@@ -178,7 +178,7 @@ Berdasarkan UI_UX_Design_Specification.md dengan:
 
 ### View Mockups
 ```bash
-cd design-mockups
+cd design/mockups
 # Windows
 start dashboard.html
 
