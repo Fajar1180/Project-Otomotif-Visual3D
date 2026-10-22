@@ -1,7 +1,7 @@
 # Design Mockups - Project Otomotif AI (Project Pak Yogi)
 
 ## Ikhtisar
-Folder ini berisi HTML mockups untuk semua layar utama dari Platform Otomotif AI. Mockups ini dibuat berdasarkan spesifikasi lengkap di `UI_UX_Design_Specification.md`.
+Folder ini berisi HTML mockups untuk semua layar utama dari Platform Otomotif AI. Mockups ini dibuat berdasarkan spesifikasi lengkap di `docs/UI_UX_Design_Specification.md`.
 
 ## Files
 
@@ -132,7 +132,7 @@ Semua mockups sudah responsif dengan breakpoints:
 
 ## Catatan
 - Mockups ini adalah **high-fidelity prototypes** dengan real CSS styling
-- Semua warna, tipografi, spacing mengikuti spesifikasi di `UI_UX_Design_Specification.md`
+- Semua warna, tipografi, spacing mengikuti spesifikasi di `docs/UI_UX_Design_Specification.md`
 - Ikon menggunakan emoji untuk simplicity (production bisa gunakan Material Icons atau custom SVG)
 - 3D canvas menggunakan placeholder (production akan integrate React Three Fiber)
 

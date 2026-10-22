@@ -11,7 +11,7 @@
 ## Bagian 1: Paket Dokumentasi Inti
 
 ### 1.1 Dokumen Kebutuhan Proyek (PRD)
-**File:** `PRD_Project_Pak_Yogi.md`
+**File:** `docs/PRD_Project_Pak_Yogi.md`
 - Ikhtisar proyek dan konteks bisnis
 - Fitur inti:
   * AI 3D Modification Configurator & Shopee Recommender
@@ -21,7 +21,7 @@
 - Kriteria keberhasilan dan penilaian risiko
 
 ### 1.2 Spesifikasi Kebutuhan Perangkat Lunak (SRS)
-**File:** `SRS_Project_Pak_Yogi.md`
+**File:** `docs/SRS_Project_Pak_Yogi.md`
 - Kebutuhan fungsional lengkap (26 FR)
 - Kebutuhan non-fungsional (performa, keamanan, usability)
 - Spesifikasi antarmuka eksternal
@@ -29,14 +29,14 @@
 - Dukungan aksesibilitas dan internasionalisasi
 
 ### 1.3 Diagram Relasi Entitas (ERD)
-**File:** `ERD_Project_Pak_Yogi.md`
+**File:** `docs/ERD_Project_Pak_Yogi.md`
 - Skema database lengkap dengan 7 tabel inti
 - Vehicles, Symptoms, Diagnoses, Spare Parts, Workshops
 - Tabel mapping (symptom-diagnosis, diagnosis-part)
 - Visualisasi Mermaid dan skema SQL
 
 ### 1.4 Spesifikasi API
-**File:** `API_Spec_Project_Pak_Yogi.md`
+**File:** `docs/API_Spec_Project_Pak_Yogi.md`
 - Spesifikasi OpenAPI 3.0 compliant
 - Autentikasi (/auth/*)
 - Diagnosis (/diagnosis/*)
@@ -45,7 +45,7 @@
 - Penanganan error lengkap dan rate limiting
 
 ### 1.5 Spesifikasi Desain UI/UX
-**File:** `UI_UX_Design_Specification.md`
+**File:** `docs/UI_UX_Design_Specification.md`
 - Sistem desain (warna, tipografi, ikonografi)
 - Struktur layout untuk semua layar
 - Perpustakaan komponen dengan variasi

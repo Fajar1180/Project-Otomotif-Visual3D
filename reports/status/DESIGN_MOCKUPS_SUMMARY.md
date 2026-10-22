@@ -209,7 +209,7 @@ xdg-open dashboard.html
 ### Files di Repository
 ```
 Project-Otomotif-Visual3D/
-├── design-mockups/
+├── design/mockups/
 │   ├── README.md (Dokumentasi Mockups)
 │   ├── dashboard.html (Layar Dashboard)
 │   ├── 3d-configurator.html (3D Configurator)

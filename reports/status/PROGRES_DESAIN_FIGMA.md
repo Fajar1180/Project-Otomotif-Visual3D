@@ -125,7 +125,7 @@ Karena Figma MCP kena batas panggilan, desain layar dialihkan sementara ke Canva
 - Edit: https://www.canva.com/d/OOdRQgtqK7AJ52p
 - Lihat: https://www.canva.com/d/H_EccmNyAe0YphZ
 - 4 slide 16:9 (1920×1080): 1 sampul, 2 Dashboard, 3 Konfigurasi 3D, 4 Diagnosis AI
-- Isi layar = hasil render `design-mockups/*.html` (gambar, bukan elemen vektor terpisah)
+- Isi layar = hasil render `design/mockups/*.html` (gambar, bukan elemen vektor terpisah)
 
 Keterbatasan Canva untuk pekerjaan ini:
 - Tidak ada komponen/varian/auto layout → Design System tidak bisa dibangun di Canva
@@ -135,7 +135,7 @@ Keterbatasan Canva untuk pekerjaan ini:
 ## Riwayat Pembaruan
 
 - 19 Okt 2026 — Figma: file dibuat, 3 halaman, Design System (14 color style, 7 text style, 5 komponen), 3 frame layar 1920×1080. Prototype gagal karena kuota MCP.
-- 19 Okt 2026 — Canva: render `design-mockups/*.html` → 3 PNG (1920×1080) → unggah sebagai aset → deck `OTOMOTIF AI` 4 slide diisi screenshot, disimpan (committed) dan diverifikasi lewat thumbnail.
+- 19 Okt 2026 — Canva: render `design/mockups/*.html` → 3 PNG (1920×1080) → unggah sebagai aset → deck `OTOMOTIF AI` 4 slide diisi screenshot, disimpan (committed) dan diverifikasi lewat thumbnail.
 - 19 Okt 2026 — Catatan progres ini dibuat dan di-push agar tim bisa meneruskan.
 
 ## Langkah Berikutnya (urut prioritas)
@@ -147,8 +147,8 @@ Keterbatasan Canva untuk pekerjaan ini:
 5. Ganti placeholder judul slide Canva yang menduplikasi heading di dalam gambar.
 
 ## Berkas Terkait di Repo
-- `UI_UX_Design_Specification.md` — spesifikasi desain lengkap
+- `docs/UI_UX_Design_Specification.md` — spesifikasi desain lengkap
 - `DESIGN.md` — token desain
-- `figma-design-specification.json` — token format JSON
-- `design-mockups/dashboard.html`, `3d-configurator.html`, `ai-diagnosis.html` — mockup HTML acuan
+- `design/figma-design-specification.json` — token format JSON
+- `design/mockups/dashboard.html`, `3d-configurator.html`, `ai-diagnosis.html` — mockup HTML acuan
 - `FIGMA_MANUAL_GUIDE.md` — panduan langkah manual
