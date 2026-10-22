@@ -1,11 +1,13 @@
 """Database and application configuration."""
 import os
-from pydantic import Field
+from pydantic import Field, ConfigDict
 from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     """Application settings from environment."""
+    
+    model_config = ConfigDict(env_file=".env", case_sensitive=False)
 
     # Database
     database_url: str = Field(
@@ -17,10 +19,6 @@ class Settings(BaseSettings):
     debug: bool = Field(default=False, description="Debug mode")
     environment: str = Field(default="development", description="Environment name")
     openai_api_key: str = Field(default="", description="OpenAI API key")
-    
-    class Config:
-        env_file = ".env"
-        case_sensitive = False
 
 
 settings = Settings()
