@@ -45,7 +45,7 @@ async def analyze_diagnosis(
         rag_service = RAGService()
         llm_service = LLMServiceFactory.create(
             api_key=settings.openai_api_key if hasattr(settings, 'openai_api_key') else None,
-            mock=not settings.debug,  # Mock in production for cost control
+            mock=True,  # Always mock until API key validated
         )
         diagnosis_service = DiagnosisService(rag_service, llm_service)
 

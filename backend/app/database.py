@@ -1,59 +1,65 @@
 """Database configuration and session management.
 
-Single declarative Base, async/sync-aware get_db generator.
+Async engine + async session generator for FastAPI routes.
+Single declarative Base lives in models.py.
 """
 
 from __future__ import annotations
 
 import os
-from typing import Generator
+from typing import AsyncGenerator
 
-from sqlalchemy import create_engine, event
-from sqlalchemy.orm import DeclarativeBase, Session as SA_Session, sessionmaker
+from sqlalchemy.ext.asyncio import (
+    AsyncSession,
+    async_sessionmaker,
+    create_async_engine,
+)
 from sqlalchemy.pool import StaticPool
 
 from config import settings
-from models import Base  # Export Base for use in tests/routes
+from models import Base  # noqa: F401 — registers all models on Base.metadata
 
-# ---------------------------------------------------------------------------
-# Engine: SQLite (tests) or PostgreSQL (production).  For SQLite we use
-# StaticPool + check_same_thread=False.  For PostgreSQL we rely on the
-# DSN from settings (default: SQLite in-memory for CI/tests).
-# ---------------------------------------------------------------------------
-if settings.database_url.startswith("postgresql"):
-    _engine = create_engine(
-        settings.database_url,
-        future=True,
-        pool_pre_ping=True,
-    )
-else:
-    _engine = create_engine(
-        "sqlite:///:memory:",
+
+def _async_url(url: str) -> str:
+    """Translate sync DSN to async driver DSN."""
+    if url.startswith("postgresql://"):
+        return url.replace("postgresql://", "postgresql+asyncpg://", 1)
+    if url.startswith("sqlite://"):
+        return url.replace("sqlite://", "sqlite+aiosqlite://", 1)
+    return url
+
+
+_url = _async_url(settings.database_url)
+
+if _url.startswith("sqlite"):
+    _engine = create_async_engine(
+        _url,
         connect_args={"check_same_thread": False},
         poolclass=StaticPool,
         future=True,
     )
+else:
+    _engine = create_async_engine(_url, pool_pre_ping=True, future=True)
 
-SessionLocal = sessionmaker(bind=_engine, autoflush=False, autocommit=False, future=True)
+SessionLocal = async_sessionmaker(
+    bind=_engine,
+    class_=AsyncSession,
+    autoflush=False,
+    autocommit=False,
+    expire_on_commit=False,
+)
 
 
-def init_db() -> None:
-    """Create all tables (call once at app start or in test setup)."""
-    Base.metadata.create_all(bind=_engine)
+async def init_db() -> None:
+    """Create all tables (call once at app start)."""
+    async with _engine.begin() as conn:
+        await conn.run_sync(Base.metadata.create_all)
 
 
-def get_db() -> Generator[SA_Session, None, None]:
-    """Yield a SQLAlchemy session.
-
-    Yields a session that the caller (route) must close.  In production
-    this is typically wrapped by FastAPI's `Depends(get_db)` which ensures
-    the session is closed after the request.
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+async def get_db() -> AsyncGenerator[AsyncSession, None]:
+    """Yield an AsyncSession for FastAPI's Depends(get_db)."""
+    async with SessionLocal() as session:
+        yield session
 
 
 # ---------------------------------------------------------------------------
