@@ -2,7 +2,7 @@
 from typing import Optional
 from uuid import UUID
 
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from models import DiagnosticResult
@@ -27,7 +27,7 @@ class DiagnosisService:
 
     async def analyze(
         self,
-        db: AsyncSession,
+        db: Session,
         request: DiagnosisAnalyzeRequest,
     ) -> DiagnosisAnalyzeResponse:
         """
@@ -44,7 +44,7 @@ class DiagnosisService:
         vehicle_context = self._build_vehicle_context(request)
         
         # Step 2: RAG search for similar symptoms
-        similar_symptoms = await self.rag.search_similar_symptoms(
+        similar_symptoms = self.rag.search_similar_symptoms(
             db,
             request.symptom_text,
             top_k=5,
@@ -53,7 +53,7 @@ class DiagnosisService:
         symptom_ids = [UUID(s["symptom_id"]) for s in similar_symptoms]
         
         # Step 3: Retrieve diagnosis context
-        rag_context = await self.rag.retrieve_diagnosis_context(db, symptom_ids, top_k=3)
+        rag_context = self.rag.retrieve_diagnosis_context(db, symptom_ids, top_k=3)
         
         # Step 4: Call LLM for diagnosis
         llm_result = await self.llm.diagnose(
@@ -72,10 +72,10 @@ class DiagnosisService:
         )
         
         db.add(diagnostic_result)
-        await db.flush()
+        db.flush()
         
         # Step 6: Fetch and build recommendations
-        recommendations = await self._fetch_recommendations(
+        recommendations = self._fetch_recommendations(
             db,
             diagnostic_result.id,
             rag_context.get("spare_parts", [])[:5],
@@ -112,9 +112,9 @@ class DiagnosisService:
         
         return " ".join(parts) or "Kendaraan tidak ditentukan"
 
-    async def _fetch_recommendations(
+    def _fetch_recommendations(
         self,
-        db: AsyncSession,
+        db: Session,
         diagnostic_result_id: UUID,
         spare_parts: list,
     ) -> list:
@@ -149,8 +149,8 @@ class DiagnosisService:
         return recommendations
 
 
-async def get_diagnosis_service(
-    db: AsyncSession,
+def get_diagnosis_service(
+    db: Session,
     rag_service: RAGService,
     llm_service: LLMService,
 ) -> DiagnosisService:

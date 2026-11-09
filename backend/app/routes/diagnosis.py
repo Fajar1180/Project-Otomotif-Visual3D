@@ -1,6 +1,6 @@
 """Diagnosis API routes."""
 from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 
 from app.database import get_db
 from app.schemas import DiagnosisAnalyzeRequest, DiagnosisAnalyzeResponse
@@ -16,7 +16,7 @@ router = APIRouter(prefix="/api/v1", tags=["diagnosis"])
 @router.post("/diagnosis/analyze", response_model=DiagnosisAnalyzeResponse)
 async def analyze_diagnosis(
     request: DiagnosisAnalyzeRequest,
-    db: AsyncSession = Depends(get_db),
+    db: Session = Depends(get_db),
 ) -> DiagnosisAnalyzeResponse:
     """
     Analyze vehicle symptoms and return AI diagnosis with recommendations.
@@ -48,17 +48,17 @@ async def analyze_diagnosis(
             mock=not settings.debug,  # Mock in production for cost control
         )
         diagnosis_service = DiagnosisService(rag_service, llm_service)
-        
+
         # Analyze
         result = await diagnosis_service.analyze(db, request)
-        
+
         # Commit to DB
-        await db.commit()
-        
+        db.commit()
+
         return result
-        
+
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
-        await db.rollback()
+        db.rollback()
         raise HTTPException(status_code=500, detail=f"Diagnosis failed: {str(e)}")

@@ -19,7 +19,7 @@ async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
         category="Engine",
     )
     test_db_async.add(symptom)
-    await test_db_async.flush()
+    test_db_async.flush()
 
     diagnosis = Diagnosis(
         id=str(uuid4()),
@@ -32,7 +32,7 @@ async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
         ],
     )
     test_db_async.add(diagnosis)
-    await test_db_async.commit()
+    test_db_async.commit()
 
     # Make request
     async with AsyncClient(app=app, base_url="http://test") as client:
@@ -97,8 +97,8 @@ async def test_analyze_diagnosis_with_vehicle_id(test_db_async: AsyncSession):
         model="Avanza",
         year_start=2019,
     )
-    test_db.add(vehicle)
-    await test_db.commit()
+    test_db_async.add(vehicle)
+    test_db_async.commit()
 
     async with AsyncClient(app=app, base_url="http://test") as client:
         response = await client.post(

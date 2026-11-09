@@ -4,9 +4,9 @@ import pytest
 import pytest_asyncio
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
-from app.database import Base
+from app.main import app
+from app.database import SessionLocal, Base, _engine, get_db
 from models import Vehicle, Symptom, Diagnosis, SparePart, DiagnosisPartMap, VectorStore, Workshop, DiagnosticResult
 
 
@@ -32,17 +32,23 @@ def test_db(test_db_engine):
     session.close()
 
 
+@pytest.fixture(scope="session", autouse=True)
+def _ensure_test_schema():
+    """Create all tables once on the app engine so route tests see them."""
+    Base.metadata.create_all(bind=_engine)
+
 @pytest_asyncio.fixture
 async def test_db_async():
-    """Create async in-memory SQLite database for async tests."""
-    engine = create_async_engine("sqlite+aiosqlite:///:memory:")
-    
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    
-    async_session = async_sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
-    
-    async with async_session() as session:
+    """Provide a test database session bound to the app engine (so seeded data is visible to routes)."""
+    session = SessionLocal()
+
+    def _override_get_db():
         yield session
-    
-    await engine.dispose()
+
+    app.dependency_overrides[get_db] = _override_get_db
+    try:
+        yield session
+    finally:
+        app.dependency_overrides.pop(get_db, None)
+        session.rollback()
+        session.close()

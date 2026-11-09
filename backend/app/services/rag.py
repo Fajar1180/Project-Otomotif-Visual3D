@@ -3,7 +3,7 @@ from typing import List, Dict, Optional
 import json
 from uuid import UUID
 
-from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.orm import Session
 from sqlalchemy import select, text
 
 from models import VectorStore, Symptom, Diagnosis, DiagnosisPartMap, SparePart
@@ -12,9 +12,9 @@ from models import VectorStore, Symptom, Diagnosis, DiagnosisPartMap, SparePart
 class RAGService:
     """Vector search and knowledge retrieval service."""
 
-    async def search_similar_symptoms(
+    def search_similar_symptoms(
         self,
-        db: AsyncSession,
+        db: Session,
         query_text: str,
         top_k: int = 5,
         confidence_threshold: float = 0.7,
@@ -33,7 +33,7 @@ class RAGService:
         """
         # In production: use OpenAI embeddings or local model
         # For now: mock similarity based on keyword matching
-        result = await db.execute(
+        result = db.execute(
             select(Symptom).limit(top_k)
         )
         symptoms = result.scalars().all()
@@ -50,9 +50,9 @@ class RAGService:
             for s in symptoms
         ]
 
-    async def retrieve_diagnosis_context(
+    def retrieve_diagnosis_context(
         self,
-        db: AsyncSession,
+        db: Session,
         symptom_ids: List[UUID],
         top_k: int = 3,
     ) -> Dict:
@@ -74,18 +74,9 @@ class RAGService:
         }
 
         for symptom_id in symptom_ids:
-            # Get diagnosis mappings
-            result = await db.execute(
-                select(Diagnosis)
-                .from_statement(
-                    text("""
-                    SELECT DISTINCT d.* FROM diagnoses d
-                    JOIN symptom_diagnosis_map sdm ON d.id = sdm.diagnosis_id
-                    WHERE sdm.symptom_id = :symptom_id
-                    LIMIT :top_k
-                    """)
-                )
-                .bindparams(symptom_id=symptom_id, top_k=top_k)
+            # Get diagnosis mappings (mock: no symptom-diagnosis link table in models yet)
+            result = db.execute(
+                select(Diagnosis).limit(top_k)
             )
             diagnoses = result.scalars().all()
             
@@ -98,7 +89,7 @@ class RAGService:
                 })
                 
                 # Get recommended spare parts
-                parts_result = await db.execute(
+                parts_result = db.execute(
                     select(SparePart, DiagnosisPartMap.is_primary)
                     .join(DiagnosisPartMap)
                     .filter(DiagnosisPartMap.diagnosis_id == diagnosis.id)
@@ -118,9 +109,9 @@ class RAGService:
 
         return context
 
-    async def store_embedding(
+    def store_embedding(
         self,
-        db: AsyncSession,
+        db: Session,
         text_chunk: str,
         source: str,
         embedding: Optional[List[float]] = None,
@@ -146,10 +137,10 @@ class RAGService:
             metadata=metadata or {},
         )
         db.add(vs)
-        await db.flush()
+        db.flush()
         return vs.id
 
 
-async def get_rag_service() -> RAGService:
+def get_rag_service() -> RAGService:
     """Dependency injection for RAG service."""
     return RAGService()
