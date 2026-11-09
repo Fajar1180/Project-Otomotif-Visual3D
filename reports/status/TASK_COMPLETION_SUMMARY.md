@@ -52,6 +52,19 @@
 - Panduan desain responsif
 - Kebutuhan aksesibilitas dan testing
 
+### 1.6 Metodologi Startup Digital
+**File:** `STARTUP_METHODOLOGY.md`
+- Ikhtisar capaian pembelajaran startup digital
+- Identifikasi peluang bisnis digital (desirability, feasibility, viability)
+- Ideation dan inovasi (konsep, storyboard)
+- Business Model Canvas (9 blok)
+- Lean Startup (prinsip, Build-Measure-Learn)
+- Validasi ide (tahapan, wawancara, MVP)
+- Validation Board & Lembar Kerja Praktik (LK-01 s.d LK-09)
+- Pitch deck dan presentasi
+- Penerapan pada platform Otomotif AI
+- Rubrik penilaian
+
 ## Bagian 2: Implementasi Desain Figma
 
 ### 2.1 Pembuatan File Desain Figma

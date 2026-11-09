@@ -125,12 +125,12 @@ Project-Otomotif-Visual3D/
 - Timeline, risiko, dan mitigasi
 
 ### 8. [skills.md](skills.md)
-**Analisis Keterampuan**
-- Keterampuan pengembangan inti
-- Keterampuan desain
-- Keterampuan manajemen proyek
-- Keterampuan testing
-- Keterampuan dokumentasi
+**Analisis Keterampilan**
+- Keterampilan pengembangan inti
+- Keterampilan desain
+- Keterampilan manajemen proyek
+- Keterampilan testing
+- Keterampilan dokumentasi
 - Keterampilan quality assurance
 
 ### 9. [report.md](report.md)
@@ -139,8 +139,21 @@ Project-Otomotif-Visual3D/
 - Analisis struktur folder
 - Analisis sistem desain
 - Ringkasan rencana implementasi
-- Penilaian keterampuan
+- Penilaian keterampilan
 - Langkah selanjutnya
+
+### 10. [STARTUP_METHODOLOGY.md](STARTUP_METHODOLOGY.md)
+**Metodologi Startup Digital**
+- Ikhtisar capaian pembelajaran startup digital
+- Identifikasi peluang bisnis digital (desirability, feasibility, viability)
+- Ideation dan inovasi (konsep, storyboard)
+- Business Model Canvas (9 blok)
+- Lean Startup (prinsip, Build-Measure-Learn)
+- Validasi ide (tahapan, wawancara, MVP)
+- Validation Board & Lembar Kerja Praktik (LK-01 s.d LK-09)
+- Pitch deck dan presentasi
+- Penerapan pada platform Otomotif AI
+- Rubrik penilaian
 
 ## Langkah Selanjutnya
 

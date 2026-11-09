@@ -18,7 +18,8 @@
 | 5 | `docs/UI_UX_Design_Specification.md` | ✅ | Design System - Palette warna, tipografi, komponen, layout |
 | 6 | `Figma_Design_Creation_Instructions.md` | ✅ | Panduan langkah-demi-langkah pembuatan desain Figma |
 | 7 | `README.md` | ✅ | Ikhtisar proyek dan panduan navigasi |
-| 8 | `TASK_COMPLETION_SUMMARY.md` | ✅ | Checklist penyelesaian tugas |
+| 8 | `STARTUP_METHODOLOGY.md` | ✅ | Metodologi Startup Digital (Pertemuan 1–7 + Modul Praktik Validation Board & MVP) |
+| 9 | `TASK_COMPLETION_SUMMARY.md` | ✅ | Checklist penyelesaian tugas |
 
 **Total:** ~60+ halaman spesifikasi lengkap
 
