@@ -1,9 +1,9 @@
 FastAPI==0.104.1
-SQLAlchemy==2.0.23
+SQLAlchemy==2.0.39
 alembic==1.13.1
 psycopg2-binary==2.9.13
 pgvector==0.2.4
-pydantic==2.5.0
+pydantic==2.14.3
 pydantic-settings==2.1.0
 python-dotenv==1.0.0
 pytest==7.4.3

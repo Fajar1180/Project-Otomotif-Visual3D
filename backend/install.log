@@ -1,0 +1,160 @@
+Defaulting to user installation because normal site-packages is not writeable
+Collecting FastAPI==0.104.1
+  Using cached fastapi-0.104.1-py3-none-any.whl.metadata (24 kB)
+Collecting SQLAlchemy==2.0.23
+  Using cached SQLAlchemy-2.0.23-py3-none-any.whl.metadata (9.6 kB)
+Collecting alembic==1.13.1
+  Using cached alembic-1.13.1-py3-none-any.whl.metadata (7.4 kB)
+Collecting psycopg2-binary==2.9.13
+  Using cached psycopg2_binary-2.9.13-cp314-cp314-win_amd64.whl.metadata (5.1 kB)
+Collecting pgvector==0.2.4
+  Using cached pgvector-0.2.4-py2.py3-none-any.whl.metadata (9.8 kB)
+Collecting pydantic-settings==2.1.0
+  Using cached pydantic_settings-2.1.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting python-dotenv==1.0.0
+  Using cached python_dotenv-1.0.0-py3-none-any.whl.metadata (21 kB)
+Collecting pytest==7.4.3
+  Using cached pytest-7.4.3-py3-none-any.whl.metadata (7.9 kB)
+Collecting pytest-asyncio==0.21.1
+  Using cached pytest_asyncio-0.21.1-py3-none-any.whl.metadata (4.0 kB)
+Collecting httpx==0.25.1
+  Using cached httpx-0.25.1-py3-none-any.whl.metadata (7.1 kB)
+Collecting uvicorn==0.24.0
+  Using cached uvicorn-0.24.0-py3-none-any.whl.metadata (6.4 kB)
+Collecting openai
+  Using cached openai-3.46.0-py3-none-any.whl.metadata (45 kB)
+Collecting tenacity
+  Using cached tenacity-9.2.1-py3-none-any.whl.metadata (1.4 kB)
+Collecting anyio<4.0.0,>=3.7.1 (from FastAPI==0.104.1)
+  Using cached anyio-3.7.1-py3-none-any.whl.metadata (4.7 kB)
+Requirement already satisfied: pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from FastAPI==0.104.1) (2.14.3)
+Collecting starlette<0.28.0,>=0.27.0 (from FastAPI==0.104.1)
+  Using cached starlette-0.27.0-py3-none-any.whl.metadata (5.8 kB)
+Requirement already satisfied: typing-extensions>=4.8.0 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from FastAPI==0.104.1) (4.16.0)
+Collecting greenlet!=0.4.17 (from SQLAlchemy==2.0.23)
+  Using cached greenlet-3.5.6-cp314-cp314-win_amd64.whl.metadata (3.9 kB)
+Collecting Mako (from alembic==1.13.1)
+  Using cached mako-1.4.3-py3-none-any.whl.metadata (2.9 kB)
+Requirement already satisfied: numpy in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pgvector==0.2.4) (2.5.4)
+Collecting iniconfig (from pytest==7.4.3)
+  Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Requirement already satisfied: packaging in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pytest==7.4.3) (26.3)
+Collecting pluggy<2.0,>=0.12 (from pytest==7.4.3)
+  Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Requirement already satisfied: colorama in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pytest==7.4.3) (0.4.6)
+Requirement already satisfied: certifi in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from httpx==0.25.1) (2026.5.20)
+Requirement already satisfied: httpcore in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from httpx==0.25.1) (1.0.9)
+Requirement already satisfied: idna in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from httpx==0.25.1) (3.18)
+Collecting sniffio (from httpx==0.25.1)
+  Using cached sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+Requirement already satisfied: click>=7.0 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from uvicorn==0.24.0) (8.5.0)
+Requirement already satisfied: h11>=0.8 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from uvicorn==0.24.0) (0.16.0)
+Requirement already satisfied: annotated-types>=0.6.0 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->FastAPI==0.104.1) (0.8.0)
+Requirement already satisfied: pydantic-core==2.50.4 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->FastAPI==0.104.1) (2.50.4)
+Requirement already satisfied: typing-inspection>=0.4.4 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from pydantic!=1.8,!=1.8.1,!=2.0.0,!=2.0.1,!=2.1.0,<3.0.0,>=1.7.4->FastAPI==0.104.1) (0.4.5)
+INFO: pip is looking at multiple versions of openai to determine which version is compatible with other requirements. This could take a while.
+Collecting openai
+  Using cached openai-3.45.0-py3-none-any.whl.metadata (45 kB)
+  Using cached openai-3.44.0-py3-none-any.whl.metadata (45 kB)
+  Using cached openai-3.43.0-py3-none-any.whl.metadata (45 kB)
+  Using cached openai-3.42.1-py3-none-any.whl.metadata (45 kB)
+  Using cached openai-3.42.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.41.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.40.0-py3-none-any.whl.metadata (44 kB)
+INFO: pip is still looking at multiple versions of openai to determine which version is compatible with other requirements. This could take a while.
+  Using cached openai-3.39.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.38.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.37.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.36.1-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.36.0-py3-none-any.whl.metadata (44 kB)
+INFO: This is taking longer than usual. You might need to provide the dependency resolver with stricter constraints to reduce runtime. See https://pip.pypa.io/warnings/backtracking for guidance. If you want to abort this run, press Ctrl + C.
+  Using cached openai-3.35.1-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.35.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.34.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.33.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.32.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.31.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.30.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.29.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.28.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.27.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.26.1-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.26.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.25.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.24.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.23.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.22.1-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.22.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.21.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.20.0-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.19.2-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.19.1-py3-none-any.whl.metadata (44 kB)
+  Using cached openai-3.19.0-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.18.0-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.17.0-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.16.2-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.16.1-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.16.0-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.15.0-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.14.1-py3-none-any.whl.metadata (43 kB)
+  Using cached openai-3.14.0-py3-none-any.whl.metadata (42 kB)
+  Using cached openai-3.13.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.12.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.11.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.10.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.9.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.8.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.7.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.6.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.5.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.4.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.3.1-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.3.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.2.0-py3-none-any.whl.metadata (41 kB)
+  Using cached openai-3.1.0-py3-none-any.whl.metadata (39 kB)
+  Using cached openai-3.0.0-py3-none-any.whl.metadata (39 kB)
+  Using cached openai-2.54.0-py3-none-any.whl.metadata (40 kB)
+Collecting distro<2,>=1.7.0 (from openai)
+  Using cached distro-1.9.0-py3-none-any.whl.metadata (6.8 kB)
+Collecting jiter<1,>=0.10.0 (from openai)
+  Using cached jiter-0.19.0-cp314-cp314-win_amd64.whl.metadata (5.3 kB)
+Requirement already satisfied: tqdm>4 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from openai) (4.70.1)
+Requirement already satisfied: MarkupSafe>=2.0 in C:\Users\Ilham Al Munawar\AppData\Roaming\Python\Python314\site-packages (from Mako->alembic==1.13.1) (3.0.3)
+Using cached fastapi-0.104.1-py3-none-any.whl (92 kB)
+Using cached SQLAlchemy-2.0.23-py3-none-any.whl (1.9 MB)
+Using cached alembic-1.13.1-py3-none-any.whl (233 kB)
+Using cached psycopg2_binary-2.9.13-cp314-cp314-win_amd64.whl (2.9 MB)
+Using cached pgvector-0.2.4-py2.py3-none-any.whl (9.6 kB)
+Using cached pydantic_settings-2.1.0-py3-none-any.whl (11 kB)
+Using cached python_dotenv-1.0.0-py3-none-any.whl (19 kB)
+Using cached pytest-7.4.3-py3-none-any.whl (325 kB)
+Using cached pytest_asyncio-0.21.1-py3-none-any.whl (13 kB)
+Using cached httpx-0.25.1-py3-none-any.whl (75 kB)
+Using cached uvicorn-0.24.0-py3-none-any.whl (59 kB)
+Using cached anyio-3.7.1-py3-none-any.whl (80 kB)
+Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+Using cached starlette-0.27.0-py3-none-any.whl (66 kB)
+Using cached openai-2.54.0-py3-none-any.whl (1.7 MB)
+Using cached distro-1.9.0-py3-none-any.whl (20 kB)
+Using cached jiter-0.19.0-cp314-cp314-win_amd64.whl (225 kB)
+Using cached tenacity-9.2.1-py3-none-any.whl (32 kB)
+Using cached greenlet-3.5.6-cp314-cp314-win_amd64.whl (327 kB)
+Using cached sniffio-1.3.1-py3-none-any.whl (10 kB)
+Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Using cached mako-1.4.3-py3-none-any.whl (80 kB)
+Installing collected packages: uvicorn, tenacity, sniffio, python-dotenv, psycopg2-binary, pluggy, pgvector, Mako, jiter, iniconfig, greenlet, distro, SQLAlchemy, pytest, anyio, starlette, pytest-asyncio, pydantic-settings, httpx, alembic, openai, FastAPI
+  Attempting uninstall: anyio
+    Found existing installation: anyio 4.15.1
+    Uninstalling anyio-4.15.1:
+      Successfully uninstalled anyio-4.15.1
+  Attempting uninstall: httpx
+    Found existing installation: httpx 0.28.1
+    Uninstalling httpx-0.28.1:
+      Successfully uninstalled httpx-0.28.1
+
+ERROR: pip's dependency resolver does not currently take into account all the packages that are installed. This behaviour is the source of the following dependency conflicts.
+httpx2 2.16.0 requires anyio>=4.10; sys_platform != "emscripten", but you have anyio 3.7.1 which is incompatible.
+Successfully installed FastAPI-0.104.1 Mako-1.4.3 SQLAlchemy-2.0.23 alembic-1.13.1 anyio-3.7.1 distro-1.9.0 greenlet-3.5.6 httpx-0.25.1 iniconfig-2.3.1 jiter-0.19.0 openai-2.54.0 pgvector-0.2.4 pluggy-1.7.0 psycopg2-binary-2.9.13 pydantic-settings-2.1.0 pytest-7.4.3 pytest-asyncio-0.21.1 python-dotenv-1.0.0 sniffio-1.3.1 starlette-0.27.0 tenacity-9.2.1 uvicorn-0.24.0
+
+[notice] A new release of pip is available: 26.2.1 -> 26.3
+[notice] To update, run: C:\Python314\python.exe -m pip install --upgrade pip

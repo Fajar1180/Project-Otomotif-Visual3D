@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pitch Deck — Platform Otomotif AI</title>
+<style>
+:root{--bg:#0A2463;--card:#1E4E79;--accent:#9CA3AF;--fg:#FFFFFF;--muted:#CBD5E1;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--fg);-webkit-font-smoothing:antialiased}
+.slide{width:960px;height:540px;padding:40px 60px;background:linear-gradient(135deg,#0A2463 0%,#1E4E79 100%);color:#fff;border-radius:16px;margin:24px auto;box-shadow:0 20px 40px rgba(0,0,0,.4);position:relative;overflow:hidden}
+.slide::after{content:"";position:absolute;inset:0;background:url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22960%22 height=%22540%22><text x=%22820%22 y=%22520%22 font-size=%22140%22 fill=%22rgba(255,255,255,.04)%22 font-weight=%22900%22>PAK YOGI</text></svg>') no-repeat right bottom;pointer-events:none}
+h1{font-size:34px;line-height:1.25;margin-bottom:12px;font-weight:800}
+h2{font-size:22px;line-height:1.3;margin-bottom:10px;font-weight:700;color:#93C5FD}
+p{font-size:15px;line-height:1.6;color:var(--muted);margin-bottom:10px}
+.small{font-size:12px;color:var(--accent);margin-top:6px}
+ul{margin-left:20px;margin-bottom:10px;color:var(--muted)}
+li{margin-bottom:6px;line-height:1.5}
+.badge{display:inline-block;font-size:11px;padding:2px 8px;border-radius:4px;background:rgba(255,255,255,.15);color:#fff;margin-right:6px;margin-bottom:4px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:12px}
+.card{background:rgba(255,255,255,.08);padding:14px 16px;border-radius:10px;border:1px solid rgba(255,255,255,.12)}
+.card h3{font-size:15px;color:#93C5FD;margin-bottom:6px}
+.card p{font-size:13px;line-height:1.45;color:var(--muted);margin:0}
+.num{font-size:28px;font-weight:800;color:#60A5FA}
+.tag{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:#60A5FA;font-weight:700;margin-bottom:10px;display:block}
+.slide-footer{position:absolute;bottom:24px;left:60px;right:60px;font-size:11px;color:var(--accent);border-top:1px solid rgba(255,255,255,.15);padding-top:8px;display:flex;justify-content:space-between}
+.kicker{font-size:13px;color:#93C5FD;text-transform:uppercase;letter-spacing:.5px;font-weight:700;margin-bottom:8px;display:block}
+</style>
+</head>
+<body>
+
+<section class="slide">
+<span class="kicker">Platform Otomotif AI · Project Pak Yogi</span>
+<h1>Pitch Deck</h1>
+<p>Diagnosis kendaraan berbasis AI &amp; konfigurasi 3D modifikasi untuk pemilik kendaraan dan bengkel di Indonesia.</p>
+<div class="small">UTS Startup Digital UKRI · Versi 1.0 · 9 November 2026</div>
+<div class="slide-footer">Platform Otomotif AI &mdash; Confidential</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Masalah</span>
+<h1>Diagnosis kendaraan masih sulit dilakukan sendiri</h1>
+<ul>
+<li>Pemilik kendaraan kesulitan mendiagnosa kerusakan tanpa datang langsung ke bengkel.</li>
+<li>Tidak ada estimasi biaya dan kerusakan sebelum kunjungan.</li>
+<li>Membuang waktu dan biaya transportasi untuk kunjungan yang tidak perlu.</li>
+<li>Solusi saat ini: tanya langsung kepada mekanik di bengkel konvensional.</li>
+</ul>
+<div class="grid">
+<div class="card"><h3>Dampak waktu</h3><p>Kunjungan langsung tanpa estimasi = waktu terbuang untuk gejala ringan yang bisa diatasi sendiri.</p></div>
+<div class="card"><h3>Dampak biaya</h3><p>Transportasi + biaya bengkel untuk diagnosa yang sebenarnya bisa dilakukan mandiri.</p></div>
+</div>
+<div class="slide-footer">Slide 2 of 11 &mdash; Masalah</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Solusi</span>
+<h1>AI Storytelling Diagnosis &amp; 3D Modification Configurator</h1>
+<ul>
+<li><b>AI Storytelling Diagnosis</b>: NLP/RAG menginterpretasi keluhan (teks/audio), klasifikasi keparahan (DIY_EASY, DIY_HARD, WORKSHOP_REQUIRED), langkah perbaikan, rekomendasi suku cadang.</li>
+<li><b>AI 3D Configurator</b>: visualisasi 3D modifikasi kendaraan, penukaran komponen real-time, link afiliasi Shopee, rekomendasi bengkel terdekat via Maps API.</li>
+</ul>
+<div class="card" style="margin-top:14px">
+<h3>Manfaat</h3>
+<p>Diagnosis lebih cepat, estimasi biaya transparan, mengurangi kunjungan tidak perlu ke bengkel.</p>
+</div>
+<div class="slide-footer">Slide 3 of 11 &mdash; Solusi</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Produk</span>
+<h1>MVP: Diagnosis satu kategori kerusakan mesin</h1>
+<ul>
+<li>Input cerita keluhan (teks) + konteks kendaraan.</li>
+<li>Hasil diagnosis dengan tingkat keparahan (DIY_EASY / DIY_HARD / WORKSHOP_REQUIRED).</li>
+<li>Langkah perbaikan + rekomendasi suku cadang.</li>
+</ul>
+<div class="grid">
+<div class="card"><h3>Teknis</h3><p>FastAPI endpoint <code>POST /api/v1/diagnosis/analyze</code>, RAG pipeline OpenAI/Claude.</p></div>
+<div class="card"><h3>Ditunda</h3><p>3D Configurator, Shopee Affiliate, Maps, riwayat, autentikasi.</p></div>
+</div>
+<div class="slide-footer">Slide 4 of 11 &mdash; Produk</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Pasar</span>
+<h1>Trend modifikasi kendaraan di Indonesia</h1>
+<ul>
+<li>Pertumbuhan tinggi budaya modifikasi motor (Thailook, Bratstyle, Cafe Racer).</li>
+<li>Peluang monetisasi via Program Affiliate Shopee.</li>
+<li>Segmen: pemilik bengkel, pemilik kendaraan (mobil &amp; motor), mekanik, penggemar DIY.</li>
+</ul>
+<div class="slide-footer">Slide 5 of 11 &mdash; Pasar</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Model Bisnis</span>
+<h1>Komisi afiliasi Shopee</h1>
+<ul>
+<li>Revenue: komisi afiliasi dari penjualan suku cadang dan komponen modifikasi.</li>
+<li>Channel: platform web (Next.js), link afiliasi Shopee, Maps API.</li>
+<li>Biaya: API LLM, infrastruktur server, pengembangan tim.</li>
+</ul>
+<div class="slide-footer">Slide 6 of 11 &mdash; Model Bisnis</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Traction</span>
+<h1>Fase Inisiasi — PRD, SRS, ERD, API Spec, UI/UX siap</h1>
+<ul>
+<li>Dokumen lengkap: PRD v1.0, SRS (FR-001 s.d. FR-026), ERD, API Spec OpenAPI 3.0, UI/UX Design Spec.</li>
+<li>Backend FastAPI (diagnosis route, RAG, database pgvector) dalam pengembangan.</li>
+<li>Frontend Next.js + React Three Fiber (R3F) untuk rendering 3D.</li>
+<li>Validasi calon pengguna dan eksperimen akurasi >85% / latensi <200ms belum dilakukan.</li>
+</ul>
+<div class="slide-footer">Slide 7 of 11 &mdash; Traction</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Tim</span>
+<h1>Tim kompakt, multidisipiliner</h1>
+<div class="grid">
+<div class="card"><h3>fajar1180</h3><p>Project Manager, System Analyst, Backend, Frontend, QA Testing.</p></div>
+<div class="card"><h3>ilhamalmunawar05-cpu</h3><p>System Analyst, Backend Developer, Frontend Developer, QA Engineer.</p></div>
+</div>
+<div class="slide-footer">Slide 8 of 11 &mdash; Tim</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Butuhan Dana</span>
+<h1>Biaya API LLM, infrastruktur, dan pengembangan</h1>
+<ul>
+<li>Biaya API LLM (OpenAI/Claude) untuk RAG pipeline.</li>
+<li>Infrastruktur server: PostgreSQL + pgvector, Celery + Redis.</li>
+<li>Biaya pengembangan tim (2 orang).</li>
+</ul>
+<p class="small">Rincian anggaran disesuaikan dengan format anggaran UKRI.</p>
+<div class="slide-footer">Slide 9 of 11 &mdash; Butuhan Dana</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Roadmap</span>
+<h1>6 Minggu ke Production Ready</h1>
+<table style="width:100%;border-collapse:collapse;font-size:13px;color:var(--muted)">
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M0</b></td><td>Project Kickoff &amp; Finalisasi Arsitektur</td><td style="text-align:right">Minggu 1</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M1</b></td><td>Skema Database &amp; Unit Tests</td><td style="text-align:right">Minggu 2</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M2</b></td><td>Backend API + Frontend Skeleton</td><td style="text-align:right">Minggu 3</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M3</b></td><td>Modul RAG + Integrasi Shopee</td><td style="text-align:right">Minggu 4</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M4</b></td><td>Integrasi Fitur Penuh &amp; QA</td><td style="text-align:right">Minggu 5</td></tr>
+<tr style="border-bottom:1px solid rgba(255,255,255,.15)"><td style="padding:6px 0"><b>M5</b></td><td>Rilis Production Ready</td><td style="text-align:right">Minggu 6</td></tr>
+</table>
+<div class="slide-footer">Slide 10 of 11 &mdash; Roadmap</div>
+</section>
+
+<section class="slide">
+<span class="kicker">Kesimpulan</span>
+<h1>Platform Otomotif AI — Siap Dibangun</h1>
+<ul>
+<li>Diagnosis AI cepat (>85% akurasi) dan transparan biaya.</li>
+<li>Mengurangi kunjungan tidak perlu ke bengkel.</li>
+<li>Monetisasi via komisi afiliasi Shopee.</li>
+<li>Siap untuk MVP dan uji ke calon pengguna riil.</li>
+</ul>
+<div class="card" style="margin-top:14px;border-color:#60A5FA">
+<h3 style="color:#60A5FA">Terima kasih</h3>
+<p style="color:#fff;margin:0">Platform Otomotif AI (Project Pak Yogi) &mdash; fajar1180 &amp; ilhamalmunawar05-cpu</p>
+</div>
+<div class="slide-footer">Slide 11 of 11 &mdash; Kesimpulan</div>
+</section>
+
+</body>
+</html>

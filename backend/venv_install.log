@@ -1,0 +1,49 @@
+Requirement already satisfied: FastAPI==0.104.1 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 1)) (0.104.1)
+Collecting SQLAlchemy==2.0.39 (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 2))
+  Downloading sqlalchemy-2.0.39-cp313-cp313-win_amd64.whl.metadata (9.9 kB)
+Requirement already satisfied: alembic==1.13.1 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 3)) (1.13.1)
+Requirement already satisfied: psycopg2-binary==2.9.13 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 4)) (2.9.13)
+Requirement already satisfied: pgvector==0.2.4 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 5)) (0.2.4)
+Requirement already satisfied: pydantic==2.14.3 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 6)) (2.14.3)
+Requirement already satisfied: pydantic-settings==2.1.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 7)) (2.1.0)
+Requirement already satisfied: python-dotenv==1.0.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 8)) (1.0.0)
+Requirement already satisfied: pytest==7.4.3 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 9)) (7.4.3)
+Requirement already satisfied: pytest-asyncio==0.21.1 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 10)) (0.21.1)
+Requirement already satisfied: httpx==0.25.1 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 11)) (0.25.1)
+Requirement already satisfied: uvicorn==0.24.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 12)) (0.24.0)
+Requirement already satisfied: openai>=1.0.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 13)) (2.54.0)
+Requirement already satisfied: tenacity>=8.2.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from -r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 14)) (9.2.1)
+Requirement already satisfied: anyio<4.0.0,>=3.7.1 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from FastAPI==0.104.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 1)) (3.7.1)
+Requirement already satisfied: starlette<0.28.0,>=0.27.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from FastAPI==0.104.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 1)) (0.27.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from FastAPI==0.104.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 1)) (4.16.0)
+Requirement already satisfied: greenlet!=0.4.17 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from SQLAlchemy==2.0.39->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 2)) (3.5.6)
+Requirement already satisfied: Mako in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from alembic==1.13.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 3)) (1.4.3)
+Requirement already satisfied: numpy in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pgvector==0.2.4->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 5)) (2.5.4)
+Requirement already satisfied: annotated-types>=0.6.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pydantic==2.14.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 6)) (0.8.0)
+Requirement already satisfied: pydantic-core==2.50.4 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pydantic==2.14.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 6)) (2.50.4)
+Requirement already satisfied: typing-inspection>=0.4.4 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pydantic==2.14.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 6)) (0.4.5)
+Requirement already satisfied: iniconfig in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pytest==7.4.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 9)) (2.3.1)
+Requirement already satisfied: packaging in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pytest==7.4.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 9)) (26.3)
+Requirement already satisfied: pluggy<2.0,>=0.12 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pytest==7.4.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 9)) (1.7.0)
+Requirement already satisfied: colorama in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from pytest==7.4.3->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 9)) (0.4.6)
+Requirement already satisfied: certifi in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from httpx==0.25.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 11)) (2026.10.23)
+Requirement already satisfied: httpcore in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from httpx==0.25.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 11)) (1.0.9)
+Requirement already satisfied: idna in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from httpx==0.25.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 11)) (3.20)
+Requirement already satisfied: sniffio in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from httpx==0.25.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 11)) (1.3.1)
+Requirement already satisfied: click>=7.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from uvicorn==0.24.0->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 12)) (8.5.1)
+Requirement already satisfied: h11>=0.8 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from uvicorn==0.24.0->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 12)) (0.16.0)
+Requirement already satisfied: distro<2,>=1.7.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from openai>=1.0.0->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 13)) (1.9.0)
+Requirement already satisfied: jiter<1,>=0.10.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from openai>=1.0.0->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 13)) (0.19.0)
+Requirement already satisfied: tqdm>4 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from openai>=1.0.0->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 13)) (4.70.1)
+Requirement already satisfied: MarkupSafe>=2.0 in c:\laragon\www\project-otomotif-visual3d\backend\.venv\lib\site-packages (from Mako->alembic==1.13.1->-r C:/laragon/www/Project-Otomotif-Visual3D/backend/requirements.txt (line 3)) (3.0.4)
+Downloading sqlalchemy-2.0.39-cp313-cp313-win_amd64.whl (2.1 MB)
+   ---------------------------------------- 2.1/2.1 MB 7.2 MB/s eta 0:00:00
+Installing collected packages: SQLAlchemy
+  Attempting uninstall: SQLAlchemy
+    Found existing installation: SQLAlchemy 2.0.23
+    Uninstalling SQLAlchemy-2.0.23:
+      Successfully uninstalled SQLAlchemy-2.0.23
+Successfully installed SQLAlchemy-2.0.39
+
+[notice] A new release of pip is available: 24.2 -> 26.3
+[notice] To update, run: C:\laragon\www\Project-Otomotif-Visual3D\backend\.venv\Scripts\python.exe -m pip install --upgrade pip
