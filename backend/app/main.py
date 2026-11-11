@@ -16,7 +16,7 @@ app.include_router(diagnosis_router)
 @app.on_event("startup")
 async def startup():
     """Initialize database on startup."""
-    await init_db()
+    init_db()
 
 
 @app.get("/health")

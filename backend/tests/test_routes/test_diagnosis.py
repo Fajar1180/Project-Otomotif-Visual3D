@@ -1,15 +1,14 @@
 """Integration tests for diagnosis endpoint."""
 import pytest
 from uuid import uuid4
-from httpx import AsyncClient
-from sqlalchemy.ext.asyncio import AsyncSession
+from httpx import ASGITransport, AsyncClient
 
 from app.main import app
 from models import Vehicle, Symptom, Diagnosis, SparePart
 
 
 @pytest.mark.asyncio
-async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
+async def test_analyze_diagnosis_happy_path(test_db_async):
     """Test successful diagnosis analysis."""
     # Seed test data
     symptom = Symptom(
@@ -35,7 +34,7 @@ async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
     test_db_async.commit()
 
     # Make request
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/api/v1/diagnosis/analyze",
             json={
@@ -59,7 +58,7 @@ async def test_analyze_diagnosis_happy_path(test_db_async: AsyncSession):
 @pytest.mark.asyncio
 async def test_analyze_diagnosis_validation_error():
     """Test validation error for short symptom."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/api/v1/diagnosis/analyze",
             json={
@@ -74,7 +73,7 @@ async def test_analyze_diagnosis_validation_error():
 @pytest.mark.asyncio
 async def test_analyze_diagnosis_year_validation():
     """Test validation error for invalid vehicle year."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/api/v1/diagnosis/analyze",
             json={
@@ -87,7 +86,7 @@ async def test_analyze_diagnosis_year_validation():
 
 
 @pytest.mark.asyncio
-async def test_analyze_diagnosis_with_vehicle_id(test_db_async: AsyncSession):
+async def test_analyze_diagnosis_with_vehicle_id(test_db_async):
     """Test diagnosis with saved vehicle ID."""
     from models import Vehicle
     
@@ -100,7 +99,7 @@ async def test_analyze_diagnosis_with_vehicle_id(test_db_async: AsyncSession):
     test_db_async.add(vehicle)
     test_db_async.commit()
 
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/api/v1/diagnosis/analyze",
             json={
@@ -117,7 +116,7 @@ async def test_analyze_diagnosis_with_vehicle_id(test_db_async: AsyncSession):
 @pytest.mark.asyncio
 async def test_diagnosis_response_structure():
     """Test response structure matches schema."""
-    async with AsyncClient(app=app, base_url="http://test") as client:
+    async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         response = await client.post(
             "/api/v1/diagnosis/analyze",
             json={
