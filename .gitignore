@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+
+# Logs & pip artifacts
+*.log
+=*
+
+# Office temp files
+~$*
+*.tmp
+
+# OS
+.DS_Store
+Thumbs.db
