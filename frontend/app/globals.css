@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  --foreground: #1f2937;
+  --background: #f9fafb;
+  --muted-foreground: #6b7280;
+  --accent: #10b981;
+  --border: #e5e7eb;
+  --card: #ffffff;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-[var(--background)] text-[var(--foreground)] transition-colors font-sans;
+}
+
+@layer components {
+  .container-app {
+    @apply max-w-7xl mx-auto px-4;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+
+  .btn-primary {
+    @apply bg-[var(--accent)] text-white hover:bg-green-600;
+  }
+
+  .btn-secondary {
+    @apply bg-[var(--card)] text-[var(--foreground)] border border-[var(--border)] hover:bg-gray-50;
+  }
+
+  .card {
+    @apply bg-[var(--card)] border border-[var(--border)] rounded-lg p-4 shadow-sm;
+  }
+}
