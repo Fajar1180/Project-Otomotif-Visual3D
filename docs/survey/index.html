@@ -1012,33 +1012,32 @@
         referrer: document.referrer || 'direct'
       };
 
+      // Backup lokal dulu: data user tidak boleh hilang walau jaringan/server gagal.
+      if (USE_LOCAL_STORAGE) {
+        const existing = JSON.parse(localStorage.getItem('ov3d_survey_responses') || '[]');
+        existing.push(payload);
+        localStorage.setItem('ov3d_survey_responses', JSON.stringify(existing));
+      }
+
       try {
         if (FORM_ENDPOINT && !FORM_ENDPOINT.includes('YOUR_GAS_DEPLOYMENT_ID')) {
+          // Google Apps Script tidak bisa mengirim header CORS dan tidak menjawab
+          // preflight OPTIONS. Simple request + no-cors = tanpa preflight; respons
+          // opaque (tidak terbaca), jadi status HTTP tidak bisa diperiksa di sini.
           await fetch(FORM_ENDPOINT, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'text/plain' },
             body: JSON.stringify(payload)
           });
-        } else if (USE_LOCAL_STORAGE) {
-          // Fallback: save to localStorage
-          const existing = JSON.parse(localStorage.getItem('ov3d_survey_responses') || '[]');
-          existing.push(payload);
-          localStorage.setItem('ov3d_survey_responses', JSON.stringify(existing));
-          console.log('Saved to localStorage (no endpoint configured)');
         }
         showSuccess();
       } catch (err) {
+        // Hanya sampai sini kalau request benar-benar tidak terkirim (offline/DNS).
         console.error('Submit error:', err);
-        if (USE_LOCAL_STORAGE) {
-          const existing = JSON.parse(localStorage.getItem('ov3d_survey_responses') || '[]');
-          existing.push(payload);
-          localStorage.setItem('ov3d_survey_responses', JSON.stringify(existing));
-          showSuccess();
-        } else {
-          alert('Gagal mengirim. Silakan coba lagi.');
-          btnSubmit.disabled = false;
-          btnSubmit.innerHTML = 'Kirim Survei <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>';
-        }
+        alert('Gagal mengirim karena koneksi. Jawaban Anda sudah disimpan di perangkat ini — silakan coba lagi saat online.');
+        btnSubmit.disabled = false;
+        btnSubmit.innerHTML = 'Kirim Survei <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>';
       }
     });
 
