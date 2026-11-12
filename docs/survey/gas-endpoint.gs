@@ -10,7 +10,10 @@
  * 5. Copy URL → paste ke index.html FORM_ENDPOINT
  */
 
-const SPREADSHEET_ID = 'YOUR_SPREADSHEET_ID_HERE'; // GANTI INI
+// Terima ID polos ATAU URL spreadsheet lengkap (paste dari address bar).
+// openById() menolak URL — selalu ekstrak 25+ char ID-nya.
+const SPREADSHEET_REF = 'YOUR_SPREADSHEET_ID_HERE'; // GANTI INI
+const SPREADSHEET_ID = (String(SPREADSHEET_REF).match(/[-\w]{25,}/) || [''])[0];
 const SHEET_NAME = 'Responses';
 
 function doPost(e) {
@@ -37,7 +40,9 @@ function doPost(e) {
 }
 
 function doGet(e) {
-  // Allow CORS preflight
+  // Health check saja. ContentService TIDAK bisa mengirim header CORS, dan Apps
+  // Script tidak menjawab preflight OPTIONS — itu sebabnya klien memakai
+  // `mode: 'no-cors'` + Content-Type text/plain (simple request, tanpa preflight).
   return ContentService.createTextOutput(JSON.stringify({ status: 'OK', message: 'Survey endpoint active' }))
     .setMimeType(ContentService.MimeType.JSON);
 }
