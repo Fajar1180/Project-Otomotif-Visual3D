@@ -12,7 +12,7 @@
 
 // Terima ID polos ATAU URL spreadsheet lengkap (paste dari address bar).
 // openById() menolak URL — selalu ekstrak 25+ char ID-nya.
-const SPREADSHEET_REF = 'YOUR_SPREADSHEET_ID_HERE'; // GANTI INI
+const SPREADSHEET_REF = '1ZT-1PkXqr5d0F1eSsJPt1BhlMHBI3vuHzvoaX28q0zc'; // spreadsheet survei
 const SPREADSHEET_ID = (String(SPREADSHEET_REF).match(/[-\w]{25,}/) || [''])[0];
 const SHEET_NAME = 'Responses';
 
