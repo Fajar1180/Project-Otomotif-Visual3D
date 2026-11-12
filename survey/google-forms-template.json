@@ -1,0 +1,374 @@
+{
+  "title": "Survei Validasi Produk: Otomotif Visual 3D — Platform AI Diagnosis & Modifikasi Motor",
+  "description": "Kami mengembangkan platform AI untuk membantu pemilik motor mendiagnosa kerusakan mandiri, visualisasi modifikasi 3D, dan menemukan bengkel terpercaya. Survei ini untuk memvalidasi kebutuhan dan keinginan bayar Anda. Waktu: ~5 menit. Data anonime.",
+  "settings": {
+    "collectEmail": true,
+    "limitOneResponse": true,
+    "showProgressBar": true,
+    "confirmationMessage": "Terima kasih! Jawaban Anda membantu kami membangun fitur yang tepat. Jika bersedia jadi early adopter MVP (dapat voucher Shopee Rp50k), kami akan hubungi via email/WhatsApp."
+  },
+  "sections": [
+    {
+      "id": "screening",
+      "title": "A. Screening & Demografi",
+      "questions": [
+        {
+          "id": "q_role",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Peran Anda saat ini (pilih yang paling mewakili):",
+          "options": [
+            "Pemilik bengkel (motor/mobil)",
+            "Mekanik/teknisi bengkel",
+            "Pemilik motor (pribadi)",
+            "Pemilik mobil (pribadi)",
+            "Penggemar modifikasi motor (DIY/hobi)",
+            "Lainnya"
+          ]
+        },
+        {
+          "id": "q_location",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Lokasi Anda:",
+          "options": [
+            "Bandung",
+            "Jabodetabek (Jakarta, Bogor, Depok, Tangerang, Bekasi)",
+            "Jawa Barat lainnya",
+            "Luar Jawa"
+          ]
+        },
+        {
+          "id": "q_motor_brand",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "Merek motor yang dimiliki/dibengkel (bisa pilih multiple):",
+          "options": [
+            "Honda",
+            "Yamaha",
+            "Suzuki",
+            "Kawasaki",
+            "Vespa",
+            "Lainnya"
+          ]
+        },
+        {
+          "id": "q_community",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "Apakah Anda bagian dari komunitas motor?",
+          "options": [
+            "Ya, aktif (Thailook, Bratstyle, Cafe Racer, dll)",
+            "Ya, tapi pasif",
+            "Tidak"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "problem_validation",
+      "title": "B. Validasi Masalah (Pain Points)",
+      "description": "Seberapa sering Anda mengalami hal berikut? (Skala 1 = Tidak pernah, 5 = Sangat sering)",
+      "questions": [
+        {
+          "id": "q_pain_diagnosis",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Kesulitan mendiagnosa kerusakan motor sendiri",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak pernah",
+          "highLabel": "Sangat sering"
+        },
+        {
+          "id": "q_pain_cost_transparency",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Tidak tahu estimasi biaya perbaikan sebelum ke bengkel",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak pernah",
+          "highLabel": "Sangat sering"
+        },
+        {
+          "id": "q_pain_dependency",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Ketergantungan pada bengkel (takut ditipu/mahal tidak transparan)",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak pernah",
+          "highLabel": "Sangat sering"
+        },
+        {
+          "id": "q_pain_visual_mod",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Kesulitan memvisualisasikan hasil modifikasi sebelum beli pasang",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak pernah",
+          "highLabel": "Sangat sering"
+        },
+        {
+          "id": "q_pain_wasted_trip",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Membuang waktu/biaya transport ke bengkel tapi cuma konsultasi ringan",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak pernah",
+          "highLabel": "Sangat sering"
+        }
+      ]
+    },
+    {
+      "id": "current_behavior",
+      "title": "C. Perilaku Saat Ini",
+      "questions": [
+        {
+          "id": "q_where_diagnosis",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Saat motor bermasalah, ke mana Anda biasanya pergi dulu?",
+          "options": [
+            "Langsung ke bengkel langganan",
+            "Cari di Google/YouTube (tutorial DIY)",
+            "Tanya di grup komunitas/WhatsApp",
+            "Pakai aplikasi bengkel online (GoBengkel, dll)",
+            "Coba perbaiki sendiri dulu",
+            "Lainnya"
+          ]
+        },
+        {
+          "id": "q_parts_buy",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Di beli suku cadang/aksesoris motor biasanya di mana?",
+          "options": [
+            "Bengkel resmi/dealer",
+            "Bengkel umum/lokal",
+            "Shopee/Tokopedia/Lazada",
+            "Toko fisik sparepart (ex: Cihampelas, Jalan Cibaduyut)",
+            "Grup komunitas/jual beli member",
+            "Lainnya"
+          ]
+        },
+        {
+          "id": "q_mod_interest",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Seberapa tertarik Anda memodifikasi motor?",
+          "options": [
+            "Sangat tertarik (sering modif)",
+            "Cukup tertarik (kadang modif ringan)",
+            "Tidak tertarik (standar pabrik)",
+            "Ingin tapi takut salah/berisiko"
+          ]
+        },
+        {
+          "id": "q_app_usage",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "Aplikasi otomotif apa yang pernah Anda pakai?",
+          "options": [
+            "GoBengkel / Bengkelin / Bengkelku",
+            "Shopee/Tokopedia (beli suku cadang)",
+            "Manual/Service Book digital",
+            "Komunitas WhatsApp/Telegram",
+            "Belum pernah pakai aplikasi otomotif",
+            "Lainnya"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "solution_validation",
+      "title": "D. Validasi Solusi & Fitur",
+      "description": "Seberapa berguna fitur berikut untuk Anda? (1 = Tidak berguna, 5 = Sangat berguna)",
+      "questions": [
+        {
+          "id": "q_feat_ai_diagnosis",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Diagnosis AI: ceritakan keluhan → dapat kesimpulan, tingkat keparahan (DIY_EASY/DIY_HARD/WORKSHOP_REQUIRED), langkah perbaikan, rekomendasi suku cadang",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak berguna",
+          "highLabel": "Sangat berguna"
+        },
+        {
+          "id": "q_feat_3d_config",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Konfigurator 3D: visualisasi motor 3D interaktif, ganti komponen (knalpot, body, ban, suspension) real-time, lihat preview sebelum beli",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak berguna",
+          "highLabel": "Sangat berguna"
+        },
+        {
+          "id": "q_feat_workshop_finder",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Pencari bengkel terdekat: filter rating, jam buka, kategori (mobil/motor), jarak, navigasi ke lokasi",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak berguna",
+          "highLabel": "Sangat berguna"
+        },
+        {
+          "id": "q_feat_shopee_link",
+          "type": "LINEAR_SCALE",
+          "required": true,
+          "title": "Link afiliasi Shopee otomatis di rekomendasi suku cadang (beli 1 klik, harga sama, kami dapat komisi kecil)",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak berguna",
+          "highLabel": "Sangat berguna"
+        },
+        {
+          "id": "q_feat_history",
+          "type": "LINEAR_SCALE",
+          "required": false,
+          "title": "Riwayat diagnosis & perbaikan (log digital untuk tracking kondisi motor)",
+          "low": 1,
+          "high": 5,
+          "lowLabel": "Tidak berguna",
+          "highLabel": "Sangut berguna"
+        }
+      ]
+    },
+    {
+      "id": "willingness_to_pay",
+      "title": "E. Keinginan Bayar (Pricing Validation)",
+      "description": "Model: Freemium. Fitur dasar gratis. Premium berbayar bulanan.",
+      "questions": [
+        {
+          "id": "q_wtp_bengkel_sub",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "[UNTUK PEMILIK BENGKEL] Berapa budget bulanan untuk langganan premium (fitur: analytics leads, prioritas tampil, API access, dashboard bengkel)?",
+          "options": [
+            "Tidak mau bayar (cuma fitur gratis)",
+            "Rp 50.000 – 100.000/bulan",
+            "Rp 100.000 – 200.000/bulan",
+            "Rp 200.000 – 300.000/bulan",
+            "Rp 300.000 – 500.000/bulan",
+            "> Rp 500.000/bulan (jika ROI jelas)"
+          ]
+        },
+        {
+          "id": "q_wtp_user_sub",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "[UNTUK PEMILIK MOTOR/USER] Berapa budget bulanan untuk langganan premium (diagnosis unlimited, history export, prioritas bengkel partner, no ads)?",
+          "options": [
+            "Tidak mau bayar (cuma fitur gratis)",
+            "Rp 15.000 – 25.000/bulan",
+            "Rp 25.000 – 50.000/bulan",
+            "Rp 50.000 – 75.000/bulan",
+            "Rp 75.000 – 100.000/bulan",
+            "> Rp 100.000/bulan"
+          ]
+        },
+        {
+          "id": "q_wtp_listing_fee",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "[UNTUK PEMILIK BENGKEL] Fee listing premium/bulanan untuk featured placement & lead terverifikasi (target >10k MAU):",
+          "options": [
+            "Tidak mau bayar",
+            "Rp 25.000 – 50.000/bulan",
+            "Rp 50.000 – 100.000/bulan",
+            "Rp 100.000 – 200.000/bulan",
+            "Revenue share % dari transaksi (bukan fee tetap)"
+          ]
+        },
+        {
+          "id": "q_payment_method",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "Metode pembayaran preferensi:",
+          "options": [
+            "Transfer bank / Virtual Account",
+            "E-wallet (GoPay, OVO, Dana, ShopeePay)",
+            "Kartu kredit/debit",
+            "Konvenien (Alfamart/Indomaret)",
+            "ShopeePay (karena sudah beli di Shopee)"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mvp_testing",
+      "title": "F. Rekrutmen Early Adopter MVP",
+      "description": "MVP Minggu 4–5: Diagnosis AI (Wizard of Oz — tim review manual sebelum kirim). Early adopter dapat voucher Shopee Rp50k.",
+      "questions": [
+        {
+          "id": "q_willing_mvp",
+          "type": "MULTIPLE_CHOICE",
+          "required": true,
+          "title": "Bersedia jadi early adopter MVP (test diagnosis AI 2–3 kali, isi feedback singkat)?",
+          "options": [
+            "Ya, sangat bersedia",
+            "Ya, tapi butuh info lebih dulu",
+            "Mungkin (tergantung jadwal)",
+            "Tidak"
+          ]
+        },
+        {
+          "id": "q_contact_wa",
+          "type": "TEXT",
+          "required": false,
+          "title": "Nomor WhatsApp (untuk grup early adopter & voucher):",
+          "validation": "Indonesia phone format (08xx/628xx)"
+        },
+        {
+          "id": "q_contact_email",
+          "type": "TEXT",
+          "required": true,
+          "title": "Email (untuk update produk & akses MVP):",
+          "validation": "Email format"
+        },
+        {
+          "id": "q_preferred_channel",
+          "type": "MULTIPLE_CHOICE",
+          "required": false,
+          "title": "Kanal komunikasi preferensi:",
+          "options": [
+            "WhatsApp Group",
+            "Telegram Group",
+            "Email newsletter",
+            "Discord",
+            "Instagram DM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "open_feedback",
+      "title": "G. Masukan Bebas",
+      "questions": [
+        {
+          "id": "q_feature_request",
+          "type": "PARAGRAPH_TEXT",
+          "required": false,
+          "title": "Fitur apa yang paling Anda butuhkan tapi belum ada di aplikasi otomotif existing?"
+        },
+        {
+          "id": "q_concern",
+          "type": "PARAGRAPH_TEXT",
+          "required": false,
+          "title": "Kecemasan/keberatan Anda soal diagnosis AI untuk motor (akurasi, privasi, dll)?"
+        },
+        {
+          "id": "q_referral",
+          "type": "PARAGRAPH_TEXT",
+          "required": false,
+          "title": "Kenal bengkel/komunitas/macan motor yang cocok jadi pilot? Tuliskan nama/kontak di sini."
+        }
+      ]
+    }
+  ]
+}
