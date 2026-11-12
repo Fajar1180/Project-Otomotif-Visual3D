@@ -16,26 +16,39 @@ const SPREADSHEET_REF = 'YOUR_SPREADSHEET_ID_HERE'; // GANTI INI
 const SPREADSHEET_ID = (String(SPREADSHEET_REF).match(/[-\w]{25,}/) || [''])[0];
 const SHEET_NAME = 'Responses';
 
+function jsonOut(obj) {
+  return ContentService.createTextOutput(JSON.stringify(obj))
+    .setMimeType(ContentService.MimeType.JSON);
+}
+
 function doPost(e) {
+  // e kosong = fungsi dijalankan manual dari editor (Run), bukan lewat HTTP.
+  // Tanpa guard ini yang muncul cuma TypeError 'reading postData' yang tidak
+  // memberi tahu apa pun. Untuk uji manual pakai testSubmit().
+  if (!e || !e.postData || !e.postData.contents) {
+    console.error('doPost dipanggil tanpa event HTTP (Run manual?). Pakai testSubmit() untuk uji manual.');
+    return jsonOut({
+      success: false,
+      error: 'No HTTP event. doPost harus dipanggil via POST, bukan Run manual di editor.'
+    });
+  }
+
   try {
     const data = JSON.parse(e.postData.contents);
 
     // Validasi basic
     if (!data || !data.q_contact_email) {
-      return ContentService.createTextOutput(JSON.stringify({ success: false, error: 'Missing required fields' }))
-        .setMimeType(ContentService.MimeType.JSON);
+      return jsonOut({ success: false, error: 'Missing required fields' });
     }
 
     const sheet = getOrCreateSheet();
     appendRow(sheet, data);
 
-    return ContentService.createTextOutput(JSON.stringify({ success: true }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return jsonOut({ success: true });
 
   } catch (err) {
     console.error('Survey submit error:', err);
-    return ContentService.createTextOutput(JSON.stringify({ success: false, error: err.toString() }))
-      .setMimeType(ContentService.MimeType.JSON);
+    return jsonOut({ success: false, error: err.toString() });
   }
 }
 
