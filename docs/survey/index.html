@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Survei Validasi Produk: Otomotif Visual 3D</title>
+  <meta name="description" content="Survei validasi platform AI diagnosis motor, visualisasi modifikasi 3D, dan pencari bengkel terpercaya">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f1a;
+      --bg-elevated: #111827;
+      --card: #1a2234;
+      --border: #2a3a52;
+      --fg: #e8edf5;
+      --muted: #8b9cc3;
+      --accent: #00d4a7;
+      --accent-hover: #00e8b8;
+      --accent-dim: rgba(0, 212, 167, 0.15);
+      --danger: #ff6b6b;
+      --warning: #ffd93d;
+      --success: #00d4a7;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --transition: 0.2s ease;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 24px 16px;
+    }
+
+    .survey-container {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .survey-header {
+      text-align: center;
+      padding: 32px 24px;
+      background: linear-gradient(135deg, var(--card) 0%, var(--bg-elevated) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .survey-header::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), #0099ff);
+    }
+
+    .survey-logo {
+      width: 56px;
+      height: 56px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--accent), #0099ff);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 24px;
+    }
+
+    .survey-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--fg);
+      margin-bottom: 8px;
+      line-height: 1.3;
+    }
+
+    .survey-subtitle {
+      color: var(--muted);
+      font-size: 1rem;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .survey-meta {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      margin-top: 16px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      flex-wrap: wrap;
+    }
+
+    .meta-item { display: flex; align-items: center; gap: 6px; }
+
+    /* Progress Bar */
+    .progress-wrapper {
+      margin-bottom: 24px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: var(--bg-elevated);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), #0099ff);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: var(--muted);
+    }
+
+    /* Sections */
+    .survey-section {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .section-header {
+      padding: 20px 24px;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-number {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-dim);
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 0.85rem;
+      margin-right: 12px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--fg);
+      display: inline;
+    }
+
+    .section-description {
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 6px;
+      line-height: 1.5;
+    }
+
+    .section-content {
+      padding: 24px;
+    }
+
+    /* Questions */
+    .question {
+      margin-bottom: 28px;
+    }
+
+    .question:last-child { margin-bottom: 0; }
+
+    .question-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: var(--fg);
+    }
+
+    .question-number {
+      color: var(--muted);
+      font-weight: 400;
+      flex-shrink: 0;
+    }
+
+    .required-badge {
+      color: var(--danger);
+      font-size: 0.75rem;
+      margin-left: 4px;
+    }
+
+    .question-help {
+      color: var(--muted);
+      font-size: 0.8rem;
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* Inputs */
+    .options-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 10px;
+    }
+
+    .option-card {
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--bg-elevated);
+    }
+
+    .option-card:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .option-card.selected {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      box-shadow: 0 0 0 2px var(--accent-dim);
+    }
+
+    .option-card input { display: none; }
+
+    .option-text { font-size: 0.9rem; color: var(--fg); }
+
+    /* Radio/Checkbox specific */
+    .option-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all var(--transition);
+      background: var(--bg-elevated);
+    }
+
+    .option-row:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .option-row.selected {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .option-row input[type="radio"],
+    .option-row input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    /* Scale */
+    .scale-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .scale-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--muted);
+      padding: 0 4px;
+    }
+
+    .scale-track {
+      display: flex;
+      gap: 8px;
+    }
+
+    .scale-option {
+      flex: 1;
+    }
+
+    .scale-btn {
+      width: 100%;
+      aspect-ratio: 1;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      color: var(--fg);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scale-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .scale-btn.selected {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    /* Text inputs */
+    .text-input,
+    .textarea-input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg-elevated);
+      color: var(--fg);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: all var(--transition);
+    }
+
+    .text-input:focus,
+    .textarea-input:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-dim);
+    }
+
+    .text-input::placeholder,
+    .textarea-input::placeholder {
+      color: var(--muted);
+    }
+
+    .textarea-input {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .char-count {
+      text-align: right;
+      font-size: 0.75rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: space-between;
+      padding: 24px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-elevated);
+      position: sticky;
+      bottom: 0;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: var(--radius-sm);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: all var(--transition);
+      border: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      background: var(--accent-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 16px rgba(0, 212, 167, 0.3);
+    }
+
+    .btn-primary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--fg);
+      border: 2px solid var(--border);
+    }
+
+    .btn-secondary:hover:not(:disabled) {
+      border-color: var(--muted);
+      background: var(--bg);
+    }
+
+    .btn-secondary:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Submit state */
+    .submit-success {
+      text-align: center;
+      padding: 48px 24px;
+    }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--success), #0099ff);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 36px;
+    }
+
+    .success-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .success-message {
+      color: var(--muted);
+      max-width: 400px;
+      margin: 0 auto 24px;
+    }
+
+    /* Validation */
+    .field-error {
+      border-color: var(--danger) !important;
+    }
+
+    .error-message {
+      color: var(--danger);
+      font-size: 0.75rem;
+      margin-top: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      body { padding: 16px 12px; }
+      .survey-title { font-size: 1.4rem; }
+      .section-content { padding: 20px 16px; }
+      .section-header { padding: 16px; }
+      .nav-buttons { padding: 16px; flex-direction: column-reverse; }
+      .btn { width: 100%; justify-content: center; }
+      .scale-track { gap: 4px; }
+      .scale-btn { font-size: 0.85rem; }
+      .options-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      * { transition: none !important; }
+    }
+
+    /* Focus visible */
+    .btn:focus-visible,
+    .option-row:focus-visible,
+    .option-card:focus-visible,
+    .scale-btn:focus-visible,
+    .text-input:focus-visible,
+    .textarea-input:focus-visible {
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="survey-container">
+    <!-- Header -->
+    <header class="survey-header">
+      <div class="survey-logo" aria-hidden="true">🏍️</div>
+      <h1 class="survey-title">Survei Validasi Produk: Otomotif Visual 3D</h1>
+      <p class="survey-subtitle">Platform AI diagnosis motor, visualisasi modifikasi 3D, & pencari bengkel terpercaya. Bantuan 5 menit Anda menentukan fitur yang kami bangun.</p>
+      <div class="survey-meta">
+        <span class="meta-item">⏱️ ~5 menit</span>
+        <span class="meta-item">🔒 Anonim</span>
+        <span class="meta-item">🎁 Voucher Shopee Rp50k untuk early adopter</span>
+      </div>
+    </header>
+
+    <!-- Progress -->
+    <div class="progress-wrapper" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Kemajuan survei">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text">
+        <span id="progressCurrent">Bagian 1 dari 7</span>
+        <span id="progressPercent">0%</span>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <form id="surveyForm" novalidate>
+      <!-- Sections will be injected here by JS -->
+    </form>
+
+    <!-- Navigation -->
+    <nav class="nav-buttons" id="navButtons" aria-label="Navigasi survei">
+      <button type="button" class="btn btn-secondary" id="btnPrev" disabled>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"></polyline></svg>
+        Sebelumnya
+      </button>
+      <div style="flex:1"></div>
+      <button type="button" class="btn btn-primary" id="btnNext">
+        Selanjutnya
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+      <button type="submit" class="btn btn-primary" id="btnSubmit" style="display:none" form="surveyForm">
+        Kirim Survei
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>
+      </button>
+    </nav>
+
+    <!-- Success State (hidden initially) -->
+    <div class="submit-success" id="successState" style="display:none" role="alert">
+      <div class="success-icon" aria-hidden="true">✓</div>
+      <h2 class="success-title">Terima Kasih!</h2>
+      <p class="success-message">Respons Anda telah terkirim. Data Anda membantu kami membangun <strong>Otomotif Visual 3D</strong> yang lebih relevan untuk pemilik motor & bengkel Indonesia.</p>
+      <p class="success-message" style="margin-top:16px; font-size:0.9rem;">Jika Anda bersedia jadi <strong>early adopter MVP</strong>, tim kami akan menghubungi via WhatsApp/email dalam 1–2 hari kerja untuk kirim voucher Shopee Rp50k & akses beta.</p>
+      <button type="button" class="btn btn-primary" onclick="resetSurvey()">Isi Lagi</button>
+    </div>
+  </div>
+
+  <!-- Survey Data (embedded for GitHub Pages static hosting) -->
+  <script>
+    const SURVEY_DATA = {
+      "title": "Survei Validasi Produk: Otomotif Visual 3D",
+      "sections": [
+        {
+          "id": "screening",
+          "title": "Screening & Demografi",
+          "description": "Pertanyaan awal untuk memahami profil Anda.",
+          "questions": [
+            { "id": "q_role", "type": "radio", "required": true, "title": "Peran Anda saat ini (pilih yang paling mewakili):", "options": ["Pemilik bengkel (motor/mobil)", "Mekanik/teknisi bengkel", "Pemilik motor (pribadi)", "Pemilik mobil (pribadi)", "Penggemar modifikasi motor (DIY/hobi)", "Lainnya"] },
+            { "id": "q_location", "type": "radio", "required": true, "title": "Lokasi Anda:", "options": ["Bandung", "Jabodetabek (Jakarta, Bogor, Depok, Tangerang, Bekasi)", "Jawa Barat lainnya", "Luar Jawa"] },
+            { "id": "q_motor_brand", "type": "checkbox", "required": false, "title": "Merek motor yang dimiliki/dibengkel (bisa pilih multiple):", "options": ["Honda", "Yamaha", "Suzuki", "Kawasaki", "Vespa", "Lainnya"] },
+            { "id": "q_community", "type": "radio", "required": false, "title": "Apakah Anda bagian dari komunitas motor?", "options": ["Ya, aktif (Thailook, Bratstyle, Cafe Racer, dll)", "Ya, tapi pasif", "Tidak"] }
+          ]
+        },
+        {
+          "id": "problem_validation",
+          "title": "Validasi Masalah (Pain Points)",
+          "description": "Seberapa sering Anda mengalami hal berikut? (Skala 1 = Tidak pernah, 5 = Sangat sering)",
+          "questions": [
+            { "id": "q_pain_diagnosis", "type": "scale", "required": true, "title": "Kesulitan mendiagnosa kerusakan motor sendiri", "lowLabel": "Tidak pernah", "highLabel": "Sangat sering", "min": 1, "max": 5 },
+            { "id": "q_pain_cost_transparency", "type": "scale", "required": true, "title": "Tidak tahu estimasi biaya perbaikan sebelum ke bengkel", "lowLabel": "Tidak pernah", "highLabel": "Sangat sering", "min": 1, "max": 5 },
+            { "id": "q_pain_dependency", "type": "scale", "required": true, "title": "Ketergantungan pada bengkel (takut ditipu/mahal tidak transparan)", "lowLabel": "Tidak pernah", "highLabel": "Sangat sering", "min": 1, "max": 5 },
+            { "id": "q_pain_visual_mod", "type": "scale", "required": true, "title": "Kesulitan memvisualisasikan hasil modifikasi sebelum beli pasang", "lowLabel": "Tidak pernah", "highLabel": "Sangat sering", "min": 1, "max": 5 },
+            { "id": "q_pain_wasted_trip", "type": "scale", "required": true, "title": "Membuang waktu/biaya transport ke bengkel tapi cuma konsultasi ringan", "lowLabel": "Tidak pernah", "highLabel": "Sangat sering", "min": 1, "max": 5 }
+          ]
+        },
+        {
+          "id": "current_behavior",
+          "title": "Perilaku Saat Ini",
+          "description": "Bagaimana cara Anda menangani motor bermasalah saat ini?",
+          "questions": [
+            { "id": "q_where_diagnosis", "type": "radio", "required": true, "title": "Saat motor bermasalah, ke mana Anda biasanya pergi dulu?", "options": ["Langsung ke bengkel langganan", "Cari di Google/YouTube (tutorial DIY)", "Tanya di grup komunitas/WhatsApp", "Pakai aplikasi bengkel online (GoBengkel, dll)", "Coba perbaiki sendiri dulu", "Lainnya"] },
+            { "id": "q_parts_buy", "type": "radio", "required": true, "title": "Di beli suku cadang/aksesoris motor biasanya di mana?", "options": ["Bengkel resmi/dealer", "Bengkel umum/lokal", "Shopee/Tokopedia/Lazada", "Toko fisik sparepart (ex: Cihampelas, Jalan Cibaduyut)", "Grup komunitas/jual beli member", "Lainnya"] },
+            { "id": "q_mod_interest", "type": "radio", "required": true, "title": "Seberapa tertarik Anda memodifikasi motor?", "options": ["Sangat tertarik (sering modif)", "Cukup tertarik (kadang modif ringan)", "Tidak tertarik (standar pabrik)", "Ingin tapi takut salah/berisiko"] },
+            { "id": "q_app_usage", "type": "checkbox", "required": false, "title": "Aplikasi otomotif apa yang pernah Anda pakai?", "options": ["GoBengkel / Bengkelin / Bengkelku", "Shopee/Tokopedia (beli suku cadang)", "Manual/Service Book digital", "Komunitas WhatsApp/Telegram", "Belum pernah pakai aplikasi otomotif", "Lainnya"] }
+          ]
+        },
+        {
+          "id": "solution_validation",
+          "title": "Validasi Solusi & Fitur",
+          "description": "Seberapa berguna fitur berikut untuk Anda? (1 = Tidak berguna, 5 = Sangat berguna)",
+          "questions": [
+            { "id": "q_feat_ai_diagnosis", "type": "scale", "required": true, "title": "Diagnosis AI: ceritakan keluhan → dapat kesimpulan, tingkat keparahan (DIY_EASY/DIY_HARD/WORKSHOP_REQUIRED), langkah perbaikan, rekomendasi suku cadang", "lowLabel": "Tidak berguna", "highLabel": "Sangat berguna", "min": 1, "max": 5 },
+            { "id": "q_feat_3d_config", "type": "scale", "required": true, "title": "Konfigurator 3D: visualisasi motor 3D interaktif, ganti komponen (knalpot, body, ban, suspension) real-time, lihat preview sebelum beli", "lowLabel": "Tidak berguna", "highLabel": "Sangat berguna", "min": 1, "max": 5 },
+            { "id": "q_feat_workshop_finder", "type": "scale", "required": true, "title": "Pencari bengkel terdekat: filter rating, jam buka, kategori (mobil/motor), jarak, navigasi ke lokasi", "lowLabel": "Tidak berguna", "highLabel": "Sangat berguna", "min": 1, "max": 5 },
+            { "id": "q_feat_shopee_link", "type": "scale", "required": true, "title": "Link afiliasi Shopee otomatis di rekomendasi suku cadang (beli 1 klik, harga sama, kami dapat komisi kecil)", "lowLabel": "Tidak berguna", "highLabel": "Sangat berguna", "min": 1, "max": 5 },
+            { "id": "q_feat_history", "type": "scale", "required": false, "title": "Riwayat diagnosis & perbaikan (log digital untuk tracking kondisi motor)", "lowLabel": "Tidak berguna", "highLabel": "Sangat berguna", "min": 1, "max": 5 }
+          ]
+        },
+        {
+          "id": "willingness_to_pay",
+          "title": "Keinginan Bayar (Pricing Validation)",
+          "description": "Model: Freemium. Fitur dasar gratis. Premium berbayar bulanan.",
+          "questions": [
+            { "id": "q_wtp_bengkel_sub", "type": "radio", "required": true, "title": "[UNTUK PEMILIK BENGKEL] Berapa budget bulanan untuk langganan premium (fitur: analytics leads, prioritas tampil, API access, dashboard bengkel)?", "options": ["Tidak mau bayar (cuma fitur gratis)", "Rp 50.000 – 100.000/bulan", "Rp 100.000 – 200.000/bulan", "Rp 200.000 – 300.000/bulan", "Rp 300.000 – 500.000/bulan", "> Rp 500.000/bulan (jika ROI jelas)"] },
+            { "id": "q_wtp_user_sub", "type": "radio", "required": true, "title": "[UNTUK PEMILIK MOTOR/USER] Berapa budget bulanan untuk langganan premium (diagnosis unlimited, history export, prioritas bengkel partner, no ads)?", "options": ["Tidak mau bayar (cuma fitur gratis)", "Rp 15.000 – 25.000/bulan", "Rp 25.000 – 50.000/bulan", "Rp 50.000 – 75.000/bulan", "Rp 75.000 – 100.000/bulan", "> Rp 100.000/bulan"] },
+            { "id": "q_wtp_listing_fee", "type": "radio", "required": false, "title": "[UNTUK PEMILIK BENGKEL] Fee listing premium/bulanan untuk featured placement & lead terverifikasi (target >10k MAU):", "options": ["Tidak mau bayar", "Rp 25.000 – 50.000/bulan", "Rp 50.000 – 100.000/bulan", "Rp 100.000 – 200.000/bulan", "Revenue share % dari transaksi (bukan fee tetap)"] },
+            { "id": "q_payment_method", "type": "checkbox", "required": false, "title": "Metode pembayaran preferensi:", "options": ["Transfer bank / Virtual Account", "E-wallet (GoPay, OVO, Dana, ShopeePay)", "Kartu kredit/debit", "Konvenien (Alfamart/Indomaret)", "ShopeePay (karena sudah beli di Shopee)"] }
+          ]
+        },
+        {
+          "id": "mvp_testing",
+          "title": "Rekrutmen Early Adopter MVP",
+          "description": "MVP Minggu 4–5: Diagnosis AI (Wizard of Oz — tim review manual sebelum kirim). Early adopter dapat voucher Shopee Rp50k.",
+          "questions": [
+            { "id": "q_willing_mvp", "type": "radio", "required": true, "title": "Bersedia jadi early adopter MVP (test diagnosis AI 2–3 kali, isi feedback singkat)?", "options": ["Ya, sangat bersedia", "Ya, tapi butuh info lebih dulu", "Mungkin (tergantung jadwal)", "Tidak"] },
+            { "id": "q_contact_wa", "type": "text", "required": false, "title": "Nomor WhatsApp (untuk grup early adopter & voucher):", "placeholder": "08xx-xxxx-xxxx atau 628xx-xxxx-xxxx", "pattern": "^(\\+62|62|0)8[1-9][0-9]{7,10}$" },
+            { "id": "q_contact_email", "type": "email", "required": true, "title": "Email (untuk update produk & akses MVP):", "placeholder": "nama@domain.com" },
+            { "id": "q_preferred_channel", "type": "checkbox", "required": false, "title": "Kanal komunikasi preferensi:", "options": ["WhatsApp Group", "Telegram Group", "Email newsletter", "Discord", "Instagram DM"] }
+          ]
+        },
+        {
+          "id": "open_feedback",
+          "title": "Masukan Bebas",
+          "description": "Saran, kekhawatiran, atau rekomendasi komunitas/bengkel untuk pilot.",
+          "questions": [
+            { "id": "q_feature_request", "type": "textarea", "required": false, "title": "Fitur apa yang paling Anda butuhkan tapi belum ada di aplikasi otomotif existing?", "placeholder": "Contoh: Jadwal servis otomatis, estimasi biaya real-time, komunitas tanya jawab mekanik..." },
+            { "id": "q_concern", "type": "textarea", "required": false, "title": "Kecemasan/keberatan Anda soal diagnosis AI untuk motor (akurasi, privasi, dll)?", "placeholder": "Contoh: Takut AI salah diagnosis, data pribadi bocor, tidak bisa tanya langsung ke mekanik..." },
+            { "id": "q_referral", "type": "textarea", "required": false, "title": "Kenal bengkel/komunitas/macan motor yang cocok jadi pilot? Tuliskan nama/kontak di sini.", "placeholder": "Nama bengkel/komunitas, lokasi, kontak person (jika ada)..." }
+          ]
+        }
+      ]
+    };
+
+    // Configuration
+    const FORM_ENDPOINT = 'https://script.google.com/macros/s/YOUR_GAS_DEPLOYMENT_ID/exec'; // Ganti dengan Google Apps Script URL
+    const USE_LOCAL_STORAGE = true; // Fallback if no endpoint
+
+    // State
+    let currentSection = 0;
+    const responses = {};
+    let touchedFields = new Set();
+
+    // DOM Elements
+    const form = document.getElementById('surveyForm');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+    const btnSubmit = document.getElementById('btnSubmit');
+    const progressFill = document.getElementById('progressFill');
+    const progressCurrent = document.getElementById('progressCurrent');
+    const progressPercent = document.getElementById('progressPercent');
+    const successState = document.getElementById('successState');
+    const navButtons = document.getElementById('navButtons');
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSection(currentSection);
+      updateProgress();
+      updateNav();
+    });
+
+    // Render Section
+    function renderSection(index) {
+      const section = SURVEY_DATA.sections[index];
+      form.innerHTML = '';
+
+      section.questions.forEach((q, qIndex) => {
+        const questionEl = createQuestionElement(q, index, qIndex);
+        form.appendChild(questionEl);
+      });
+
+      // Restore answers from responses
+      restoreAnswers();
+      attachListeners();
+    }
+
+    // Create Question Element
+    function createQuestionElement(q, sectionIdx, qIndex) {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.dataset.qid = q.id;
+      div.dataset.required = q.required;
+
+      let inputHtml = '';
+
+      switch (q.type) {
+        case 'radio':
+          inputHtml = `<div class="options-grid" role="radiogroup" aria-label="${escapeHtml(q.title)}">${q.options.map((opt, i) => `
+            <label class="option-card" tabindex="0" data-value="${escapeHtml(opt)}">
+              <input type="radio" name="${q.id}" value="${escapeHtml(opt)}" ${q.required ? 'required' : ''} aria-label="${escapeHtml(opt)}">
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </label>
+          `).join('')}</div>`;
+          break;
+
+        case 'checkbox':
+          inputHtml = `<div class="options-grid" role="group" aria-label="${escapeHtml(q.title)}">${q.options.map((opt, i) => `
+            <label class="option-card" tabindex="0" data-value="${escapeHtml(opt)}">
+              <input type="checkbox" name="${q.id}" value="${escapeHtml(opt)}" aria-label="${escapeHtml(opt)}">
+              <span class="option-text">${escapeHtml(opt)}</span>
+            </label>
+          `).join('')}</div>`;
+          break;
+
+        case 'scale':
+          inputHtml = `
+            <div class="scale-container" role="radiogroup" aria-label="${escapeHtml(q.title)}">
+              <div class="scale-labels">
+                <span>${escapeHtml(q.lowLabel)}</span>
+                <span>${escapeHtml(q.highLabel)}</span>
+              </div>
+              <div class="scale-track">
+                ${Array.from({length: q.max - q.min + 1}, (_, i) => q.min + i).map(val => `
+                  <div class="scale-option">
+                    <button type="button" class="scale-btn" data-value="${val}" aria-label="${val}: ${val === q.min ? q.lowLabel : val === q.max ? q.highLabel : ''}">${val}</button>
+                  </div>
+                `).join('')}
+              </div>
+              <input type="hidden" name="${q.id}" ${q.required ? 'required' : ''}>
+            </div>`;
+          break;
+
+        case 'text':
+        case 'email':
+          inputHtml = `
+            <input type="${q.type}" name="${q.id}" class="text-input" placeholder="${escapeHtml(q.placeholder || '')}" ${q.pattern ? `pattern="${q.pattern}"` : ''} ${q.required ? 'required' : ''} autocomplete="${q.type === 'email' ? 'email' : 'tel'}">
+            ${q.pattern ? `<div class="error-message" style="display:none"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> Format tidak valid</div>` : ''}`;
+          break;
+
+        case 'textarea':
+          inputHtml = `
+            <textarea name="${q.id}" class="textarea-input" placeholder="${escapeHtml(q.placeholder || '')}" ${q.required ? 'required' : ''}></textarea>
+            <div class="char-count"><span class="current-len">0</span> / 1000 karakter</div>`;
+          break;
+      }
+
+      div.innerHTML = `
+        <label class="question-label">
+          <span class="question-number">Q${sectionIdx * 10 + qIndex + 1}.</span>
+          <span>${escapeHtml(q.title)}${q.required ? ' <span class="required-badge" aria-hidden="true">*</span>' : ''}</span>
+        </label>
+        ${q.description ? `<div class="question-help">${escapeHtml(q.description)}</div>` : ''}
+        ${inputHtml}
+        <div class="error-message" style="display:none" aria-live="polite"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg> Pertanyaan ini wajib diisi</div>
+      `;
+
+      return div;
+    }
+
+    // Escape HTML - safe because SURVEY_DATA is hardcoded trusted content, not user input
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Attach Event Listeners
+    function attachListeners() {
+      // Option cards (radio/checkbox)
+      document.querySelectorAll('.option-card').forEach(card => {
+        card.addEventListener('click', () => handleOptionCard(card));
+        card.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleOptionCard(card); }
+        });
+      });
+
+      // Scale buttons
+      document.querySelectorAll('.scale-btn').forEach(btn => {
+        btn.addEventListener('click', () => handleScale(btn));
+        btn.addEventListener('keydown', e => {
+          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleScale(btn); }
+        });
+      });
+
+      // Text inputs
+      document.querySelectorAll('.text-input').forEach(input => {
+        input.addEventListener('input', () => handleTextInput(input));
+        input.addEventListener('blur', () => validateField(input));
+      });
+
+      // Textarea
+      document.querySelectorAll('.textarea-input').forEach(ta => {
+        ta.addEventListener('input', () => handleTextarea(ta));
+        ta.addEventListener('blur', () => validateField(ta));
+      });
+    }
+
+    // Handlers
+    function handleOptionCard(card) {
+      const input = card.querySelector('input');
+      const name = input.name;
+      const isRadio = input.type === 'radio';
+
+      if (isRadio) {
+        document.querySelectorAll(`.option-card input[name="${name}"]`).forEach(i => {
+          i.closest('.option-card').classList.remove('selected');
+          i.checked = false;
+        });
+      }
+
+      input.checked = !input.checked;
+      card.classList.toggle('selected', input.checked);
+
+      // Update hidden input for scale
+      saveResponse(name, isRadio ? input.value : getCheckboxValues(name));
+      touchedFields.add(name);
+      validateField(card);
+    }
+
+    function getCheckboxValues(name) {
+      return Array.from(document.querySelectorAll(`input[name="${name}"]:checked`)).map(i => i.value);
+    }
+
+    function handleScale(btn) {
+      const container = btn.closest('.scale-container');
+      const hiddenInput = container.querySelector('input[type="hidden"]');
+      const value = btn.dataset.value;
+
+      container.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      hiddenInput.value = value;
+
+      saveResponse(hiddenInput.name, value);
+      touchedFields.add(hiddenInput.name);
+      validateField(btn);
+    }
+
+    function handleTextInput(input) {
+      saveResponse(input.name, input.value);
+      updateCharCount(input);
+    }
+
+    function handleTextarea(ta) {
+      saveResponse(ta.name, ta.value);
+      updateCharCount(ta);
+    }
+
+    function updateCharCount(el) {
+      const countEl = el.parentElement.querySelector('.current-len');
+      if (countEl) countEl.textContent = el.value.length;
+    }
+
+    function saveResponse(key, value) {
+      responses[key] = value;
+    }
+
+    function restoreAnswers() {
+      Object.entries(responses).forEach(([key, value]) => {
+        const input = form.querySelector(`[name="${key}"]`);
+        if (!input) return;
+
+        if (input.type === 'radio') {
+          const card = form.querySelector(`.option-card input[name="${key}"][value="${value}"]`);
+          if (card) { card.checked = true; card.closest('.option-card').classList.add('selected'); }
+        } else if (input.type === 'checkbox') {
+          if (Array.isArray(value)) {
+            value.forEach(v => {
+              const card = form.querySelector(`.option-card input[name="${key}"][value="${v}"]`);
+              if (card) { card.checked = true; card.closest('.option-card').classList.add('selected'); }
+            });
+          }
+        } else if (input.tagName === 'BUTTON' || input.classList.contains('scale-btn')) {
+          // scale handled via hidden input
+          const hidden = form.querySelector(`input[type="hidden"][name="${key}"]`);
+          if (hidden) hidden.value = value;
+          const btn = form.querySelector(`.scale-btn[data-value="${value}"]`);
+          if (btn) btn.classList.add('selected');
+        } else {
+          input.value = value;
+          updateCharCount(input);
+        }
+      });
+    }
+
+    // Validation
+    function validateField(el) {
+      const qid = el.dataset?.qid || el.name || el.closest('.question')?.dataset?.qid;
+      const questionEl = form.querySelector(`.question[data-qid="${qid}"]`);
+      if (!questionEl) return true;
+
+      const required = questionEl.dataset.required === 'true';
+      if (!required) { clearError(questionEl); return true; }
+
+      let isValid = false;
+      const firstInput = questionEl.querySelector('input, textarea, button.scale-btn');
+
+      if (firstInput?.type === 'radio') {
+        isValid = questionEl.querySelector('input[type="radio"]:checked') !== null;
+      } else if (firstInput?.type === 'checkbox') {
+        isValid = questionEl.querySelector('input[type="checkbox"]:checked') !== null;
+      } else if (firstInput?.classList.contains('scale-btn')) {
+        isValid = questionEl.querySelector('input[type="hidden"]').value !== '';
+      } else if (firstInput?.tagName === 'TEXTAREA' || firstInput?.type === 'text' || firstInput?.type === 'email') {
+        isValid = firstInput.value.trim().length > 0;
+        if (firstInput.type === 'email' && isValid) {
+          isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(firstInput.value);
+        }
+        if (firstInput.pattern && isValid) {
+          isValid = new RegExp(firstInput.pattern).test(firstInput.value);
+        }
+      }
+
+      if (isValid || !touchedFields.has(qid)) {
+        clearError(questionEl);
+      } else {
+        showError(questionEl);
+      }
+
+      return isValid;
+    }
+
+    function showError(questionEl) {
+      questionEl.classList.add('has-error');
+      const errorMsg = questionEl.querySelector('.error-message:last-child');
+      if (errorMsg) errorMsg.style.display = 'flex';
+      const inputs = questionEl.querySelectorAll('input, textarea, .scale-btn, .option-card');
+      inputs.forEach(i => i.classList.add('field-error'));
+    }
+
+    function clearError(questionEl) {
+      questionEl.classList.remove('has-error');
+      const errorMsg = questionEl.querySelector('.error-message:last-child');
+      if (errorMsg) errorMsg.style.display = 'none';
+      const inputs = questionEl.querySelectorAll('input, textarea, .scale-btn, .option-card');
+      inputs.forEach(i => i.classList.remove('field-error'));
+    }
+
+    function validateCurrentSection() {
+      const questions = form.querySelectorAll('.question');
+      let allValid = true;
+      questions.forEach(q => {
+        const qid = q.dataset.qid;
+        touchedFields.add(qid); // Mark all as touched on navigation
+        if (!validateField(q)) allValid = false;
+      });
+      return allValid;
+    }
+
+    // Navigation
+    function updateNav() {
+      const isLast = currentSection === SURVEY_DATA.sections.length - 1;
+      btnPrev.disabled = currentSection === 0;
+      btnNext.style.display = isLast ? 'none' : 'inline-flex';
+      btnSubmit.style.display = isLast ? 'inline-flex' : 'none';
+    }
+
+    function updateProgress() {
+      const total = SURVEY_DATA.sections.length;
+      const pct = Math.round(((currentSection + 1) / total) * 100);
+      progressFill.style.width = `${pct}%`;
+      progressCurrent.textContent = `Bagian ${currentSection + 1} dari ${total}`;
+      progressPercent.textContent = `${pct}%`;
+      document.querySelector('.progress-wrapper').setAttribute('aria-valuenow', pct);
+    }
+
+    function goNext() {
+      if (!validateCurrentSection()) {
+        // Scroll to first error
+        const firstError = form.querySelector('.has-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+      if (currentSection < SURVEY_DATA.sections.length - 1) {
+        currentSection++;
+        renderSection(currentSection);
+        updateProgress();
+        updateNav();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    function goPrev() {
+      if (currentSection > 0) {
+        currentSection--;
+        renderSection(currentSection);
+        updateProgress();
+        updateNav();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // Submit
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!validateCurrentSection()) {
+        const firstError = form.querySelector('.has-error');
+        if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
+
+      btnSubmit.disabled = true;
+      btnSubmit.innerHTML = '<svg class="spinner" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation:spin 1s linear infinite"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle><path d="M12 2a10 10 0 0 1 10 10" stroke-opacity="1" stroke-linecap="round"></path></svg> Mengirim...';
+      if (!document.getElementById('spinner-style')) {
+        const style = document.createElement('style');
+        style.id = 'spinner-style';
+        style.textContent = '@keyframes spin { to { transform: rotate(360deg); } } .spinner { animation: spin 1s linear infinite; }';
+        document.head.appendChild(style);
+      }
+
+      const payload = {
+        ...responses,
+        submitted_at: new Date().toISOString(),
+        user_agent: navigator.userAgent,
+        referrer: document.referrer || 'direct'
+      };
+
+      try {
+        if (FORM_ENDPOINT && !FORM_ENDPOINT.includes('YOUR_GAS_DEPLOYMENT_ID')) {
+          await fetch(FORM_ENDPOINT, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+          });
+        } else if (USE_LOCAL_STORAGE) {
+          // Fallback: save to localStorage
+          const existing = JSON.parse(localStorage.getItem('ov3d_survey_responses') || '[]');
+          existing.push(payload);
+          localStorage.setItem('ov3d_survey_responses', JSON.stringify(existing));
+          console.log('Saved to localStorage (no endpoint configured)');
+        }
+        showSuccess();
+      } catch (err) {
+        console.error('Submit error:', err);
+        if (USE_LOCAL_STORAGE) {
+          const existing = JSON.parse(localStorage.getItem('ov3d_survey_responses') || '[]');
+          existing.push(payload);
+          localStorage.setItem('ov3d_survey_responses', JSON.stringify(existing));
+          showSuccess();
+        } else {
+          alert('Gagal mengirim. Silakan coba lagi.');
+          btnSubmit.disabled = false;
+          btnSubmit.innerHTML = 'Kirim Survei <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"></path><path d="M22 2L15 22L11 13L2 9L22 2Z"></path></svg>';
+        }
+      }
+    });
+
+    function showSuccess() {
+      form.style.display = 'none';
+      navButtons.style.display = 'none';
+      document.querySelector('.progress-wrapper').style.display = 'none';
+      successState.style.display = 'block';
+    }
+
+    function resetSurvey() {
+      Object.keys(responses).forEach(k => delete responses[k]);
+      touchedFields.clear();
+      currentSection = 0;
+      form.style.display = 'block';
+      navButtons.style.display = 'flex';
+      document.querySelector('.progress-wrapper').style.display = 'block';
+      successState.style.display = 'none';
+      renderSection(0);
+      updateProgress();
+      updateNav();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // Button handlers
+    btnNext.addEventListener('click', goNext);
+    btnPrev.addEventListener('click', goPrev);
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && e.target.tagName !== 'TEXTAREA' && e.target.tagName !== 'INPUT' && !e.target.classList.contains('btn')) {
+        if (btnNext.style.display !== 'none') goNext();
+      }
+    });
+  </script>
+</body>
+</html>
