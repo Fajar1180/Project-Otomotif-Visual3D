@@ -1,8 +1,18 @@
-'use client'
+'use client';
 
-import Link from 'next/link'
+import Link from 'next/link';
+import { useAuthStore } from '@/app/store/auth';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
+  const { user, logout, isAuthenticated } = useAuthStore();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    logout();
+    router.push('/login');
+  };
+
   return (
     <nav className="bg-[var(--card)] border-b border-[var(--border)] sticky top-0 z-50">
       <div className="container-app flex items-center justify-between h-16">
@@ -29,8 +39,37 @@ export default function Navbar() {
           </Link>
         </div>
 
-        <button className="btn btn-primary">Sign In</button>
+        <div className="flex items-center gap-3">
+          {isAuthenticated ? (
+            <>
+              <span className="text-sm text-[var(--muted-foreground)]">
+                {user?.email}
+              </span>
+              <button
+                onClick={handleLogout}
+                className="text-sm font-medium text-red-500 hover:underline"
+              >
+                Keluar
+              </button>
+            </>
+          ) : (
+            <>
+              <Link
+                href="/login"
+                className="text-sm font-medium hover:text-[var(--accent)]"
+              >
+                Masuk
+              </Link>
+              <Link
+                href="/register"
+                className="text-sm bg-[var(--accent)] text-white px-3 py-1 rounded hover:opacity-90"
+              >
+                Daftar
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </nav>
-  )
+  );
 }
