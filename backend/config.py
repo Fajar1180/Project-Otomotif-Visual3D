@@ -24,5 +24,9 @@ class Settings(BaseSettings):
     jwt_secret: str = Field(default="dev-secret-change-me", description="HS256 signing key")
     jwt_expire_minutes: int = Field(default=60, description="Access token lifetime in minutes")
 
+    # Celery / Redis (track A infra)
+    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis broker/backend URL")
+    celery_task_always_eager: bool = Field(default=False, description="Run Celery tasks eagerly (tests/local without worker)")
+
 
 settings = Settings()

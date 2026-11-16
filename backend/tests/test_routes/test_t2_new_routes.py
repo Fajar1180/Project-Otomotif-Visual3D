@@ -105,7 +105,7 @@ async def test_3d(test_db_async):
 
         r = await client.get(f"/api/v1/3d/status/{task_id}")
         assert r.status_code == 200
-        assert r.json()["status"] == "completed"
+        assert r.json()["status"].lower() == "completed"
         assert r.json()["task_id"] == task_id
 
         r = await client.get("/api/v1/3d/status/nope-task")

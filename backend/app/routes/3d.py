@@ -13,6 +13,9 @@ from uuid import uuid4
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel, Field
 
+from app.celery_app import celery_app
+from app.services.task_store import task_store
+
 router = APIRouter(prefix="/api/v1/3d", tags=["3d"])
 
 
@@ -51,11 +54,25 @@ class ModifyRequest(BaseModel):
 
 @router.post("/generate", status_code=status.HTTP_202_ACCEPTED)
 def generate(payload: GenerateRequest) -> dict:
-    """Queue a (stub) 3D reconstruction task."""
+    """Queue a (stub) 3D reconstruction task via Celery."""
     if payload.images and len(payload.images) > 4:
         raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Maksimal 4 foto")
+
+    record = task_store.create()
+    image_urls = payload.images or []
+
+    if celery_app.conf.task_always_eager:
+        from app.tasks.three_d import generate_3d
+
+        generate_3d.apply(args=[record.task_id, image_urls])
+    else:
+        celery_app.send_task(
+            "app.tasks.three_d.generate_3d",
+            args=[record.task_id, image_urls],
+        )
+
     return {
-        "task_id": _encode_task(payload.vehicle_brand, payload.vehicle_model),
+        "task_id": record.task_id,
         "status": "processing",
         "message": "Konstruksi 3D berjalan di background",
         "estimated_time_seconds": 120,
@@ -64,15 +81,17 @@ def generate(payload: GenerateRequest) -> dict:
 
 @router.get("/status/{task_id}")
 def task_status(task_id: str) -> dict:
-    """Report the (stub) status of a generate task."""
-    info = _decode_task(task_id)
-    slug = f"{info['brand']}-{info['model']}".lower().replace(" ", "-")
+    """Report the status of a generate task."""
+    record = task_store.get(task_id)
+    if not record:
+        raise HTTPException(status.HTTP_404_NOT_FOUND, "Task tidak ditemukan")
+
     return {
-        "task_id": task_id,
-        "status": "completed",
-        "mesh_url": f"https://cdn.otomotif-ai.com/meshes/{slug}.glb",
-        "texture_url": f"https://cdn.otomotif-ai.com/textures/{slug}.png",
-        "metadata": {"vertices": 45000, "faces": 90000, "texture_resolution": "1024x1024"},
+        "task_id": record.task_id,
+        "status": record.status,
+        "mesh_url": record.mesh_url,
+        "texture_url": record.texture_url,
+        "error": record.error,
     }
 
 
