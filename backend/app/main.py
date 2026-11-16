@@ -12,6 +12,7 @@ from app.routes.auth import router as auth_router
 from app.routes.diagnosis import router as diagnosis_router
 from app.routes.vehicles import router as vehicles_router
 from app.routes.workshops import router as workshops_router
+from app.routes.shopee import router as shopee_router  # Issue #6: Shopee Affiliate
 import importlib
 
 three_d_mod = importlib.import_module("app.routes.3d")
@@ -28,6 +29,7 @@ app.include_router(diagnosis_router)
 app.include_router(vehicles_router)
 app.include_router(workshops_router)
 app.include_router(three_d_mod.router)
+app.include_router(shopee_router)  # Issue #6: Shopee Affiliate
 
 
 # ---------------------------------------------------------------------------

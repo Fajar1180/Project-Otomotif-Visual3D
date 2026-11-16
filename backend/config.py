@@ -1,32 +1,52 @@
-"""Database and application configuration."""
+"""Database and application configuration.
+Uses stdlib-only approach: os.getenv + fallback values.
+No pydantic_settings dependency.
+"""
+
+from __future__ import annotations
 import os
-from pydantic import Field, ConfigDict
-from pydantic_settings import BaseSettings
+from typing import Final
+
+# Build paths inside project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.abspath(os.path.dirname(__file__))
+
+# === App settings ===
+DEBUG: bool = os.getenv("DEBUG", "False").lower() in ("1", "true", "yes")
+ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
+
+# === Auth ===
+JWT_SECRET: Final[str] = os.getenv("JWT_SECRET", "dev-secret-change-me")
+JWT_EXPIRE_MINUTES: int = int(os.getenv("JWT_EXPIRE_MINUTES", "60"))
+
+# === Database ===
+DATABASE_URL: str = os.getenv(
+    "DATABASE_URL",
+    "sqlite:///:memory:",
+)
+
+# === Redis / Celery ===
+REDIS_URL: str = os.getenv(
+    "REDIS_URL",
+    "redis://localhost:6379/0",
+)
+
+# === Shopee ===
+SHOPEE_APP_ID: str = os.getenv("SHOPEE_APP_ID", "")
+SHOPEE_APP_KEY: str = os.getenv("SHOPEE_APP_KEY", "")
+SHOPEE_APP_SECRET: str = os.getenv("SHOPEE_APP_SECRET", "")
 
 
-class Settings(BaseSettings):
-    """Application settings from environment."""
-    
-    model_config = ConfigDict(env_file=".env", case_sensitive=False)
-
-    # Database
-    database_url: str = Field(
-        default="sqlite:///:memory:",
-        description="Database connection string (SQLite or PostgreSQL)"
-    )
-    
-    # App
-    debug: bool = Field(default=False, description="Debug mode")
-    environment: str = Field(default="development", description="Environment name")
-    openai_api_key: str = Field(default="", description="OpenAI API key")
-
-    # Auth (override JWT_SECRET in production)
-    jwt_secret: str = Field(default="dev-secret-change-me", description="HS256 signing key")
-    jwt_expire_minutes: int = Field(default=60, description="Access token lifetime in minutes")
-
-    # Celery / Redis (track A infra)
-    redis_url: str = Field(default="redis://localhost:6379/0", description="Redis broker/backend URL")
-    celery_task_always_eager: bool = Field(default=False, description="Run Celery tasks eagerly (tests/local without worker)")
-
-
-settings = Settings()
+# Namespace so `from config import settings` works without pydantic_settings
+class settings:  # ponytail: namespace class mirrors module-level vars; no pydantic_settings
+    """Configuration namespace — stdlib-only, mirrors the module-level vars."""
+    DEBUG = DEBUG
+    ENVIRONMENT = ENVIRONMENT
+    JWT_SECRET = JWT_SECRET
+    JWT_EXPIRE_MINUTES = JWT_EXPIRE_MINUTES
+    DATABASE_URL = DATABASE_URL
+    database_url = DATABASE_URL
+    redis_url = REDIS_URL
+    SHOPEE_APP_ID = SHOPEE_APP_ID
+    SHOPEE_APP_KEY = SHOPEE_APP_KEY
+    SHOPEE_APP_SECRET = SHOPEE_APP_SECRET
+    celery_task_always_eager = False

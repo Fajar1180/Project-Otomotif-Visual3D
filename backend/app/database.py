@@ -20,7 +20,7 @@ from models import Base  # Export Base for use in tests/routes
 # StaticPool + check_same_thread=False.  For PostgreSQL we rely on the
 # DSN from settings (default: SQLite in-memory for CI/tests).
 # ---------------------------------------------------------------------------
-if settings.database_url.startswith("postgresql"):
+if settings.DATABASE_URL.startswith("postgresql"):
     _engine = create_engine(
         settings.database_url,
         future=True,

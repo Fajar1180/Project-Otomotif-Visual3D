@@ -1,6 +1,10 @@
 'use client'
 
+import { ShopeeSearchPage } from '@/app/components/ShopeeSearchPage'
+import { ThreeProductCarousel } from '@/app/components/ThreeProductCarousel'
+
 export default function Dashboard() {
+
   return (
     <div className="space-y-8">
       <div>
@@ -9,6 +13,8 @@ export default function Dashboard() {
           AI-powered vehicle diagnostics, 3D customization, and workshop finder
         </p>
       </div>
+
+      <ShopeeSearchPage />
 
       <div className="grid grid-cols-3 gap-6">
         <div className="card">
@@ -53,6 +59,8 @@ export default function Dashboard() {
           </a>
         </div>
       </div>
+
+      <ThreeProductCarousel />
 
       <div className="card bg-gradient-to-r from-blue-50 to-green-50 border-0">
         <h3 className="font-bold mb-4">Recent Activity</h3>
