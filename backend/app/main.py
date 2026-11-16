@@ -1,4 +1,5 @@
 """FastAPI application factory."""
+import time
 from uuid import uuid4
 
 from fastapi import FastAPI, Request
@@ -66,6 +67,43 @@ async def http_exception_handler(request: Request, exc: StarletteHTTPException):
 @app.exception_handler(Exception)
 async def unhandled_exception_handler(request: Request, exc: Exception):
     return error_response(500, "Terjadi error tak terduga", request_id=f"req-{uuid4()}")
+
+
+# ---------------------------------------------------------------------------
+# Rate limit: 100 req / 60s per IP, in-memory. Good enough for one process;
+# swap for Redis when the API runs multi-worker.
+# ---------------------------------------------------------------------------
+_RATE_LIMIT = 100
+_RATE_WINDOW = 60.0
+_RATE_EXEMPT = ("/health", "/docs", "/redoc", "/openapi.json")
+_hits: dict = {}
+
+
+@app.middleware("http")
+async def rate_limit(request: Request, call_next):
+    path = request.url.path
+    if path.startswith(_RATE_EXEMPT):
+        return await call_next(request)
+
+    ip = request.client.host if request.client else "unknown"
+    now = time.monotonic()
+    start, count = _hits.get(ip, (now, 0))
+    if now - start >= _RATE_WINDOW:
+        start, count = now, 0
+    count += 1
+    _hits[ip] = (start, count)
+
+    if count > _RATE_LIMIT:
+        retry_after = max(1, int(_RATE_WINDOW - (now - start)))
+        response = error_response(
+            429, "Terlalu banyak permintaan", retry_after=retry_after
+        )
+        response.headers["Retry-After"] = str(retry_after)
+        return response
+
+    response = await call_next(request)
+    response.headers["X-RateLimit-Remaining"] = str(_RATE_LIMIT - count)
+    return response
 
 
 @app.on_event("startup")
