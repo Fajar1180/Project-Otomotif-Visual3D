@@ -10,6 +10,11 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 from app.database import init_db
 from app.routes.auth import router as auth_router
 from app.routes.diagnosis import router as diagnosis_router
+from app.routes.vehicles import router as vehicles_router
+from app.routes.workshops import router as workshops_router
+import importlib
+
+three_d_mod = importlib.import_module("app.routes.3d")
 
 app = FastAPI(
     title="Otomotif AI API",
@@ -18,8 +23,11 @@ app = FastAPI(
 )
 
 # Include routers
-app.include_router(diagnosis_router)
 app.include_router(auth_router)
+app.include_router(diagnosis_router)
+app.include_router(vehicles_router)
+app.include_router(workshops_router)
+app.include_router(three_d_mod.router)
 
 
 # ---------------------------------------------------------------------------
