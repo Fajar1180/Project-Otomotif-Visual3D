@@ -35,6 +35,15 @@ SHOPEE_APP_ID: str = os.getenv("SHOPEE_APP_ID", "")
 SHOPEE_APP_KEY: str = os.getenv("SHOPEE_APP_KEY", "")
 SHOPEE_APP_SECRET: str = os.getenv("SHOPEE_APP_SECRET", "")
 
+# === 3D Engine Adapter (Issue #5) ===
+THREE_D_ENGINE: str = os.getenv("THREE_D_ENGINE", "fallback")  # fallback | replicate | huggingface | external
+REPLICATE_API_TOKEN: str = os.getenv("REPLICATE_API_TOKEN", "")
+REPLICATE_MODEL_VERSION: str = os.getenv("REPLICATE_MODEL_VERSION", "")
+HUGGINGFACE_API_TOKEN: str = os.getenv("HUGGINGFACE_API_TOKEN", "")
+HUGGINGFACE_MODEL_ID: str = os.getenv("HUGGINGFACE_MODEL_ID", "")
+EXTERNAL_3D_WORKER_URL: str = os.getenv("EXTERNAL_3D_WORKER_URL", "")
+THREE_D_OUTPUT_DIR: str = os.getenv("THREE_D_OUTPUT_DIR", os.path.join(BASE_DIR, "generated_meshes"))
+
 
 # Namespace so `from config import settings` works without pydantic_settings
 class settings:  # ponytail: namespace class mirrors module-level vars; no pydantic_settings
@@ -50,3 +59,10 @@ class settings:  # ponytail: namespace class mirrors module-level vars; no pydan
     SHOPEE_APP_KEY = SHOPEE_APP_KEY
     SHOPEE_APP_SECRET = SHOPEE_APP_SECRET
     celery_task_always_eager = False
+    THREE_D_ENGINE = THREE_D_ENGINE
+    REPLICATE_API_TOKEN = REPLICATE_API_TOKEN
+    REPLICATE_MODEL_VERSION = REPLICATE_MODEL_VERSION
+    HUGGINGFACE_API_TOKEN = HUGGINGFACE_API_TOKEN
+    HUGGINGFACE_MODEL_ID = HUGGINGFACE_MODEL_ID
+    EXTERNAL_3D_WORKER_URL = EXTERNAL_3D_WORKER_URL
+    THREE_D_OUTPUT_DIR = THREE_D_OUTPUT_DIR

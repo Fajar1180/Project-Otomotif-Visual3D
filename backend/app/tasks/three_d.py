@@ -1,23 +1,30 @@
-"""Celery task: generate 3D mesh from 4 input images (placeholder pipeline)."""
+"""Celery task: generate 3D mesh from 4 input images (Issue #5).
+
+Uses the Service Adapter Pattern (app/services/three_d_engine.py) so the
+engine can be swapped between ``fallback`` (local .glb generator, no GPU /
+no model weights), ``replicate``, ``huggingface``, or ``external`` worker
+via ``THREE_D_ENGINE`` env var — without downloading PyTorch/InstantMesh
+locally.
+
+Retry: max 3 attempts with exponential backoff. Task status tracked in
+task_store.
+"""
+
 from __future__ import annotations
+
+from typing import Optional, Tuple
 
 from app.celery_app import celery_app
 from app.services.task_store import task_store
-
-# ponytail: real pipeline (mesh/texture synthesis) is stubbed here.
-# Ceiling: swap _synthesize for a genuine 3D reconstruction service.
-# Upgrade path: implement _synthesize, then wire store updates to result URLs.
+from app.services.three_d_engine import get_engine, ThreeDEngineError
 
 
-def _synthesize(image_urls: list[str]) -> tuple[str, str]:
-    """Stub: return fake mesh/texture URLs."""
-    import time
-
-    time.sleep(0.1)  # simulate work
-    return "https://cdn.example.com/mesh.obj", "https://cdn.example.com/texture.png"
-
-
-@celery_app.task(name="app.tasks.three_d.generate_3d", bind=True, autoretry_for=(Exception,), retry_kwargs={"max_retries": 2})
+@celery_app.task(
+    name="app.tasks.three_d.generate_3d",
+    bind=True,
+    autoretry_for=(ThreeDEngineError, Exception),
+    retry_kwargs={"max_retries": 3, "countdown": 2, "backoff": 2},
+)
 def generate_3d(self, task_id: str, image_urls: list[str]) -> dict:
     record = task_store.get(task_id)
     if not record:
@@ -25,7 +32,8 @@ def generate_3d(self, task_id: str, image_urls: list[str]) -> dict:
 
     task_store.update(task_id, status="PROCESSING")
     try:
-        mesh_url, texture_url = _synthesize(image_urls)
+        engine = get_engine()
+        mesh_url, texture_url = engine.synthesize(image_urls)
         task_store.update(
             task_id,
             status="COMPLETED",
