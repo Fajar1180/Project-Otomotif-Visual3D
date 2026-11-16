@@ -48,11 +48,16 @@ async def test_analyze_diagnosis_happy_path(test_db_async):
     assert response.status_code == 200
     data = response.json()
     assert "diagnosis_id" in data
-    assert "diagnosis" in data
-    assert data["severity"] in ["DIY_EASY", "DIY_HARD", "WORKSHOP_REQUIRED"]
+    assert data["conclusion"]
+    assert data["severity_level"] in ["DIY_EASY", "DIY_HARD", "WORKSHOP_REQUIRED"]
     assert 0.0 <= data["confidence_score"] <= 1.0
+    assert data["technical_explanation"]
     assert isinstance(data["repair_steps"], list)
-    assert isinstance(data["recommendations"], list)
+    assert isinstance(data["recommended_parts"], list)
+    assert isinstance(data["recommended_workshops"], list)
+    # legacy fields must be gone
+    for legacy in ("diagnosis", "severity", "recommendations"):
+        assert legacy not in data
 
 
 @pytest.mark.asyncio
@@ -133,26 +138,32 @@ async def test_diagnosis_response_structure():
     # Verify response structure
     required_fields = [
         "diagnosis_id",
-        "diagnosis",
-        "severity",
+        "conclusion",
+        "severity_level",
         "confidence_score",
+        "technical_explanation",
         "repair_steps",
-        "recommendations",
+        "recommended_parts",
+        "recommended_workshops",
     ]
     for field in required_fields:
         assert field in data, f"Missing required field: {field}"
 
-    # Verify repair steps structure
+    assert data["severity_level"] in ["DIY_EASY", "DIY_HARD", "WORKSHOP_REQUIRED"]
+    assert 0.0 <= data["confidence_score"] <= 1.0
+
+    # Verify repair steps structure: [{step:int, description:str}]
+    assert data["repair_steps"], "expected at least one repair step"
     for step in data["repair_steps"]:
-        assert "step" in step
-        assert "description" in step
         assert isinstance(step["step"], int)
         assert isinstance(step["description"], str)
 
-    # Verify recommendations structure
-    for rec in data["recommendations"]:
-        assert "part_name" in rec
-        assert "part_category" in rec
-        assert "estimated_cost" in rec
-        assert "priority" in rec
-        assert "urgency" in rec
+    # Verify recommended parts structure
+    for part in data["recommended_parts"]:
+        for field in ("part_id", "part_name", "brand", "price_estimate", "shopee_affiliate_link", "is_primary"):
+            assert field in part
+
+    # Verify recommended workshops structure (may be empty)
+    for ws in data["recommended_workshops"]:
+        for field in ("workshop_id", "name", "address", "distance_km", "rating", "phone", "maps_url"):
+            assert field in ws

@@ -28,11 +28,13 @@ async def analyze_diagnosis(
     
     **Response:**
     - `diagnosis_id`: UUID of stored diagnostic result
-    - `diagnosis`: Technical diagnosis explanation
-    - `severity`: DIY_EASY | DIY_HARD | WORKSHOP_REQUIRED
+    - `conclusion`: Technical diagnosis explanation
+    - `severity_level`: DIY_EASY | DIY_HARD | WORKSHOP_REQUIRED
     - `confidence_score`: 0.0-1.0
+    - `technical_explanation`: Detailed technical explanation
     - `repair_steps`: List of step-by-step instructions
-    - `recommendations`: Recommended spare parts with Shopee links
+    - `recommended_parts`: Recommended spare parts with Shopee links
+    - `recommended_workshops`: Recommended workshops
     
     **Performance:** Target <500ms (95th percentile)
     

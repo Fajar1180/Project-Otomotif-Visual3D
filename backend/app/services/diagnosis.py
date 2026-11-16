@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 from sqlalchemy import select
 
 from models import DiagnosticResult
-from app.schemas import DiagnosisAnalyzeRequest, DiagnosisAnalyzeResponse, RepairStepResponse, RecommendationResponse
+from app.schemas import DiagnosisAnalyzeRequest, DiagnosisAnalyzeResponse, RepairStepResponse, PartRecommendation, WorkshopRecommendation
 from app.services.rag import RAGService
 from app.services.llm import LLMService
 
@@ -61,40 +61,67 @@ class DiagnosisService:
             vehicle_context=vehicle_context,
             rag_context=rag_context,
         )
-        
+
         # Step 5: Store diagnosis result in DB
+        # LLM returns keys: diagnosis, severity, confidence, repair_steps
+        conclusion = llm_result.get("conclusion") or llm_result.get("diagnosis") or ""
+        technical_explanation = llm_result.get("technical_explanation") or conclusion
+        severity_level = llm_result.get("severity_level") or llm_result.get("severity") or "WORKSHOP_REQUIRED"
+        confidence_score = llm_result.get("confidence_score", llm_result.get("confidence", 0.5))
+        repair_steps = self._normalize_repair_steps(llm_result.get("repair_steps"))
+
         diagnostic_result = DiagnosticResult(
             symptom_text=request.symptom_text,
-            diagnosis=llm_result["diagnosis"],
-            confidence_score=llm_result["confidence"],
-            severity=llm_result["severity"],
-            repair_steps=llm_result["repair_steps"],
+            diagnosis=conclusion,
+            severity=severity_level,
+            confidence_score=confidence_score,
+            repair_steps=[s.model_dump() for s in repair_steps],
         )
-        
+
         db.add(diagnostic_result)
         db.flush()
-        
+
         # Step 6: Fetch and build recommendations
-        recommendations = self._fetch_recommendations(
-            db,
-            diagnostic_result.id,
+        recommended_parts = self._fetch_parts_recommendations(
             rag_context.get("spare_parts", [])[:5],
         )
-        
+        recommended_workshops = self._fetch_workshops_recommendations(
+            rag_context.get("workshops", []),
+        )
+
         # Step 7: Build response
-        repair_steps = [
-            RepairStepResponse(step=s["step"], description=s["description"])
-            for s in llm_result.get("repair_steps", [])
-        ]
-        
         return DiagnosisAnalyzeResponse(
             diagnosis_id=diagnostic_result.id,
-            diagnosis=llm_result["diagnosis"],
-            severity=llm_result["severity"],
-            confidence_score=llm_result["confidence"],
+            conclusion=conclusion,
+            severity_level=severity_level,
+            confidence_score=confidence_score,
+            technical_explanation=technical_explanation,
             repair_steps=repair_steps,
-            recommendations=recommendations,
+            recommended_parts=recommended_parts,
+            recommended_workshops=recommended_workshops,
         )
+
+    @staticmethod
+    def _normalize_repair_steps(raw_steps) -> list:
+        """Coerce LLM repair_steps into [{step:int, description:str}].
+
+        ponytail: handles dicts and bare strings only; add nested/step-object
+        variants if a real LLM starts emitting them.
+        """
+        normalized = []
+        for idx, item in enumerate(raw_steps or [], 1):
+            if isinstance(item, dict):
+                description = item.get("description") or item.get("text") or ""
+                step = item.get("step", idx)
+                try:
+                    step = int(step)
+                except (TypeError, ValueError):
+                    step = idx
+            else:
+                description, step = str(item), idx
+            if description:
+                normalized.append(RepairStepResponse(step=step, description=description))
+        return normalized
 
     def _build_vehicle_context(self, request: DiagnosisAnalyzeRequest) -> str:
         """Build human-readable vehicle context string."""
@@ -112,40 +139,37 @@ class DiagnosisService:
         
         return " ".join(parts) or "Kendaraan tidak ditentukan"
 
-    def _fetch_recommendations(
-        self,
-        db: Session,
-        diagnostic_result_id: UUID,
-        spare_parts: list,
-    ) -> list:
-        """
-        Fetch and build recommendation responses.
-        
-        Args:
-            db: Async database session
-            diagnostic_result_id: ID of diagnostic result
-            spare_parts: List of spare part dicts from RAG context
-            
-        Returns:
-            List of RecommendationResponse objects
-        """
+    def _fetch_parts_recommendations(self, spare_parts: list) -> list:
+        """Build PartRecommendation list from RAG spare parts context."""
         recommendations = []
-        
         for idx, part in enumerate(spare_parts[:5], 1):
-            # In production: fetch actual Recommendation record from DB
-            # For now: build from RAG context
-            rec = RecommendationResponse(
-                id=UUID(int=idx),  # Mock ID
-                part_name=part.get("part_name", "Unknown Part"),
-                part_category=part.get("category", "Accessories"),
-                part_description=None,
-                estimated_cost=float(part.get("price_range", "0").split("-")[0]),
-                urgency="soon" if idx == 1 else "optional",
-                priority=idx,
-                shopee_affiliate_link=part.get("shopee_url"),
+            recommendations.append(
+                PartRecommendation(
+                    part_id=UUID(int=idx),
+                    part_name=part.get("part_name", "Unknown Part"),
+                    brand=part.get("brand", "Generic"),
+                    price_estimate=str(part.get("price_estimate", part.get("price_range", "0"))),
+                    shopee_affiliate_link=part.get("shopee_affiliate_link", part.get("shopee_url", "")),
+                    is_primary=(idx == 1),
+                )
             )
-            recommendations.append(rec)
-        
+        return recommendations
+
+    def _fetch_workshops_recommendations(self, workshops: list) -> list:
+        """Build WorkshopRecommendation list from RAG workshop context."""
+        recommendations = []
+        for idx, w in enumerate(workshops[:3], 1):
+            recommendations.append(
+                WorkshopRecommendation(
+                    workshop_id=UUID(int=idx),
+                    name=w.get("name", f"Bengkel {idx}"),
+                    address=w.get("address", "-"),
+                    distance_km=float(w.get("distance_km", 0)),
+                    rating=float(w.get("rating", 0)),
+                    phone=w.get("phone", "-"),
+                    maps_url=w.get("maps_url", ""),
+                )
+            )
         return recommendations
 
 
