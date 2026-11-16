@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.main import app
+from app.celery_app import celery_app
 from app.database import SessionLocal, Base, _engine, get_db
 from models import Vehicle, Symptom, Diagnosis, SparePart, DiagnosisPartMap, VectorStore, Workshop, DiagnosticResult
 
@@ -52,3 +53,11 @@ async def test_db_async():
         app.dependency_overrides.pop(get_db, None)
         session.rollback()
         session.close()
+
+
+@pytest.fixture(autouse=True)
+def _celery_eager_for_tests():
+    """Run Celery tasks synchronously in tests (no Redis/worker needed)."""
+    celery_app.conf.task_always_eager = True
+    yield
+    celery_app.conf.task_always_eager = False

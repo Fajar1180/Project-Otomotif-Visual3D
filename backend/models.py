@@ -156,6 +156,21 @@ class User(Base):
     full_name = Column(String(150), nullable=True)
     created_at = Column(DateTime, default=func.now())
 
+    refresh_tokens = relationship("RefreshToken", back_populates="user", cascade="all, delete-orphan")
+
+
+class RefreshToken(Base):
+    """Refresh token for rotating access tokens."""
+    __tablename__ = "refresh_tokens"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid4()))
+    user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    token = Column(String(255), unique=True, nullable=False, index=True)
+    expires_at = Column(DateTime, nullable=False)
+    created_at = Column(DateTime, default=func.now())
+
+    user = relationship("User", back_populates="refresh_tokens")
+
 
 class DiagnosticResult(Base):
     """Stored diagnosis result for a user's vehicle (audit trail)."""

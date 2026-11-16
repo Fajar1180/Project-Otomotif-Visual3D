@@ -10,13 +10,15 @@ import json
 from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, UploadFile, File, Form
 from pydantic import BaseModel, Field
 
 from app.celery_app import celery_app
 from app.services.task_store import task_store
 
 router = APIRouter(prefix="/api/v1/3d", tags=["3d"])
+
+MAX_PHOTOS = 4
 
 
 def _encode_task(brand: str, model: str) -> str:
@@ -33,14 +35,6 @@ def _decode_task(task_id: str) -> Dict[str, str]:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Task tidak ditemukan")
 
 
-class GenerateRequest(BaseModel):
-    """JSON form of the spec's multipart body (python-multipart is not installed)."""
-
-    vehicle_brand: str = Field(..., min_length=1, max_length=100)
-    vehicle_model: str = Field(..., min_length=1, max_length=100)
-    images: Optional[List[str]] = Field(None, description="Photo URLs or base64 payloads, max 4")
-
-
 class Modification(BaseModel):
     component_type: str
     part_id: str
@@ -53,13 +47,22 @@ class ModifyRequest(BaseModel):
 
 
 @router.post("/generate", status_code=status.HTTP_202_ACCEPTED)
-def generate(payload: GenerateRequest) -> dict:
-    """Queue a (stub) 3D reconstruction task via Celery."""
-    if payload.images and len(payload.images) > 4:
-        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Maksimal 4 foto")
+async def generate(
+    vehicle_brand: str = Form(...),
+    vehicle_model: str = Form(...),
+    images: List[UploadFile] = File(...),
+) -> dict:
+    """Queue a 3D reconstruction task from 4 vehicle photos (multipart)."""
+    if not vehicle_brand.strip() or not vehicle_model.strip():
+        raise HTTPException(status.HTTP_422_UNPROCESSABLE_ENTITY, "Brand dan model wajib diisi")
+    if len(images) != MAX_PHOTOS:
+        raise HTTPException(
+            status.HTTP_422_UNPROCESSABLE_ENTITY,
+            f"Harus tepat {MAX_PHOTOS} foto (front, back, left, right), diterima {len(images)}",
+        )
 
     record = task_store.create()
-    image_urls = payload.images or []
+    image_urls = [f"{img.filename}:{await img.read()!r}" for img in images]
 
     if celery_app.conf.task_always_eager:
         from app.tasks.three_d import generate_3d

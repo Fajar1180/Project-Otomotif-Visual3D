@@ -12,8 +12,17 @@ import json
 import os
 import time
 from typing import Any, Dict, Optional
+from uuid import uuid4
 
-from config import settings
+from config import (
+    JWT_SECRET,
+    JWT_EXPIRE_MINUTES,
+    DATABASE_URL,
+    REDIS_URL,
+    SHOPEE_APP_ID,
+    SHOPEE_APP_KEY,
+    SHOPEE_APP_SECRET,
+)
 
 try:  # bcrypt is installed in the venv; pbkdf2 is the stdlib fallback
     import bcrypt as _bcrypt
@@ -46,7 +55,6 @@ except ImportError:  # pragma: no cover
         except ValueError:
             return False
 
-
 def _b64e(raw: bytes) -> str:
     return base64.urlsafe_b64encode(raw).rstrip(b"=").decode()
 
@@ -57,17 +65,32 @@ def _b64d(text: str) -> bytes:
 
 def _sign(signing_input: str) -> str:
     return _b64e(
-        hmac.new(settings.jwt_secret.encode(), signing_input.encode(), hashlib.sha256).digest()
+        hmac.new(JWT_SECRET.encode(), signing_input.encode(), hashlib.sha256).digest()
     )
 
 
 def create_access_token(subject: str, expires_minutes: Optional[int] = None) -> str:
     """Return a signed HS256 JWT for ``subject`` (usually the user id)."""
     now = int(time.time())
-    ttl = (expires_minutes or settings.jwt_expire_minutes) * 60
+    ttl = (expires_minutes or JWT_EXPIRE_MINUTES) * 60
     header = _b64e(json.dumps({"alg": "HS256", "typ": "JWT"}, separators=(",", ":")).encode())
     payload = _b64e(
         json.dumps({"sub": str(subject), "iat": now, "exp": now + ttl}, separators=(",", ":")).encode()
+    )
+    signing_input = f"{header}.{payload}"
+    return f"{signing_input}.{_sign(signing_input)}"
+
+
+def create_refresh_token(subject: str, expires_days: int = 7) -> str:
+    """Return a long-lived signed HS256 JWT refresh token for ``subject``."""
+    now = int(time.time())
+    ttl = expires_days * 86400
+    header = _b64e(json.dumps({"alg": "HS256", "typ": "JWT"}, separators=(",", ":")).encode())
+    payload = _b64e(
+        json.dumps(
+            {"sub": str(subject), "iat": now, "typ": "refresh", "jti": str(uuid4()), "exp": now + ttl},
+            separators=(",", ":"),
+        ).encode()
     )
     signing_input = f"{header}.{payload}"
     return f"{signing_input}.{_sign(signing_input)}"
@@ -85,3 +108,12 @@ def decode_access_token(token: str) -> Dict[str, Any]:
     if int(data.get("exp", 0)) < int(time.time()):
         raise ValueError("Token expired")
     return data
+
+
+def get_current_user(token: str) -> Dict[str, Any]:
+    """Dependency: decode JWT and return user payload dict.
+
+    Raises ValueError if token is invalid or expired.
+    The caller (route) should catch this and return 401.
+    """
+    return decode_access_token(token)

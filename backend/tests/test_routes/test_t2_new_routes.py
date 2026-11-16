@@ -90,14 +90,15 @@ async def test_workshops(test_db_async):
 
 @pytest.mark.asyncio
 async def test_3d(test_db_async):
+    import io
+
     async with AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client:
         r = await client.post(
             "/api/v1/3d/generate",
-            json={
-                "vehicle_brand": "Honda",
-                "vehicle_model": "Vario 150",
-                "images": ["http://x/f1.jpg"],
-            },
+            data={"vehicle_brand": "Honda", "vehicle_model": "Vario 150"},
+            files=[
+                ("images", (f"f{i}.jpg", io.BytesIO(b"\xff\xd8\xff"), "image/jpeg")) for i in range(4)
+            ],
         )
         assert r.status_code == 202, r.text
         task_id: str = r.json()["task_id"]
