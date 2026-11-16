@@ -12,6 +12,7 @@ import json
 import os
 import time
 from typing import Any, Dict, Optional
+from uuid import uuid4
 
 from config import settings
 
@@ -68,6 +69,21 @@ def create_access_token(subject: str, expires_minutes: Optional[int] = None) -> 
     header = _b64e(json.dumps({"alg": "HS256", "typ": "JWT"}, separators=(",", ":")).encode())
     payload = _b64e(
         json.dumps({"sub": str(subject), "iat": now, "exp": now + ttl}, separators=(",", ":")).encode()
+    )
+    signing_input = f"{header}.{payload}"
+    return f"{signing_input}.{_sign(signing_input)}"
+
+
+def create_refresh_token(subject: str, expires_days: int = 7) -> str:
+    """Return a long-lived signed HS256 JWT refresh token for ``subject``."""
+    now = int(time.time())
+    ttl = expires_days * 86400
+    header = _b64e(json.dumps({"alg": "HS256", "typ": "JWT"}, separators=(",", ":")).encode())
+    payload = _b64e(
+        json.dumps(
+            {"sub": str(subject), "iat": now, "typ": "refresh", "jti": str(uuid4()), "exp": now + ttl},
+            separators=(",", ":"),
+        ).encode()
     )
     signing_input = f"{header}.{payload}"
     return f"{signing_input}.{_sign(signing_input)}"
