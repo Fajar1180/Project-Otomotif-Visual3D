@@ -36,9 +36,11 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
 
-    // Validasi basic
-    if (!data || !data.q_contact_email) {
-      return jsonOut({ success: false, error: 'Missing required fields' });
+    // Validasi basic: pastikan payload ada objek. Email diwajibkan di frontend;
+    // di sisi server jangan nolak payload hanya karena email kosong (jaga-jaga
+    // jika validasi frontend dilewati).
+    if (!data || typeof data !== 'object') {
+      return jsonOut({ success: false, error: 'Missing payload' });
     }
 
     const sheet = getOrCreateSheet();
