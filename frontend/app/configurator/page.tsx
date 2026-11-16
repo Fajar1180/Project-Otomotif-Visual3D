@@ -1,9 +1,13 @@
 'use client'
 
+import { useState } from 'react'
 import { useConfiguratorStore } from '../store'
+import { Vehicle3DViewer } from '@/app/components/Vehicle3DViewer'
 
 export default function Configurator3D() {
   const { selectedParts, togglePart, clearParts } = useConfiguratorStore()
+  const [taskId, setTaskId] = useState<string | null>(null)
+  const [generateLoading, setGenerateLoading] = useState(false)
 
   const categories = [
     { id: 'wheels', label: 'Wheels', parts: ['Stock', '17" Alloy', '19" Performance'] },
@@ -12,13 +16,63 @@ export default function Configurator3D() {
     { id: 'body', label: 'Body Kit', parts: ['Stock', 'Sport', 'Aggressive'] },
   ]
 
+  const handleGenerate = async () => {
+    setGenerateLoading(true)
+    try {
+      const files = ['front', 'back', 'left', 'right'].map((name) => {
+        const buf = new ArrayBuffer(16)
+        return new File([buf], `${name}.jpg`, { type: 'image/jpeg' })
+      })
+      const form = new FormData()
+      form.append('vehicle_brand', 'Generic')
+      form.append('vehicle_model', 'Concept')
+      files.forEach((f) => form.append('images', f))
+
+      const res = await fetch('/api/v1/3d/generate', {
+        method: 'POST',
+        body: form,
+      })
+      if (!res.ok) throw new Error('Generate gagal')
+      const data = await res.json()
+      setTaskId(data.task_id)
+    } catch (e) {
+      console.error(e)
+      alert('Gagal generate 3D. Pastikan backend berjalan di http://localhost:8000')
+    } finally {
+      setGenerateLoading(false)
+    }
+  }
+
   return (
     <div className="max-w-6xl space-y-8">
       <div>
         <h1 className="text-3xl font-bold mb-2">3D Configurator</h1>
         <p className="text-[var(--muted-foreground)]">
-          Visualize and customize your vehicle in 3D. Canvas loading coming soon.
+          Visualize and customize your vehicle in 3D.
         </p>
+      </div>
+
+      <div className="card p-4">
+        <div className="flex flex-col sm:flex-row gap-4 items-end">
+          <div className="flex-1 min-w-[200px]">
+            <label className="block text-xs font-medium mb-1 text-[var(--muted-foreground)]">
+              Task ID (kosongkan untuk generate baru)
+            </label>
+            <input
+              value={taskId ?? ''}
+              onChange={(e) => setTaskId(e.target.value || null)}
+              className="w-full p-2 border border-[var(--border)] rounded-lg text-sm"
+              placeholder="task_xxxx"
+            />
+          </div>
+          <button
+            onClick={handleGenerate}
+            disabled={generateLoading}
+            className="btn btn-primary disabled:opacity-50"
+          >
+            {generateLoading ? 'Memproses...' : 'Generate 3D Model'}
+          </button>
+        </div>
       </div>
 
       <div className="grid grid-cols-4 gap-6">
@@ -55,17 +109,16 @@ export default function Configurator3D() {
           </div>
         </div>
 
-        <div className="col-span-3 card bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center min-h-96">
-          <div className="text-center">
-            <div className="text-6xl mb-4">🚗</div>
-            <p className="font-bold text-lg mb-2">3D Canvas</p>
-            <p className="text-[var(--muted-foreground)]">
-              Three.js visualization coming soon
-            </p>
-            <p className="text-sm text-[var(--muted-foreground)] mt-4">
-              Selected Parts: {Object.keys(selectedParts).length}
-            </p>
-          </div>
+        <div className="col-span-3 card p-4">
+          <h3 className="font-bold mb-4">3D Preview</h3>
+          {taskId ? (
+            <Vehicle3DViewer taskId={taskId} />
+          ) : (
+            <div className="flex flex-col items-center justify-center h-96 text-[var(--muted-foreground)]">
+              <div className="text-4xl mb-2">🚗</div>
+              <p className="text-sm">Generate model 3D untuk memulai preview</p>
+            </div>
+          )}
         </div>
       </div>
 
