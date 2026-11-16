@@ -16,7 +16,7 @@ ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
 
 # === Auth ===
 JWT_SECRET: Final[str] = os.getenv("JWT_SECRET", "dev-secret-change-me")
-JWT_EXPIRE_MINUTES: int = int(os.getenv("JWT_EXPIRE_MINUTES", "60"))
+JWT_EXPIRE_MINUTES: int = int(os.getenv("JWT_EXPIRE_MINUTES", "1440"))
 
 # === Database ===
 DATABASE_URL: str = os.getenv(
