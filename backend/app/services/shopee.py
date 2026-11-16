@@ -10,8 +10,10 @@ from __future__ import annotations
 
 import time
 from typing import Any, Dict, List, Optional
+from urllib.parse import urlencode, urlparse, parse_qsl, urlunparse
 
 import httpx
+
 
 from config import (
     JWT_SECRET,
@@ -127,3 +129,31 @@ def search_products(query: str, limit: int = 10) -> List[Dict[str, Any]]:
 
     _cache_set(cache_key, items)
     return items
+
+
+def generate_affiliate_link(item_id: str, source: str = "web", campaign: str = "affiliate") -> str:
+    """Build an affiliate link for an item with UTM tracking params.
+
+    Falls back to the static parts list when the item is not a live Shopee
+    result. UTM params: utm_source, utm_medium=affiliate, utm_campaign.
+    """
+    target = None
+    for part in STATIC_PARTS:
+        if part["item_id"] == item_id:
+            target = part["shopee_url"]
+            break
+    if target is None:
+        raise ValueError(f"Tidak dapat menemukan link afiliasi untuk item_id={item_id}")
+
+    parsed = urlparse(target)
+    query = dict(parse_qsl(parsed.query))
+    query.update(
+        {
+            "utm_source": source,
+            "utm_medium": "affiliate",
+            "utm_campaign": campaign,
+        }
+    )
+    return urlunparse(
+        (parsed.scheme, parsed.netloc, parsed.path, parsed.params, urlencode(query), parsed.fragment)
+    )

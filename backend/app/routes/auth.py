@@ -1,11 +1,12 @@
 """Auth routes: register + login (JWT)."""
 from __future__ import annotations
 
+import time
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 from uuid import uuid4
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException, Request, status
 from pydantic import BaseModel, EmailStr, Field
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -15,6 +16,31 @@ from app.database import get_db
 from models import RefreshToken, User
 
 router = APIRouter(prefix="/api/v1/auth", tags=["auth"])
+
+_LOGIN_LIMIT = 5
+_LOGIN_WINDOW = 60.0
+_login_hits: dict = {}
+
+
+def _login_rate_limit(request: Request) -> None:
+    """In-memory rate limit for login attempts per IP (5 / 60s)."""
+    ip = request.client.host if request.client else "unknown"
+    now = time.monotonic()
+    start, count = _login_hits.get(ip, (now, 0))
+    if now - start >= _LOGIN_WINDOW:
+        start, count = now, 0
+    count += 1
+    _login_hits[ip] = (start, count)
+    if count > _LOGIN_LIMIT:
+        retry_after = max(1, int(_LOGIN_WINDOW - (now - start)))
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail={
+                "error": "RATE_LIMITED",
+                "message": "Terlalu banyak percobaan login, coba lagi nanti",
+                "retry_after": retry_after,
+            },
+        )
 
 
 class RegisterRequest(BaseModel):
@@ -83,8 +109,9 @@ def register(payload: RegisterRequest, db: Session = Depends(get_db)) -> TokenRe
 
 
 @router.post("/login", response_model=TokenResponse)
-def login(payload: LoginRequest, db: Session = Depends(get_db)) -> TokenResponse:
+def login(payload: LoginRequest, request: Request, db: Session = Depends(get_db)) -> TokenResponse:
     """Exchange email + password for an access token."""
+    _login_rate_limit(request)
     user = db.execute(select(User).where(User.email == payload.email)).scalar_one_or_none()
     if not user or not verify_password(payload.password, user.hashed_password):
         raise HTTPException(status.HTTP_401_UNAUTHORIZED, "Email atau password salah")
