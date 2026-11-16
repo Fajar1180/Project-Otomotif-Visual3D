@@ -35,6 +35,7 @@ class Vehicle(Base):
     model = Column(String(100), nullable=False)
     year_start = Column(Integer, nullable=False)
     year_end = Column(Integer, nullable=True)
+    category = Column(String(30), nullable=True)
     created_at = Column(DateTime, default=func.now())
 
     # Relationships
@@ -51,6 +52,7 @@ class Symptom(Base):
     symptom_code = Column(String(50), unique=True, nullable=False)
     description = Column(Text, nullable=False)
     category = Column(String(50), nullable=False)  # Engine, Transmission, etc.
+    embedding = Column(JSON, nullable=True)  # ponytail: JSON not pgvector, swap when pgvector is installed
     created_at = Column(DateTime, default=func.now())
 
 
@@ -81,6 +83,8 @@ class SparePart(Base):
     price_min = Column(Float, nullable=True)
     price_max = Column(Float, nullable=True)
     default_shopee_url = Column(String(500), nullable=True)
+    shopee_item_id = Column(String(50), nullable=True)
+    shopee_shop_id = Column(String(50), nullable=True)
     created_at = Column(DateTime, default=func.now())
 
     # Relationships
@@ -121,11 +125,35 @@ class Workshop(Base):
     __tablename__ = "workshops"
 
     id = Column(String(36), primary_key=True, default=lambda: str(uuid4()))
-    workshop_name = Column(String(255), nullable=False)
-    location = Column(String(500), nullable=True)
+    name = Column(String(100), nullable=False)
+    address = Column(Text, nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     phone = Column(String(20), nullable=True)
-    email = Column(String(100), nullable=True)
+    specialties = Column(JSON, nullable=True)  # ["Engine", "Electrical", ...]
     rating = Column(Float, default=0.0)  # 0-5 star rating
+    review_count = Column(Integer, default=0)
+    website = Column(String(255), nullable=True)
+    created_at = Column(DateTime, default=func.now())
+
+
+class SymptomDiagnosisMap(Base):
+    """Junction table: Symptom -> Diagnosis with a confidence weight."""
+    __tablename__ = "symptom_diagnosis_map"
+
+    symptom_id = Column(String(36), ForeignKey("symptoms.id"), primary_key=True)
+    diagnosis_id = Column(String(36), ForeignKey("diagnoses.id"), primary_key=True)
+    confidence_weight = Column(Float, nullable=False, default=0.5)
+
+
+class User(Base):
+    """Registered user (JWT auth)."""
+    __tablename__ = "users"
+
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid4()))
+    email = Column(String(255), unique=True, nullable=False, index=True)
+    hashed_password = Column(String(255), nullable=False)
+    full_name = Column(String(150), nullable=True)
     created_at = Column(DateTime, default=func.now())
 
 
