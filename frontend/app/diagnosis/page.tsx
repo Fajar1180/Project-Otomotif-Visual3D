@@ -2,7 +2,6 @@
 
 import { useDiagnosisStore } from '../store'
 import { useState } from 'react'
-
 export default function DiagnosisPage() {
   const { symptomText, setSymptomsText } = useDiagnosisStore()
   const [make, setMake] = useState('')
@@ -10,6 +9,7 @@ export default function DiagnosisPage() {
   const [year, setYear] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<any>(null)
+  const [workshops, setWorkshops] = useState<any[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -31,6 +31,15 @@ export default function DiagnosisPage() {
       )
       const data = await response.json()
       setResult(data)
+      try {
+        const wr = await fetch('/api/v1/workshops')
+        if (wr.ok) {
+          const wd = await wr.json()
+          setWorkshops(wd.data || wd.workshops || [])
+        }
+      } catch (e) {
+        console.error(e)
+      }
     } catch (error) {
       console.error('Error:', error)
     } finally {
@@ -132,6 +141,20 @@ export default function DiagnosisPage() {
                 </ul>
               </div>
             )}
+          </div>
+        </div>
+      )}
+      {workshops.length > 0 && (
+        <div className="card mt-6">
+          <h2 className="text-xl font-bold mb-4">Workshop Recommendations</h2>
+          <div className="grid grid-cols-3 gap-4">
+            {workshops.map((w: any) => (
+              <div key={w.id} className="border rounded-lg p-3">
+                <div className="font-bold">{w.name}</div>
+                <div className="text-sm text-[var(--muted-foreground)]">{w.address}</div>
+                <div className="mt-2 text-[var(--accent)] font-medium">{w.phone}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}
