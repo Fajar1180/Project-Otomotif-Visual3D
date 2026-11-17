@@ -10,11 +10,24 @@ export default function DiagnosisPage() {
   const [year, setYear] = useState('')
   const [loading, setLoading] = useState(false)
   const [result, setResult] = useState<any>(null)
-  const [workshops, setWorkshops] = useState<any[]>([]);
+  const [workshops, setWorkshops] = useState<any[]>([])
+  const MAX_SYMPTOM_LENGTH = 500
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
+
+    // Trim and validate symptom text length
+    const trimmedSymptom = symptomText.trim()
+    if (!trimmedSymptom) {
+      setLoading(false)
+      return
+    }
+    if (trimmedSymptom.length > MAX_SYMPTOM_LENGTH) {
+      setLoading(false)
+      alert('Penyakit terlalu panjang (maksimal 500 karakter)')
+      return
+    }
 
     try {
       const response = await apiRequest(
@@ -23,7 +36,7 @@ export default function DiagnosisPage() {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            symptom_text: symptomText,
+            symptom_text: trimmedSymptom,
             vehicle_make: make,
             vehicle_model: model,
             vehicle_year: parseInt(year),
@@ -67,6 +80,9 @@ export default function DiagnosisPage() {
             className="w-full p-4 border border-[var(--border)] rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--accent)]"
             rows={5}
           />
+          <p className="text-xs text-[var(--muted-foreground)] mt-1">
+            Maksimal {MAX_SYMPTOM_LENGTH} karakter
+          </p>
         </div>
 
         <div className="grid grid-cols-3 gap-4">
@@ -104,7 +120,7 @@ export default function DiagnosisPage() {
 
         <button
           type="submit"
-          disabled={loading || !symptomText}
+          disabled={loading || !symptomText || symptomText.trim().length === 0}
           className="btn btn-primary w-full disabled:opacity-50"
         >
           {loading ? 'Analyzing...' : 'Get Diagnosis'}
@@ -145,6 +161,7 @@ export default function DiagnosisPage() {
           </div>
         </div>
       )}
+
       {workshops.length > 0 && (
         <div className="card mt-6">
           <h2 className="text-xl font-bold mb-4">Workshop Recommendations</h2>

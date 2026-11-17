@@ -19,6 +19,8 @@ from app.services.task_store import task_store
 router = APIRouter(prefix="/api/v1/3d", tags=["3d"])
 
 MAX_PHOTOS = 4
+MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB per file
+ALLOWED_MIME_TYPES = {"image/jpeg", "image/png", "image/webp"}
 
 
 def _encode_task(brand: str, model: str) -> str:
@@ -60,7 +62,24 @@ async def generate(
             status.HTTP_422_UNPROCESSABLE_ENTITY,
             f"Harus tepat {MAX_PHOTOS} foto (front, back, left, right), diterima {len(images)}",
         )
-
+    
+    # Validate image size and MIME type
+    for img in images:
+        # Read a preview to check size without loading entire file
+        content = await img.read()
+        if len(content) > MAX_FILE_SIZE:
+            raise HTTPException(
+                status.HTTP_413_PAYLOAD_TOO_LARGE,
+                f"File {img.filename} terlalu besar (maksimal {MAX_FILE_SIZE // (1024*1024)}MB)",
+            )
+        if img.content_type not in ALLOWED_MIME_TYPES:
+            raise HTTPException(
+                status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
+                f"Tipe file {img.filename} tidak didukung. Hanya: {', '.join(ALLOWED_MIME_TYPES)}",
+            )
+        # Reset file pointer after reading for Celery task
+        img.file.seek(0)
+    
     record = task_store.create()
     image_urls = [f"{img.filename}:{await img.read()!r}" for img in images]
 
@@ -101,14 +120,21 @@ def task_status(task_id: str) -> dict:
 @router.post("/modify")
 def modify(payload: ModifyRequest) -> dict:
     """Apply (stub) component modifications to a base mesh."""
+    # Sanitize part_id: only alphanumeric characters, max 8 chars for affiliate link
+    safe_part_ids = []
+    for m in payload.modifications:
+        # Keep only alphanumeric characters
+        sanitized = "".join(c for c in m.part_id if c.isalnum())[:8]
+        safe_part_ids.append(sanitized)
+    
     return {
         "modified_mesh_url": f"https://cdn.otomotif-ai.com/meshes/{payload.base_mesh_id}-mod.glb",
         "modification_id": str(uuid4()),
         "affiliate_links": [
             {
                 "part_id": m.part_id,
-                "shopee_affiliate_link": f"https://shp.ee/{m.part_id[:8]}",
+                "shopee_affiliate_link": f"https://shp.ee/{safe_part_id}",
             }
-            for m in payload.modifications
+            for m, safe_part_id in zip(payload.modifications, safe_part_ids)
         ],
     }

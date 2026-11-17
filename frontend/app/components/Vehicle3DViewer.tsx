@@ -1,32 +1,54 @@
-'use client';
+'use client'
 
-import { useEffect, useState, Suspense } from 'react';
-import { Canvas, useLoader } from '@react-three/fiber';
-import { OrbitControls } from '@react-three/drei';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
-import Link from 'next/link';
-import { apiRequest } from '../lib/api';
+import { useEffect, useState, Suspense } from 'react'
+import { Canvas, useLoader } from '@react-three/fiber'
+import { OrbitControls } from '@react-three/drei'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import Link from 'next/link'
+import { apiRequest } from '../lib/api'
+
+// URL validation for 3D model loading - only allow local paths or trusted origins
+const ALLOWED_MESH_PATTERN = /^\/(.*)$/i
+const TRUSTED_MESH_ORIGINS = ['https://app.otomotif-ai.com', 'https://www.otomotif-ai.com']
+
+function validateMeshUrl(url: string): string | null {
+  // Reject dangerous schemes
+  if (/^javascript:/i.test(url) || /^data:/i.test(url)) {
+    console.error('Rejected dangerous URL scheme:', url)
+    return null
+  }
+  // Allow local paths starting with /
+  if (ALLOWED_MESH_PATTERN.test(url)) {
+    return url
+  }
+  // Allow trusted origins (checked at runtime in useEffect)
+  if (TRUSTED_MESH_ORIGINS.some(origin => url.startsWith(origin))) {
+    return url
+  }
+  console.error('Rejected untrusted mesh URL:', url)
+  return null
+}
 
 interface Vehicle3DViewerProps {
-  taskId: string;
+  taskId: string
 }
 
 interface AffiliatePart {
-  part_id: string;
-  shopee_affiliate_link: string;
+  part_id: string
+  shopee_affiliate_link: string
 }
 
 function ModelCanvas({ meshUrl, color }: { meshUrl: string; color: string }) {
-  const gltf = useLoader(GLTFLoader, meshUrl);
+  const gltf = useLoader(GLTFLoader, meshUrl)
 
   useEffect(() => {
-    if (!gltf) return;
+    if (!gltf) return
     gltf.scene.traverse((child: any) => {
       if (child.isMesh && child.material) {
-        child.material.color.set(color);
+        child.material.color.set(color)
       }
-    });
-  }, [color, gltf]);
+    })
+  }, [color, gltf])
 
   return (
     <Canvas shadows className="h-80 w-full">
@@ -37,46 +59,49 @@ function ModelCanvas({ meshUrl, color }: { meshUrl: string; color: string }) {
         <primitive object={gltf.scene} />
       </Suspense>
     </Canvas>
-  );
+  )
 }
 
 export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
-  const [meshUrl, setMeshUrl] = useState<string | null>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'completed' | 'error'>('idle');
-  const [color, setColor] = useState('#3b82f6');
-  const [selectedPart, setSelectedPart] = useState('body');
-  const [affiliateParts, setAffiliateParts] = useState<AffiliatePart[]>([]);
+  const [meshUrl, setMeshUrl] = useState<string | null>(null)
+  const [status, setStatus] = useState<'idle' | 'loading' | 'completed' | 'error'>('idle')
+  const [color, setColor] = useState('#3b82f6')
+  const [selectedPart, setSelectedPart] = useState('body')
+  const [affiliateParts, setAffiliateParts] = useState<AffiliatePart[]>([])
 
   // Poll 3D status endpoint until COMPLETED
   useEffect(() => {
-    if (!taskId) return;
-    let active = true;
+    if (!taskId) return
+    let active = true
     async function poll() {
-      setStatus('loading');
+      setStatus('loading')
       try {
-        const res = await apiRequest(`/api/v1/3d/status/${encodeURIComponent(taskId)}`);
-        if (!res.ok) throw new Error('Gagal memuat status');
-        const data = await res.json();
-        if (!active) return;
+        const res = await apiRequest(`/api/v1/3d/status/${encodeURIComponent(taskId)}`)
+        if (!res.ok) throw new Error('Gagal memuat status')
+        const data = await res.json()
+        if (!active) return
         if (data.status === 'COMPLETED' && data.mesh_url) {
-          setMeshUrl(data.mesh_url);
-          setStatus('completed');
+          const validatedUrl = validateMeshUrl(data.mesh_url)
+          if (validatedUrl) {
+            setMeshUrl(validatedUrl)
+            setStatus('completed')
+          }
         } else if (data.status === 'FAILED') {
-          setStatus('error');
+          setStatus('error')
         } else {
-          setTimeout(poll, 2000);
+          setTimeout(poll, 2000)
         }
       } catch {
-        if (active) setStatus('error');
+        if (active) setStatus('error')
       }
     }
-    poll();
-    return () => { active = false; };
-  }, [taskId]);
+    poll()
+    return () => { active = false }
+  }, [taskId])
 
   const handlePartChange = async (part: string) => {
-    setSelectedPart(part);
-    if (!meshUrl) return;
+    setSelectedPart(part)
+    if (!meshUrl) return
     try {
       const res = await fetch('/api/v1/3d/modify', {
         method: 'POST',
@@ -84,24 +109,24 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
         body: JSON.stringify({
           base_mesh_id: meshUrl,
           modifications: [
-            { component_type: 'part', part_id: part, parameters: {} },
+            { component_type: 'part', part_id: part, parameters: {} }
           ],
         }),
-      });
-      if (!res.ok) throw new Error('Modify gagal');
-      const data = await res.json();
-      setAffiliateParts(data.affiliate_links || []);
+      })
+      if (!res.ok) throw new Error('Modify gagal')
+      const data = await res.json()
+      setAffiliateParts(data.affiliate_links || [])
     } catch (e) {
-      console.error(e);
+      console.error(e)
     }
-  };
+  }
 
   if (status === 'error') {
     return (
       <div className="card p-4 text-red-500 text-sm">
         Gagal memuat model 3D. Pastikan task ID valid dan backend berjalan.
       </div>
-    );
+    )
   }
   if (status !== 'completed' || !meshUrl) {
     return (
@@ -110,7 +135,7 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
         <p className="text-sm">Menunggu model 3D selesai diproses...</p>
         <p className="text-xs mt-2">Task ID: {taskId}</p>
       </div>
-    );
+    )
   }
 
   return (
@@ -136,7 +161,6 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
       </div>
 
       {meshUrl ? <ModelCanvas meshUrl={meshUrl} color={color} /> : null}
-
       <div className="mt-3 flex items-center gap-2">
         <label className="text-xs text-[var(--muted-foreground)]">Warna:</label>
         <input
@@ -146,7 +170,6 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
           className="w-8 h-8 rounded cursor-pointer border-0 bg-transparent"
         />
       </div>
-
       {affiliateParts.length > 0 && (
         <div className="mt-4 p-3 bg-blue-50 rounded border border-blue-100">
           <h4 className="text-sm font-bold mb-2">Rekomendasi Part (Shopee Affiliate)</h4>
@@ -168,5 +191,5 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
         </div>
       )}
     </div>
-  );
+  )
 }
