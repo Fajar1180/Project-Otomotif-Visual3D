@@ -98,5 +98,7 @@ async def analyze_diagnosis(
     except ValueError as e:
         raise HTTPException(status_code=422, detail=str(e))
     except Exception as e:
-        db.rollback()
-        raise HTTPException(status_code=500, detail=f"Diagnosis failed: {str(e)}")
+        # Log error to server log, do not expose details to client
+        import logging
+        logging.getLogger(__name__).error(f"Diagnosis error: {str(e)}")
+        raise HTTPException(status_code=500, detail="Diagnosis failed. Silakan coba lagi nanti.")

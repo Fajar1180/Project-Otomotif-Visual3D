@@ -1,17 +1,29 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import Link from "next/link";
+import { useState } from "react"
+import Link from "next/link"
+
+const MAX_EMAIL_LENGTH = 100
 
 export default function ForgotPasswordPage() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
+  const [email, setEmail] = useState("")
+  const [sent, setSent] = useState(false)
 
-  // TODO: Connect when backend endpoint is ready (POST /api/v1/auth/forgot-password)
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
+    e.preventDefault()
+
+    const trimmedEmail = email.trim()
+
+    if (!trimmedEmail) {
+      return
+    }
+    if (trimmedEmail.length > MAX_EMAIL_LENGTH) {
+      alert(`Email terlalu panjang (maksimal ${MAX_EMAIL_LENGTH} karakter)`)
+      return
+    }
+
+    setSent(true)
+  }
 
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center py-8 px-4">
@@ -58,5 +70,5 @@ export default function ForgotPasswordPage() {
         )}
       </div>
     </div>
-  );
+  )
 }

@@ -1,30 +1,39 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { apiRequest } from "../lib/api";
+import { useState } from "react"
+import { apiRequest } from "../lib/api"
 
 export interface ShopeeProduct {
-  id: string;
-  name: string;
-  price: string;
-  image: string;
-  affiliate_link: string;
+  id: string
+  name: string
+  price: string
+  image: string
+  affiliate_link: string
 }
 
 export interface ShopeeSearchFormProps {
-  onResults: (products: ShopeeProduct[]) => void;
+  onResults: (products: ShopeeProduct[]) => void
 }
 
+const MAX_QUERY_LENGTH = 100
+
 export const useShopeeSearch = (onResults?: (products: ShopeeProduct[]) => void) => {
-  const [query, setQuery] = useState("");
-  const [limit, setLimit] = useState(10);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  const [query, setQuery] = useState("")
+  const [limit, setLimit] = useState(10)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const search = async () => {
-    if (!query.trim()) return;
-    setLoading(true);
-    setError(null);
+    const trimmedQuery = query.trim()
+
+    if (!trimmedQuery) return
+    if (trimmedQuery.length > MAX_QUERY_LENGTH) {
+      setError(`Query terlalu panjang (maksimal ${MAX_QUERY_LENGTH} karakter)`)
+      return
+    }
+
+    setLoading(true)
+    setError(null)
 
     try {
       const res = await apiRequest("/shopee/search", {
@@ -33,32 +42,35 @@ export const useShopeeSearch = (onResults?: (products: ShopeeProduct[]) => void)
           "Content-Type": "application/json",
           "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") : ""}`,
         },
-        body: JSON.stringify({ query: query.trim(), limit }),
-      });
+        body: JSON.stringify({ query: trimmedQuery, limit }),
+      })
 
       if (res.status === 401) {
-        setError("Token tidak valid atau expired");
-        return;
+        setError("Token tidak valid atau expired")
+        return
       }
 
       if (!res.ok) {
-        throw new Error("Gagal mengambil data Shopee");
+        throw new Error("Gagal mengambil data Shopee")
       }
 
-      const data = await res.json();
-      setError(null);
-      onResults?.(data.items || []);
+      const data = await res.json()
+      setError(null)
+      onResults?.(data.items || [])
     } catch (e: any) {
-      setError(e.message || "Terjadi kesalahan");
+      setError(e.message || "Terjadi kesalahan")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return {
-    query, setQuery,
-    limit, setLimit,
-    loading, error,
+    query,
+    setQuery,
+    limit,
+    setLimit,
+    loading,
+    error,
     search,
-  };
-};
+  }
+}
