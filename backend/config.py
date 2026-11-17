@@ -45,6 +45,20 @@ EXTERNAL_3D_WORKER_URL: str = os.getenv("EXTERNAL_3D_WORKER_URL", "")
 THREE_D_OUTPUT_DIR: str = os.getenv("THREE_D_OUTPUT_DIR", os.path.join(BASE_DIR, "generated_meshes"))
 
 
+# === Fail fast: production must not boot on insecure defaults ===
+# Learn more: an empty/known JWT secret lets anyone forge tokens; an empty
+# DATABASE_URL silently falls back to SQLite in-memory and loses data on restart.
+if ENVIRONMENT.lower() in ("production", "prod"):
+    if not JWT_SECRET or JWT_SECRET in ("dev-secret-change-me", "change-me"):
+        raise RuntimeError(
+            "JWT_SECRET must be a strong, non-default value when ENVIRONMENT=production"
+        )
+    if not DATABASE_URL.startswith("postgresql"):
+        raise RuntimeError(
+            "DATABASE_URL must point to PostgreSQL when ENVIRONMENT=production"
+        )
+
+
 # Namespace so `from config import settings` works without pydantic_settings
 class settings:  # ponytail: namespace class mirrors module-level vars; no pydantic_settings
     """Configuration namespace — stdlib-only, mirrors the module-level vars."""

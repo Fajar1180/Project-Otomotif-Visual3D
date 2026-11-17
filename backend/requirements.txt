@@ -12,3 +12,8 @@ httpx==0.25.1
 uvicorn==0.24.0
 openai>=1.0.0
 tenacity>=8.2.0
+# Runtime deps required by app code (were missing -> image crashed at import/worker start)
+celery>=5.3.0
+redis>=5.0.0
+python-multipart>=0.0.9
+email-validator>=2.0.0
