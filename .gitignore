@@ -6,6 +6,10 @@ venv/
 *.egg-info/
 .pytest_cache/
 
+# Generated 3D meshes (runtime output from 3D engine)
+backend/generated_meshes/
+*.tsbuildinfo
+
 # Env & secrets
 .env
 .env.*
