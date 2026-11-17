@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { apiRequest } from "../lib/api";
 
 export interface ShopeeProduct {
   id: string;
@@ -26,7 +27,7 @@ export const useShopeeSearch = (onResults?: (products: ShopeeProduct[]) => void)
     setError(null);
 
     try {
-      const res = await fetch("/api/shopee/search", {
+      const res = await apiRequest("/shopee/search", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

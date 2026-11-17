@@ -5,6 +5,7 @@ import { Canvas, useLoader } from '@react-three/fiber';
 import { OrbitControls } from '@react-three/drei';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import Link from 'next/link';
+import { apiRequest } from '../lib/api';
 
 interface Vehicle3DViewerProps {
   taskId: string;
@@ -53,7 +54,7 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
     async function poll() {
       setStatus('loading');
       try {
-        const res = await fetch(`/api/v1/3d/status/${encodeURIComponent(taskId)}`);
+        const res = await apiRequest(`/api/v1/3d/status/${encodeURIComponent(taskId)}`);
         if (!res.ok) throw new Error('Gagal memuat status');
         const data = await res.json();
         if (!active) return;
