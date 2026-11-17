@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useConfiguratorStore } from '../store'
 import { Vehicle3DViewer } from '@/app/components/Vehicle3DViewer'
+import { BASE_URL } from '@/app/lib/api'
 
 export default function Configurator3D() {
   const { selectedParts, togglePart, clearParts } = useConfiguratorStore()
@@ -28,7 +29,7 @@ export default function Configurator3D() {
       form.append('vehicle_model', 'Concept')
       files.forEach((f) => form.append('images', f))
 
-      const res = await fetch('/api/v1/3d/generate', {
+      const res = await fetch(`${BASE_URL}/api/v1/3d/generate`, {
         method: 'POST',
         body: form,
       })

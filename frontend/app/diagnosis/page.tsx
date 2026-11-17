@@ -1,6 +1,7 @@
 'use client'
 
 import { useDiagnosisStore } from '../store'
+import { apiRequest } from '../lib/api'
 import { useState } from 'react'
 export default function DiagnosisPage() {
   const { symptomText, setSymptomsText } = useDiagnosisStore()
@@ -16,8 +17,8 @@ export default function DiagnosisPage() {
     setLoading(true)
 
     try {
-      const response = await fetch(
-        'http://localhost:8000/api/v1/diagnosis/analyze',
+      const response = await apiRequest(
+        '/api/v1/diagnosis/analyze',
         {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -32,7 +33,7 @@ export default function DiagnosisPage() {
       const data = await response.json()
       setResult(data)
       try {
-        const wr = await fetch('/api/v1/workshops')
+        const wr = await apiRequest('/api/v1/workshops')
         if (wr.ok) {
           const wd = await wr.json()
           setWorkshops(wd.data || wd.workshops || [])

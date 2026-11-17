@@ -1,214 +1,201 @@
-# Project Otomotif AI (Project Pak Yogi) - Paket Dokumentasi
+# Otomotif AI — Visual 3D & Diagnosis Cerdas
 
-## Ikhtisar
-Repositori ini berisi semua hasil kerja untuk Project Otomotif AI (Project Pak Yogi), mencakup:
-- Dokumen Kebutuhan Proyek (PRD)
-- Spesifikasi Kebutuhan Perangkat Lunak (SRS)
-- Diagram Relasi Entitas (ERD)
-- Spesifikasi API
-- Spesifikasi Desain UI/UX
-- Instruksi Pembuatan Desain Figma
-- Rencana Implementasi
-- Analisis Keterampilan
-- Laporan Analisis
+Platform otomotif berbasis AI: pengguna mengunggah foto kendaraan untuk dijadikan
+model 3D yang bisa dikonfigurasi, berkonsultasi soal gejala kerusakan lewat
+diagnosis berbasis LLM + RAG, dan mencari sparepart lewat integrasi Shopee
+Affiliate.
 
-## Struktur Proyek
-```
-Project-Otomotif-Visual3D/
-├── design/
-│   ├── components/               # Komponen reusable (akan diisi)
-│   ├── tokens/                   # Design tokens (akan diisi)
-│   ├── figma/                    # File desain Figma (akan diisi)
-│   ├── mockups/                  # Mockup HTML (dashboard, 3D configurator, AI diagnosis)
-│   ├── spec/                     # Spesifikasi desain (akan diisi)
-│   ├── theme/                    # Theme CSS (theme-override.css)
-│   └── figma-design-specification.json  # Design tokens
-├── docs/
-│   ├── prd/
-│   │   └── PRD_Project_Pak_Yogi.md
-│   ├── srs/
-│   │   └── SRS_Project_Pak_Yogi.md
-│   ├── erd/
-│   │   └── ERD_Project_Pak_Yogi.md
-│   ├── api/
-│   │   └── API_Spec_Project_Pak_Yogi.md
-│   ├── ui-ux/
-│   │   └── UI_UX_Design_Specification.md
-│   └── design/
-│       └── DESIGN.md
-├── guides/
-│   ├── figma/
-│   │   └── FIGMA_MANUAL_GUIDE.md
-│   │   ├── Figma_Design_Creation_Instructions.md
-│   │   └── preview-figma.html
-│   └── development/
-│       └── (akan diisi)
-├── reports/
-│   ├── status/
-│   │   ├── DESIGN_MOCKUPS_SUMMARY.md
-│   │   ├── FINAL_STATUS_REPORT.md
-│   │   ├── PROGRES_DESAIN_FIGMA.md
-│   │   ├── PROJECT_COMPLETION_FINAL.md
-│   │   ├── PROJECT_SUMMARY.md
-│   │   └── TASK_COMPLETION_SUMMARY.md
-│   ├── progress/
-│   │   └── M0-review-dokumentasi/
-│   │       └── CHECKLIST.md
-│   └── akademik/
-│   │   └── LAPORAN_INISIASI_PRODUK_STARTUP.md
-├── plan.md                       # Rencana implementasi detail
-├── skills.md                     # Analisis keterampuan yang diperlukan
-├── report.md                     # Laporan analisis proyek
-├── README.md
-└── RULES.md
-```
-
-## Daftar Dokumen
-
-### 1. [docs/prd/PRD_Project_Pak_Yogi.md](docs/prd/PRD_Project_Pak_Yogi.md)
-**Dokumen Kebutuhan Proyek**
-- Ikhtisar proyek dan konteks bisnis
-- Fitur inti: AI 3D Configurator & Shopee Recommender, AI Storytelling Diagnosis
-- Kebutuhan teknis dan arsitektur
-- Milestone dan penugasan
-- Kriteria keberhasilan dan risiko
-
-### 2. [docs/srs/SRS_Project_Pak_Yogi.md](docs/srs/SRS_Project_Pak_Yogi.md)
-**Spesifikasi Kebutuhan Perangkat Lunak**
-- Kebutuhan fungsional detail (FR-001 s.d FR-026)
-- Kebutuhan non-fungsional (kinerja, keamanan, keamanan, dll)
-- Kebutuhan antarmuka eksternal
-- Fitur sistem dan user stories
-- Glosarium dan model analisis
-
-### 3. [docs/erd/ERD_Project_Pak_Yogi.md](docs/erd/ERD_Project_Pak_Yogi.md)
-**Diagram Relasi Entitas**
-- Skema database lengkap dengan relasi
-- Visualisasi diagram Mermaid
-- Definisi entitas dan detail relasi
-- Tabel: vehicles, symptoms, diagnoses, spare_parts, workshops, tabel mapping
-
-### 4. [docs/api/API_Spec_Project_Pak_Yogi.md](docs/api/API_Spec_Project_Pak_Yogi.md)
-**Spesifikasi API (OpenAPI 3.0)**
-- Endpoint autentikasi (/auth/*)
-- Endpoint kendaraan (/vehicles/*)
-- Endpoint diagnosis (/diagnosis/*)
-- Endpoint 3D Configurator (/3d/*)
-- Endpoint bengkel (/workshops/*)
-- Respons error dan rate limiting
-
-### 5. [docs/ui-ux/UI_UX_Design_Specification.md](docs/ui-ux/UI_UX_Design_Specification.md)
-**Spesifikasi Desain UI/UX**
-- Sistem desain (palette warna, tipografi, ikonografi)
-- Struktur layout (dashboard, 3D configurator, diagnosis, dll)
-- Perpustakaan komponen (tombol, kartu, formulir)
-- Elemen interaktif (loading states, notifikasi)
-- Panduan desain responsif
-- Dukungan aksesibilitas dan internasionalisasi
-
-### 6. [guides/figma/Figma_Design_Creation_Instructions.md](guides/figma/Figma_Design_Creation_Instructions.md)
-**Instruksi Pembuatan Desain Figma**
-- Panduan langkah-demi-langkah pembuatan file desain Figma
-- Instruksi setup sistem desain
-- Spesifikasi komponen per layar
-- Variasi dan state komponen
-- Design tokens dan panduan prototyping
-- Pendekatan alternatif dan proses handoff
-
-### 7. [plan.md](plan.md)
-**Rencana Implementasi Detail**
-- Fase 1: Setup dan Foundation (Minggu 1-2)
-- Fase 2: Frontend Development (Minggu 3-6)
-- Fase 3: Backend Development (Minggu 6-8)
-- Fase 4: Testing dan QA (Minggu 8-10)
-- Fase 5: Documentation dan Handoff (Minggu 10-11)
-- Timeline, risiko, dan mitigasi
-
-### 8. [skills.md](skills.md)
-**Analisis Keterampilan**
-- Keterampilan pengembangan inti
-- Keterampilan desain
-- Keterampilan manajemen proyek
-- Keterampilan testing
-- Keterampilan dokumentasi
-- Keterampilan quality assurance
-
-### 9. [report.md](report.md)
-**Laporan Analisis Proyek**
-- Ikhtisar proyek
-- Analisis struktur folder
-- Analisis sistem desain
-- Ringkasan rencana implementasi
-- Penilaian keterampilan
-- Langkah selanjutnya
-
-### 10. [STARTUP_METHODOLOGY.md](STARTUP_METHODOLOGY.md)
-**Metodologi Startup Digital**
-- Ikhtisar capaian pembelajaran startup digital
-- Identifikasi peluang bisnis digital (desirability, feasibility, viability)
-- Ideation dan inovasi (konsep, storyboard)
-- Business Model Canvas (9 blok)
-- Lean Startup (prinsip, Build-Measure-Learn)
-- Validasi ide (tahapan, wawancara, MVP)
-- Validation Board & Lembar Kerja Praktik (LK-01 s.d LK-09)
-- Pitch deck dan presentasi
-- Penerapan pada platform Otomotif AI
-- Rubrik penilaian
-
-## Langkah Selanjutnya
-
-### Untuk Project Manager (fajar1180):
-1. Tinjau semua dokumentasi dengan stakeholder
-2. Tugas ke anggota tim berdasarkan spesifikasi
-3. Siapkan lingkungan development dan struktur repositori
-4. Mulai sprint planning untuk Milestone 1
-
-### Untuk System Analyst (ilhamalmunawar05-cpu):
-1. Finalisasi skema database berdasarkan ERD
-2. Setup database development dengan sample data
-3. Tinjau spesifikasi API untuk implementasi
-4. Siapkan dokumen desain teknis
-
-### Untuk Tim Development (ilhamalmunawar05-cpu):
-1. **Milestone 1 (Minggu 2):**
-   - Setup repositori proyek
-   - Implementasi skema database dan models
-   - Tulis unit tests (pendekatan TDD)
-   - Buat struktur awal aplikasi FastAPI
-
-2. **Milestone 2 (Minggu 3):**
-   - Implementasi endpoint API diagnosis
-   - Integrasi pgvector untuk fungsionalitas RAG
-   - Setup Celery untuk background tasks
-   - Buat skeleton frontend awal dengan Next.js
-
-3. **Milestone 3 (Minggu 4):**
-   - Implementasi API 3D configurator dan frontend
-   - Integrasi Shopee Affiliate API
-   - Setup fungsionalitas workshop finder
-   - Implementasi autentikasi pengguna
-
-4. **Milestone 4-5 (Minggu 5-6):**
-   - Integrasi fitur dan QA
-   - Optimasi performa
-   - User acceptance testing
-   - Persiapan deployment production
-
-## Konfirmasi Technology Stack
-- **Frontend:** Next.js (App Router), React Three Fiber, Tailwind CSS, Zustand
-- **Backend:** Python FastAPI, Celery + Redis, PostgreSQL + pgvector
-- **AI:** OpenAI/Claude LLM untuk RAG pipeline
-- **Integrasi:** Shopee Affiliate API, Google Maps API
-- **Development:** Metodologi Test-Driven Development (TDD)
-
-## Kriteria Keberhasilan
-- Akurasi diagnosis > 85% pada test case
-- 3D configurator load < 3 detik di mobile
-- Rata-rata response time API < 200ms
-- Semua fitur inti fungsional dan teruji
-- Target uptime bulanan 99.5%
-- Skor SUS > 75 pada user testing
+**Stack:** FastAPI (Python 3.12) · Next.js 16 + React 19 + TailwindCSS · PostgreSQL
+16 + pgvector · Redis 7 · Celery · Three.js / React Three Fiber · Docker Compose
 
 ---
-*Paket Dokumentasi Dibuat: 19 Oktober 2026*
-*Disusun oleh: fajar1180 (Project Manager), ilhamalmunawar05-cpu (System Analyst/Developer)*
+
+## Arsitektur
+
+```
+┌────────────────┐   HTTP/JSON    ┌──────────────┐   SQL    ┌─────────────────┐
+│  Next.js 16    │ ─────────────► │   FastAPI    │ ───────► │ PostgreSQL 16   │
+│  (App Router)  │  /api/v1/...   │   (uvicorn)  │          │ + pgvector      │
+└───────┬────────┘                └──────┬───────┘          └─────────────────┘
+        │                                │ enqueue
+        │ /shopee/search                 ▼
+        │                         ┌──────────────┐   ┌────────────────────┐
+        │                         │    Redis     │◄─►│   Celery worker    │
+        │                         │broker+result │   └─────────┬──────────┘
+        │                         └──────────────┘             │
+        │ Three.js render                            ┌─────────▼──────────┐
+        └────────────────────────────────────────────│ 3D engine adapter  │
+                                                     │ Replicate / HF     │
+                                                     └────────────────────┘
+```
+
+- **Frontend** — App Router; state klien via Zustand; semua HTTP lewat
+  `frontend/app/lib/api.ts` yang memakai `NEXT_PUBLIC_API_URL` sebagai basis
+  (tidak ada `rewrites`, jadi path relatif `/api/...` akan 404). Autentikasi
+  dijaga `frontend/middleware.ts` (cookie `otomotif_auth_token`).
+- **Backend** — satu router per domain (`backend/app/routes/`), logika di
+  `backend/app/services/` (LLM, RAG, Shopee, 3D engine). Generasi 3D asinkron:
+  endpoint balas `202 Accepted` + `task_id`, worker Celery mengerjakan, klien
+  mem-poll status.
+- **Worker** — `backend/app/celery_app.py`; task di `backend/app/tasks/three_d.py`.
+- **Data** — PostgreSQL + `pgvector` untuk embedding RAG; status task 3D disimpan
+  di `backend/app/services/task_store.py`.
+
+### Peta API
+
+| Method | Path | Keterangan |
+|--------|------|------------|
+| `POST` | `/api/v1/auth/register` | Daftar, balikan token |
+| `POST` | `/api/v1/auth/login` | Login, balikan token |
+| `POST` | `/api/v1/auth/refresh` | Perpanjang token |
+| `POST` | `/api/v1/auth/logout` | `204` |
+| `POST` | `/api/v1/3d/generate` | Upload foto kendaraan → `202` + `task_id` |
+| `GET`  | `/api/v1/3d/status/{task_id}` | Progres task 3D |
+| `POST` | `/api/v1/3d/modify` | Ubah warna/part model hasil generate |
+| `POST` | `/api/v1/diagnosis/analyze` | Analisis gejala → diagnosis + rekomendasi |
+| `GET`  | `/api/v1/diagnosis/history` | Riwayat diagnosis |
+| `GET` `POST` | `/api/v1/vehicles` | Katalog kendaraan (+ `GET /{vehicle_id}`) |
+| `GET`  | `/api/v1/workshops` | Direktori bengkel (+ `GET /{workshop_id}`) |
+| `POST` | `/shopee/search` | Cari sparepart (Shopee Affiliate) |
+| `GET`  | `/health` | Health check |
+
+Dokumentasi interaktif: `http://localhost:8000/docs`.
+
+### Struktur repo
+
+```
+backend/   FastAPI app, routes, services, Celery tasks, tests/
+frontend/  Next.js App Router (app/), komponen, store Zustand, middleware
+docs/      DESIGN_SYSTEM.md, spesifikasi UI/UX, PRD, SRS, ERD, API spec
+design/    Mockup HTML & design token
+guides/    Panduan (Figma, development)
+reports/ research/ survey/ startup-validation/   Riset & validasi produk
+docker-compose.yml
+```
+
+---
+
+## Menjalankan lokal (tanpa Docker)
+
+**Prasyarat:** Python 3.12, Node 20, PostgreSQL 16 + pgvector, Redis 7.
+
+1. **Konfigurasi**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Wajib diisi: `POSTGRES_PASSWORD`, `JWT_SECRET` (≥ 32 char —
+   `openssl rand -base64 32`). Untuk run di luar Docker set juga `DATABASE_URL`
+   dan `REDIS_URL` (lihat komentar di `.env.example`); di dalam Docker keduanya
+   diturunkan otomatis dari `POSTGRES_*`.
+
+   Bila `ENVIRONMENT=production`, aplikasi menolak boot kalau `JWT_SECRET` masih
+   default/kosong atau `DATABASE_URL` bukan PostgreSQL.
+
+2. **Backend**
+
+   ```bash
+   cd backend
+   python -m venv .venv && source .venv/Scripts/activate
+   pip install -r requirements.txt
+   uvicorn app.main:app --reload --port 8000
+   ```
+
+3. **Worker Celery** (terminal terpisah, venv sama)
+
+   ```bash
+   cd backend && celery -A app.celery_app worker --loglevel=info
+   ```
+
+4. **Frontend** (terminal terpisah)
+
+   ```bash
+   cd frontend
+   npm ci
+   npm run dev     # http://localhost:3000
+   ```
+
+---
+
+## Menjalankan dengan Docker Compose
+
+**Prasyarat:** Docker + Compose v2, `.env` terisi seperti di atas.
+
+```bash
+docker compose up -d --build
+docker compose ps
+docker compose logs -f api
+```
+
+| Service | Port host | Keterangan |
+|---------|-----------|------------|
+| `frontend` | `${FRONTEND_PORT:-3000}` | Next.js produksi (`npm ci && npm run build && npm start`) |
+| `api` | `${API_PORT:-8000}` | FastAPI/uvicorn |
+| `celery-worker` | — | Worker antrean 3D |
+| `postgres` | `127.0.0.1:${POSTGRES_PORT:-5432}` | pgvector/pg16, volume `postgres_data` |
+| `redis` | — (internal) | Broker + hasil task; sengaja tidak dipublikasikan |
+
+- Compose gagal start bila `POSTGRES_PASSWORD` atau `JWT_SECRET` kosong
+  (`${VAR:?...}`) — tidak ada fallback diam-diam ke kredensial default.
+- `NEXT_PUBLIC_API_URL` di-inline Next.js saat **build**; mengubahnya perlu
+  rebuild: `docker compose up -d --build frontend`.
+- `api` dan `celery-worker` memakai image yang sama (`backend/Dockerfile`);
+  `.dockerignore` menjaga `.env`, `.venv`, dan `generated_meshes/` keluar dari image.
+
+Hentikan: `docker compose down` (`-v` untuk menghapus volume data).
+
+---
+
+## Pengujian
+
+```bash
+cd backend && python -m pytest        # 25 passed: unit, auth, 3D, diagnosis, E2E
+cd frontend && npm run build          # type-check + build produksi
+```
+
+`npm test` di frontend masih placeholder — belum ada test UI (lihat batasan di
+`docs/DESIGN_SYSTEM.md`).
+
+---
+
+## Variabel environment
+
+| Variabel | Wajib | Keterangan |
+|----------|-------|-----------|
+| `POSTGRES_USER` `POSTGRES_PASSWORD` `POSTGRES_DB` | ya | Kredensial database |
+| `JWT_SECRET` | ya | ≥ 32 char, non-default di production |
+| `ENVIRONMENT` | — | `production` mengaktifkan fail-fast config |
+| `NEXT_PUBLIC_API_URL` | ya (build) | Basis URL API dari browser |
+| `OPENROUTER_API_KEY` | untuk diagnosis | LLM |
+| `SHOPEE_APP_ID` `SHOPEE_APP_KEY` `SHOPEE_APP_SECRET` | untuk Shopee | Affiliate API |
+| `THREE_D_ENGINE` | — | `replicate` / `huggingface` |
+| `REPLICATE_API_TOKEN`, `HUGGINGFACE_API_TOKEN` | sesuai engine | Kredensial 3D |
+
+Daftar lengkap di `.env.example`. **Jangan pernah commit `.env`.**
+
+---
+
+## Dokumentasi
+
+- [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md) — palet warna, tipografi,
+  komponen, dan alur halaman, diturunkan langsung dari kode
+  (`tailwind.config.ts`, `globals.css`) agar tidak bisa drift.
+- [`docs/prd/PRD_Project_Pak_Yogi.md`](docs/prd/PRD_Project_Pak_Yogi.md) — PRD
+- [`docs/srs/SRS_Project_Pak_Yogi.md`](docs/srs/SRS_Project_Pak_Yogi.md) — SRS
+- [`docs/erd/ERD_Project_Pak_Yogi.md`](docs/erd/ERD_Project_Pak_Yogi.md) — ERD
+- [`docs/api/API_Spec_Project_Pak_Yogi.md`](docs/api/API_Spec_Project_Pak_Yogi.md) — API spec
+- [`docs/ui-ux/UI_UX_Design_Specification.md`](docs/ui-ux/UI_UX_Design_Specification.md) — spesifikasi UI/UX
+- [`STARTUP_METHODOLOGY.md`](STARTUP_METHODOLOGY.md) — metodologi & validasi startup
+
+## Batasan yang diketahui
+
+- Generasi 3D bergantung pada penyedia eksternal (Replicate/HuggingFace); tanpa
+  token, endpoint tetap balas `202` tetapi task gagal di worker.
+- Skema DB dibuat lewat `create_all` saat startup — belum ada Alembic, perubahan
+  skema butuh migrasi manual.
+- Next.js 16.4.3 masih kena advisory keamanan yang memblokir `next build` sekali
+  per run (percobaan kedua lanjut); perlu upgrade.
+
+---
+*Disusun oleh: Fajar1180 (PM/Developer) · ilhamalmunawar05-cpu (System Analyst/Developer)*
