@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alur Kerja — Otomotif AI (Project Pak Yogi)</title>
+<style>
+  :root{
+    --bg:#0b1021;
+    --panel:#151b33;
+    --line:#334155;
+    --accent:#00d2ff;
+    --accent2:#3a7bd5;
+    --accent3:#ff6b6b;
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+    --diy-easy:#22c55e;
+    --diy-hard:#f59e0b;
+    --workshop:#ef4444;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{
+    font-family:Inter,system-ui,Segoe UI,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    width:1280px;height:720px;margin:0;
+    overflow:hidden;
+  }
+  .header{
+    padding:28px 40px;
+    border-bottom:1px solid var(--line);
+    display:flex;align-items:center;gap:12px;
+  }
+  .brand{font-weight:800;font-size:20px;letter-spacing:-0.5px;background:linear-gradient(90deg,var(--accent),var(--accent2),var(--accent3));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  .subtitle{color:var(--muted);font-size:13px;margin-left:8px}
+  .stage{
+    padding:34px 40px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:26px;
+    align-items:start;
+  }
+  .step{
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:22px 20px;
+    position:relative;
+    display:flex;flex-direction:column;gap:12px;
+  }
+  .step.num{font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .step h3{font-size:16px;font-weight:700;margin:0}
+  .step p{font-size:13px;color:var(--muted);line-height:1.5;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+  .tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;color:#fff;width:fit-content}
+  .tag.easy{background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.4);color:var(--diy-easy)}
+  .tag.hard{background:rgba(245,158,11,0.15);border:1px solid rgba(245,158,11,0.4);color:var(--diy-hard)}
+  .tag.workshop{background:rgba(239,68,68,0.15);border:1px solid rgba(239,68,68,0.4);color:var(--workshop)}
+  .arrow{
+    grid-column:1 / -1;
+    display:flex;justify-content:center;align-items:center;gap:26px;font-size:24px;color:var(--accent);font-weight:900
+  }
+  .arrow b{color:var(--accent3)}
+  .footer{
+    padding:22px 40px;
+    border-top:1px solid var(--line);
+    color:var(--muted);font-size:12px;display:flex;justify-content:space-between;
+  }
+  .narasi{font-style:italic;color:var(--accent);font-size:12px;max-width:520px}
+  .badge{font-weight:700;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="brand">OTOMOTIF AI</div>
+  <div class="subtitle">Project Pak Yogi &bull; Alur Kerja Diagnosis &amp; Konfigurasi</div>
+</div>
+
+<div class="stage">
+  <div class="step">
+    <div class="num">01</div>
+    <h3>Input Keluhan</h3>
+    <p>Pengguna ceritakan gejala kendaraan via teks atau suara, pilih merk/model/tahun (contoh: Honda Vario 150, 2020).</p>
+    <span class="tag easy">Input bebas bahasa alami</span>
+  </div>
+
+  <div class="arrow">▼</div>
+
+  <div class="step">
+    <div class="num">02</div>
+    <h3>AI Diagnosis</h3>
+    <p>Pipeline NLP + RAG (FastAPI) mencocokkan keluhan dengan basis pengetahuan kerusakan kendaraan.</p>
+    <span class="tag hard">RAG / NLP &bull; &gt;85% akurasi</span>
+  </div>
+
+  <div class="arrow">▼</div>
+
+  <div class="step">
+    <div class="num">03</div>
+    <h3>Klasifikasi Keparahan</h3>
+    <p>Sistem menentukan 3 level: DIY_EASY, DIY_HARD, atau WORKSHOP_REQUIRED dengan tingkat keyakinan.</p>
+    <span class="tag easy">DIY_EASY</span>
+    <span class="tag hard">DIY_HARD</span>
+    <span class="tag workshop">WORKSHOP_REQUIRED</span>
+  </div>
+
+  <div class="arrow">▼</div>
+
+  <div class="step">
+    <div class="num">04</div>
+    <h3>Output &amp; Aksi</h3>
+    <p>Langkah perbaikan langkah-demi-langkah + rekomendasi suku cadang via Shopee Affiliate, atau rujukan bengkel terdekat.</p>
+    <span class="tag easy">Shopee Affiliate</span>
+    <span class="tag workshop">Maps API</span>
+  </div>
+</div>
+
+<div class="footer">
+  <div class="narasi">Sinkronkan narasi video: "Alur kerja MVP mencakup input keluhan teks, output 3 level keparahan, serta rekomendasi suku cadang dan langkah perbaikan." — Slide 4</div>
+  <div class="badge">Otomotif AI &bull; Project Pak Yogi &bull; 1280×720</div>
+</div>
+
+</body>
+</html>

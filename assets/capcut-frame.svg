@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <defs>
+    <linearGradient id="frameGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00d2ff" stop-opacity="0.9"/>
+      <stop offset="50%" stop-color="#3a7bd5" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#ff6b6b" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Background transparan (tengah kosong untuk video) -->
+
+  <!-- Border luar -->
+  <rect x="40" y="40" width="1000" height="1840" rx="60" ry="60"
+        fill="none" stroke="url(#frameGrad)" stroke-width="22" filter="url(#glow)"/>
+
+  <!-- Border dalam -->
+  <rect x="90" y="90" width="900" height="1740" rx="30" ry="30"
+        fill="none" stroke="rgba(255,255,255,0.35)" stroke-width="6"/>
+
+  <!-- Sudut dekoratif kiri atas -->
+  <path d="M 120 120 L 120 260 M 120 120 L 260 120"
+        stroke="url(#frameGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Sudut dekoratif kanan atas -->
+  <path d="M 960 120 L 960 260 M 960 120 L 820 120"
+        stroke="url(#frameGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Sudut dekoratif kiri bawah -->
+  <path d="M 120 1800 L 120 1660 M 120 1800 L 260 1800"
+        stroke="url(#frameGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+  <!-- Sudut dekoratif kanan bawah -->
+  <path d="M 960 1800 L 960 1660 M 960 1800 L 820 1800"
+        stroke="url(#frameGrad)" stroke-width="14" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Label kecil -->
+  <text x="540" y="1880" font-family="Inter, sans-serif" font-size="28" fill="rgba(255,255,255,0.6)" text-anchor="middle">CAPCUT FRAME • 9:16</text>
+</svg>
