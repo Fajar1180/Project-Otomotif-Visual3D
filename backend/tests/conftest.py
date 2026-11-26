@@ -38,6 +38,13 @@ def _ensure_test_schema():
     """Create all tables once on the app engine so route tests see them."""
     Base.metadata.create_all(bind=_engine)
 
+import app.routes.auth as auth_routes
+
+@pytest.fixture(autouse=True)
+def _reset_login_rate_limit():
+    """Reset in-memory login rate limiter so tests don't collide on shared IP."""
+    auth_routes._login_hits = {}
+
 @pytest_asyncio.fixture
 async def test_db_async():
     """Provide a test database session bound to the app engine (so seeded data is visible to routes)."""

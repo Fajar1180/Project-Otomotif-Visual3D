@@ -38,7 +38,7 @@ export const ShopeeSearchPage = () => {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
               >
                 <option value={5}>5</option>
-                <option value={10} selected>10</option>
+                <option value={10}>10</option>
                 <option value={15}>15</option>
                 <option value={20}>20</option>
               </select>

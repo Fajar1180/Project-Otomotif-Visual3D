@@ -52,11 +52,11 @@ export default function Dashboard() {
             Find nearby workshops and repair services
           </p>
           <a
-            href="#"
-            className="text-[var(--accent)] font-medium hover:underline"
-          >
-            Find Workshops →
-          </a>
+                      href="/workshops"
+                      className="text-[var(--accent)] font-medium hover:underline"
+                    >
+                      Find Workshops →
+                    </a>
         </div>
       </div>
 

@@ -1,5 +1,7 @@
 'use client'
 
+import { apiRequest } from '../lib/api';
+
 import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, PerspectiveCamera } from '@react-three/drei'
@@ -13,10 +15,9 @@ export const ThreeProductCarousel = () => {
     // Fetch products from backend
     const fetchProducts = async () => {
       try {
-        const res = await fetch('/api/shopee/search', {
+        const res = await apiRequest('/shopee/search', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ query: '', limit: 8 })
+          body: JSON.stringify({ query: 'sparepart mobil', limit: 8 }),
         })
         if (!res.ok) throw new Error('Failed to fetch products')
         const data = await res.json()

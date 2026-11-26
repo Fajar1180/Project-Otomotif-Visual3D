@@ -40,7 +40,7 @@ export const useShopeeSearch = (onResults?: (products: ShopeeProduct[]) => void)
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${typeof window !== "undefined" ? localStorage.getItem("token") : ""}`,
+          "Authorization": `Bearer ${typeof window !== "undefined" ? (() => { try { const s = localStorage.getItem("auth-storage"); return s ? JSON.parse(s).tokens?.access_token : null; } catch { return null; } })() : ""}`,
         },
         body: JSON.stringify({ query: trimmedQuery, limit }),
       })

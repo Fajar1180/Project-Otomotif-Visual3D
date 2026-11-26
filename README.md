@@ -116,6 +116,23 @@ docker-compose.yml
    npm run dev     # http://localhost:3000
    ```
 
+> **Catatan:** Backend bisa dijalankan lokal tanpa Docker dan tanpa Redis. Set
+> `CELERY_ALWAYS_EAGER=true` di `.env` agar task Celery dieksekusi sinkron
+> (tanpa worker/broker) — cukup untuk development dan pengujian. 3D generate
+> tetap balas `202` + `task_id`, tetapi diproses segera oleh aplikasi itu sendiri.
+
+---
+
+## Akun Demo / Dummy Login
+
+Dua akun sudah ter-seed melalui `backend/seed/seed_auth.py` (idempotent, jalankan
+`python -m seed.seed_auth` dari `backend/` atau biarkan startup seeding handle):
+
+| Role | Email | Password | Kegunaan |
+|------|-------|----------|----------|
+| `user` | `user@otomotif.ai` | `UserOtomotif2026!` | Login sebagai pengguna biasa: upload foto, diagnosis, lihat riwayat |
+| `admin` | `admin@otomotif.ai` | `AdminOtomotif2026!` | Login sebagai admin: akses fitur manajemen data |
+
 ---
 
 ## Menjalankan dengan Docker Compose

@@ -54,6 +54,16 @@ export default function LoginPage() {
             </div>
           )}
           <button
+            type="button"
+            onClick={() => {
+              setEmail("user@otomotif.ai");
+              setPassword("UserOtomotif2026!");
+            }}
+            className="w-full border border-[var(--border)] text-sm py-2 rounded hover:bg-[var(--muted)] disabled:opacity-50"
+          >
+            Isi Akun Demo
+          </button>
+          <button
             type="submit"
             disabled={isLoading}
             className="w-full bg-[var(--accent)] text-white py-2 rounded hover:opacity-90 disabled:opacity-50"

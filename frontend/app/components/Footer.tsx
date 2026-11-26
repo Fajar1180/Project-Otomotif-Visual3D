@@ -10,7 +10,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
               <li><a href="#" className="hover:text-[var(--foreground)]">AI Diagnosis</a></li>
               <li><a href="#" className="hover:text-[var(--foreground)]">3D Configurator</a></li>
-              <li><a href="#" className="hover:text-[var(--foreground)]">Workshop Finder</a></li>
+              <li><a href="/workshops" className="hover:text-[var(--foreground)]">Workshop Finder</a></li>
             </ul>
           </div>
           <div>
