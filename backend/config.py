@@ -44,6 +44,17 @@ HUGGINGFACE_MODEL_ID: str = os.getenv("HUGGINGFACE_MODEL_ID", "")
 EXTERNAL_3D_WORKER_URL: str = os.getenv("EXTERNAL_3D_WORKER_URL", "")
 THREE_D_OUTPUT_DIR: str = os.getenv("THREE_D_OUTPUT_DIR", os.path.join(BASE_DIR, "generated_meshes"))
 
+# === CORS ===
+# Comma-separated list of browser origins allowed to call this API.
+CORS_ORIGINS: list[str] = [
+    o.strip()
+    for o in os.getenv(
+        "CORS_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173",
+    ).split(",")
+    if o.strip()
+]
+
 
 # === Fail fast: production must not boot on insecure defaults ===
 # Learn more: an empty/known JWT secret lets anyone forge tokens; an empty
@@ -72,7 +83,7 @@ class settings:  # ponytail: namespace class mirrors module-level vars; no pydan
     SHOPEE_APP_ID = SHOPEE_APP_ID
     SHOPEE_APP_KEY = SHOPEE_APP_KEY
     SHOPEE_APP_SECRET = SHOPEE_APP_SECRET
-    celery_task_always_eager = False
+    celery_task_always_eager = os.getenv("CELERY_ALWAYS_EAGER", "true").lower() in ("1", "true", "yes")
     THREE_D_ENGINE = THREE_D_ENGINE
     REPLICATE_API_TOKEN = REPLICATE_API_TOKEN
     REPLICATE_MODEL_VERSION = REPLICATE_MODEL_VERSION
@@ -80,3 +91,4 @@ class settings:  # ponytail: namespace class mirrors module-level vars; no pydan
     HUGGINGFACE_MODEL_ID = HUGGINGFACE_MODEL_ID
     EXTERNAL_3D_WORKER_URL = EXTERNAL_3D_WORKER_URL
     THREE_D_OUTPUT_DIR = THREE_D_OUTPUT_DIR
+    CORS_ORIGINS = CORS_ORIGINS

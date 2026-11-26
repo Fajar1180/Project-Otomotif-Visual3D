@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import base64
 import json
+import os
 from typing import Any, Dict, List, Optional
 from uuid import uuid4
 
@@ -15,12 +16,15 @@ from pydantic import BaseModel, Field
 
 from app.celery_app import celery_app
 from app.services.task_store import task_store
+from config import settings
 
 router = APIRouter(prefix="/api/v1/3d", tags=["3d"])
 
 MAX_PHOTOS = 4
 MAX_FILE_SIZE = 5 * 1024 * 1024  # 5MB per file
 ALLOWED_MIME_TYPES = {"image/jpeg", "image/png", "image/webp"}
+
+OUTPUT_DIR = settings.THREE_D_OUTPUT_DIR
 
 
 def _encode_task(brand: str, model: str) -> str:
@@ -81,7 +85,14 @@ async def generate(
         img.file.seek(0)
     
     record = task_store.create()
-    image_urls = [f"{img.filename}:{await img.read()!r}" for img in images]
+    os.makedirs(OUTPUT_DIR, exist_ok=True)
+    image_urls = []
+    for img in images:
+        img.file.seek(0)
+        dst = os.path.join(OUTPUT_DIR, f"{record.task_id}_{img.filename}")
+        with open(dst, "wb") as f:
+            f.write(await img.read())
+        image_urls.append(dst)
 
     if celery_app.conf.task_always_eager:
         from app.tasks.three_d import generate_3d
@@ -108,11 +119,19 @@ def task_status(task_id: str) -> dict:
     if not record:
         raise HTTPException(status.HTTP_404_NOT_FOUND, "Task tidak ditemukan")
 
+    # Expose a URL that the frontend can load, not a raw filesystem path.
+    mesh = record.mesh_url or ""
+    if mesh and not mesh.startswith("http"):
+        mesh = f"/static/meshes/{os.path.basename(mesh)}"
+    texture = record.texture_url or ""
+    if texture and not texture.startswith("http"):
+        texture = f"/static/meshes/{os.path.basename(texture)}"
+
     return {
         "task_id": record.task_id,
         "status": record.status,
-        "mesh_url": record.mesh_url,
-        "texture_url": record.texture_url,
+        "mesh_url": mesh,
+        "texture_url": texture,
         "error": record.error,
     }
 

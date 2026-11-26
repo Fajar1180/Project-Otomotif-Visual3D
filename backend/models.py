@@ -154,6 +154,7 @@ class User(Base):
     email = Column(String(255), unique=True, nullable=False, index=True)
     hashed_password = Column(String(255), nullable=False)
     full_name = Column(String(150), nullable=True)
+    role = Column(String(20), nullable=False, default="user")  # "user" | "admin"
     created_at = Column(DateTime, default=func.now())
 
     refresh_tokens = relationship("RefreshToken", back_populates="user", cascade="all, delete-orphan")

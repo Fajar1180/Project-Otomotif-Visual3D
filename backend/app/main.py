@@ -1,18 +1,23 @@
 """FastAPI application factory."""
+import os
 import time
 from uuid import uuid4
 
 from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
-from app.database import init_db
+from app.database import SessionLocal, init_db
 from app.routes.auth import router as auth_router
 from app.routes.diagnosis import router as diagnosis_router
 from app.routes.vehicles import router as vehicles_router
 from app.routes.workshops import router as workshops_router
 from app.routes.shopee import router as shopee_router  # Issue #6: Shopee Affiliate
+from seed.seed_auth import seed_auth
+from config import settings
 import importlib
 
 three_d_mod = importlib.import_module("app.routes.3d")
@@ -21,6 +26,24 @@ app = FastAPI(
     title="Otomotif AI API",
     description="Vehicle diagnostic and 3D configurator platform",
     version="0.1.0",
+)
+
+# CORS — the Next.js dev server (:3000) calls this API (:8000) directly from
+# the browser, so preflight must succeed or every request fails.
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.CORS_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Serve generated .glb meshes so the browser can fetch them by URL.
+os.makedirs(settings.THREE_D_OUTPUT_DIR, exist_ok=True)
+app.mount(
+    "/static/meshes",
+    StaticFiles(directory=settings.THREE_D_OUTPUT_DIR),
+    name="meshes",
 )
 
 # Include routers
@@ -118,8 +141,13 @@ async def rate_limit(request: Request, call_next):
 
 @app.on_event("startup")
 async def startup():
-    """Initialize database on startup."""
+    """Initialize database on startup + seed dummy auth accounts."""
     init_db()
+    db = SessionLocal()
+    try:
+        seed_auth(db)
+    finally:
+        db.close()
 
 
 @app.get("/health")

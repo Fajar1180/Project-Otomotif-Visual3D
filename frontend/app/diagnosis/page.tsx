@@ -1,10 +1,9 @@
 'use client'
 
-import { useDiagnosisStore } from '../store'
 import { apiRequest } from '../lib/api'
 import { useState } from 'react'
 export default function DiagnosisPage() {
-  const { symptomText, setSymptomsText } = useDiagnosisStore()
+  const [symptomText, setSymptomsText] = useState('')
   const [make, setMake] = useState('')
   const [model, setModel] = useState('')
   const [year, setYear] = useState('')

@@ -26,6 +26,12 @@ backend/generated_meshes/
 # OS
 .DS_Store
 Thumbs.db
+# Windows reserved-name artifacts accidentally written by tooling
+nul
+NUL
+
+# Local-only dev helper (hardcodes this machine's Python layout)
+backend/run_server.py
 
 # Node
 node_modules/

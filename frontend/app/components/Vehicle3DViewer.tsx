@@ -103,9 +103,8 @@ export function Vehicle3DViewer({ taskId }: Vehicle3DViewerProps) {
     setSelectedPart(part)
     if (!meshUrl) return
     try {
-      const res = await fetch('/api/v1/3d/modify', {
+      const res = await apiRequest(`/api/v1/3d/modify`, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           base_mesh_id: meshUrl,
           modifications: [

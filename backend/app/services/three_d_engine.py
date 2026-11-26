@@ -18,6 +18,7 @@ Celery task never needs to know which engine is behind it.
 from __future__ import annotations
 
 import base64
+import hashlib
 import json
 import os
 import struct
@@ -107,12 +108,14 @@ class FallbackThreeDEngine(ThreeDEngineAdapter):
 
     def synthesize(self, image_urls: list[str]) -> Tuple[str, Optional[str]]:
         os.makedirs(OUTPUT_DIR, exist_ok=True)
-        mesh_id = base64.urlsafe_b64encode(
+        # Short stable hash — base64 of full paths could blow past Windows
+        # MAX_PATH once four absolute paths are involved.
+        mesh_id = hashlib.sha256(
             json.dumps(sorted(image_urls)).encode()
-        ).decode().rstrip("=")
+        ).hexdigest()[:16]
         mesh_path = os.path.join(OUTPUT_DIR, f"{mesh_id}.glb")
         if os.path.exists(mesh_path):
-            return mesh_path, None
+            return f"/static/meshes/{os.path.basename(mesh_path)}", None
 
         # Build GLB: header + JSON chunk + BIN chunk.
         positions = b"".join(
@@ -151,7 +154,9 @@ class FallbackThreeDEngine(ThreeDEngineAdapter):
             f.write(json_chunk)
             f.write(bin_chunk)
 
-        return mesh_path, None
+        # Browser needs a URL, not a filesystem path. main.py mounts
+        # THREE_D_OUTPUT_DIR at /static/meshes.
+        return f"/static/meshes/{os.path.basename(mesh_path)}", None
 
 
 # ---------------------------------------------------------------------------
